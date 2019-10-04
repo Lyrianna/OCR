@@ -8,12 +8,12 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include <SDL2_image/SDL_image.h>
+#include <SDL_image.h>
 
 int loadimage(void);
 void BlackAndWhite(SDL_Surface* surface);
 
-int main(int argc, const char * argv[]) {
+int main() {
     return loadimage();
 }
 
