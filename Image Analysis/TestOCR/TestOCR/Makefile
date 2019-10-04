@@ -12,7 +12,5 @@ main: main.c
 clean:
 	${RM} *.o
 	${RM} *.d
-	${RM} display
-	${RM} grayscale
 
 # END
