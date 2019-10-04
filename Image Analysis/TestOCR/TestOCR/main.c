@@ -35,7 +35,7 @@ int loadimage(void){
     SDL_Surface *surface =  IMG_Load("text.png");
     if(surface != NULL){
         printf("Success\n");
-        BlackAndWhite(surface);
+        //BlackAndWhite(surface);
         MonoColor(surface);
         ExtractBlock(surface);
     }
@@ -58,7 +58,7 @@ void BlackAndWhite(SDL_Surface* surface){
             pixels[i*surface->w + j] = SDL_MapRGB(surface->format, black, black, black);
         }
     }
-    IMG_SavePNG(surface, "lenabw.png");
+    IMG_SavePNG(surface, "textbw.png");
 }
 
 void MonoColor(SDL_Surface* surface){
@@ -80,7 +80,7 @@ void MonoColor(SDL_Surface* surface){
             pixels[i*surface->w + j] = SDL_MapRGB(surface->format, black, black, black);
         }
     }
-    IMG_SavePNG(surface, "lenamono.png");
+    IMG_SavePNG(surface, "textmono.png");
 }
 
 void ExtractBlock(SDL_Surface* surface){
