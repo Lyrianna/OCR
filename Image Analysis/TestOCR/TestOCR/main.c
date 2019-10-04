@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include <SDL_image.h>
+#include <SDL2_image/SDL_image.h>
 
 int loadimage(void);
 void BlackAndWhite(SDL_Surface* surface);
@@ -80,7 +80,8 @@ void MonoColor(SDL_Surface* surface){
             pixels[i*surface->w + j] = SDL_MapRGB(surface->format, black, black, black);
         }
     }
-    IMG_SavePNG(surface, "textmono.png");
+    SDL_SaveBMP(surface, "textmono.bmp");
+    //IMG_SavePNG(surface, "textmono.png");
 }
 
 void ExtractBlock(SDL_Surface* surface){
