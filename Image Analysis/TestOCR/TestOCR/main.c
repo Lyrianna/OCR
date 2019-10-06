@@ -14,8 +14,9 @@ int loadimage(void);
 void BlackAndWhite(SDL_Surface* surface);
 void MonoColor(SDL_Surface* surface);
 void ExtractBlock(SDL_Surface* surface);
-SDL_Surface CropImg(SDL_Surface* surface,int x1,int x2,int y1, int y2);
 void draw_rectangle(SDL_Surface* surface, int x, int y, int width, int height);
+Uint32 getpixel(SDL_Surface *surface, int x, int y);
+void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 
 int main() {
     int value = loadimage();
@@ -27,15 +28,14 @@ int main() {
 int loadimage(void){
     if(SDL_Init(SDL_INIT_VIDEO)==-1)
     {
-        printf("SDL_Init: %s\n", SDL_GetError());
+        printf("SDL failed to inilialize");
         return 1;
     }
-    IMG_Init(0);
     IMG_Init(~0);
-    SDL_Surface *surface =  IMG_Load("lena.png");
+    SDL_Surface *surface =  IMG_Load("text.png");
     if(surface != NULL){
         printf("Success\n");
-        //BlackAndWhite(surface);
+        BlackAndWhite(surface);
         MonoColor(surface);
         ExtractBlock(surface);
     }
@@ -46,30 +46,31 @@ int loadimage(void){
 }
 
 void BlackAndWhite(SDL_Surface* surface){
-    Uint32 *pixels = (Uint32 *)surface->pixels;
-    printf("%lu\n",sizeof(pixels));
-    for(int i = 0; i < surface->h; i++){
-        for(int j = 0; j < surface->w;j++){
+    int i = 0;
+    int j = 0;
+    for(i = 0; i < surface->h; i++){
+        for(j = 0; j < surface->w;j++){
             Uint8 red = 0;
             Uint8 green = 0;
             Uint8 blue = 0;
-            SDL_GetRGB(pixels[i*surface->w + j], surface->format, &red, &green, &blue);
+            Uint32 pixel = getpixel(surface,j,i);
+            SDL_GetRGB(pixel, surface->format, &red, &green, &blue);
             Uint8 black = (red + green + blue)/3;
-            pixels[i*surface->w + j] = SDL_MapRGB(surface->format, black, black, black);
+            pixel = SDL_MapRGB(surface->format, black, black, black);
+            putpixel(surface,j,i,pixel);
         }
     }
     IMG_SavePNG(surface, "textbw.png");
 }
 
 void MonoColor(SDL_Surface* surface){
-    Uint32 *pixels = (Uint32 *)surface->pixels;
-    printf("%lu\n",sizeof(pixels));
     for(int i = 0; i < surface->h; i++){
         for(int j = 0; j < surface->w;j++){
             Uint8 red = 0;
             Uint8 green = 0;
             Uint8 blue = 0;
-            SDL_GetRGB(pixels[i*surface->w + j], surface->format, &red, &green, &blue);
+            Uint32 pixel = getpixel(surface,j,i);
+            SDL_GetRGB(pixel, surface->format, &red, &green, &blue);
             Uint8 black = 0;
             if((red + green + blue)/3 >= 128){
                 black = 255;
@@ -77,14 +78,14 @@ void MonoColor(SDL_Surface* surface){
             else{
                 black = 0;
             }
-            pixels[i*surface->w + j] = SDL_MapRGB(surface->format, black, black, black);
+            pixel = SDL_MapRGB(surface->format, black, black, black);
+            putpixel(surface,j,i,pixel);
         }
     }
     IMG_SavePNG(surface, "textmono.png");
 }
 
 void ExtractBlock(SDL_Surface* surface){
-    Uint32 *pixels = (Uint32 *)surface->pixels;
     int xstart = 0;
     int xend = 0;
     int ystart = 0;
@@ -96,7 +97,8 @@ void ExtractBlock(SDL_Surface* surface){
             Uint8 red = 0;
             Uint8 green = 0;
             Uint8 blue = 0;
-            SDL_GetRGB(pixels[y*surface->w + x], surface->format, &red, &green, &blue);
+            Uint32 pixel = getpixel(surface,x,y);
+            SDL_GetRGB(pixel, surface->format, &red, &green, &blue);
             if(red == 0){
                 if(firstmatch == 1|| xstart > x){
                     xstart = x;
@@ -122,22 +124,57 @@ void ExtractBlock(SDL_Surface* surface){
     draw_rectangle(surface, xstart, ystart, 1, yend - ystart);
     draw_rectangle(surface, xend, ystart, 1, yend - ystart);
     draw_rectangle(surface, xstart, yend, xend - xstart, 1);
+    IMG_SavePNG(surface, "cropped.png");
 }
 
-SDL_Surface CropImg(SDL_Surface* surface,int x1,int x2,int y1, int y2){
-    SDL_Rect crop;
-    crop.x = x1;
-    crop.y = y1;
-    crop.h = y2 - y1;
-    crop.w = x2 - x1;
-    SDL_BlitSurface(surface,NULL,NULL,&crop);
-    return *surface;
+Uint32 getpixel(SDL_Surface *surface, int x, int y)
+{
+    int bpp = surface->format->BytesPerPixel;
+    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+
+    switch(bpp) {
+        case 1:
+            return *p;
+        case 2:
+            return *(Uint16 *)p;
+        case 3:
+            return p[0] | p[1] << 8 | p[2] << 16;
+        case 4:
+            return *(Uint32 *)p;
+        default:
+            return 0;
+    }
 }
 
+void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
+{
+    int bpp = surface->format->BytesPerPixel;
+    /* Here p is the address to the pixel we want to set */
+    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+
+    switch(bpp) {
+        case 1:
+            *p = pixel;
+            break;
+
+        case 2:
+            *(Uint16 *)p = pixel;
+            break;
+
+        case 3:
+            p[0] = pixel & 0xff;
+            p[1] = (pixel >> 8) & 0xff;
+            p[2] = (pixel >> 16) & 0xff;
+            break;
+
+        case 4:
+            *(Uint32 *)p = pixel;
+            break;
+    }
+}
 void draw_rectangle(SDL_Surface* surface, int x, int y, int width, int height)
 {
     SDL_Rect pos = {x,  y, width, height};
     SDL_FillRect(surface, &pos, SDL_MapRGB(surface->format, 0, 255, 0));
-    IMG_SavePNG(surface, "cropped.png");
 }
 
