@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include <SDL2_image/SDL_image.h>
+#include <SDL_image.h>
 
 int loadimage(char *filename);
 void BlackAndWhite(SDL_Surface* surface);
