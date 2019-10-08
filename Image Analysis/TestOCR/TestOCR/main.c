@@ -8,9 +8,9 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include <SDL_image.h>
+#include <SDL2_image/SDL_image.h>
 
-int loadimage(void);
+int loadimage(char *filename);
 void BlackAndWhite(SDL_Surface* surface);
 void MonoColor(SDL_Surface* surface);
 void ExtractBlock(SDL_Surface* surface);
@@ -18,21 +18,25 @@ void draw_rectangle(SDL_Surface* surface, int x, int y, int width, int height);
 Uint32 getpixel(SDL_Surface *surface, int x, int y);
 void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 
-int main() {
-    int value = loadimage();
+int main(int argc, char *argv[]) {
+    if(argc != 2){
+        printf("Please use the correct argument\n");
+        return(-1);
+    }
+    int value = loadimage(argv[1]);
     IMG_Quit();
     SDL_Quit();
     return value;
 }
 
-int loadimage(void){
+int loadimage(char *filename){
     if(SDL_Init(SDL_INIT_VIDEO)==-1)
     {
         printf("SDL failed to inilialize");
         return 1;
     }
     IMG_Init(~0);
-    SDL_Surface *surface =  IMG_Load("text.png");
+    SDL_Surface *surface =  IMG_Load(filename);
     if(surface != NULL){
         printf("Success\n");
         BlackAndWhite(surface);
@@ -60,7 +64,7 @@ void BlackAndWhite(SDL_Surface* surface){
             putpixel(surface,j,i,pixel);
         }
     }
-    IMG_SavePNG(surface, "textbw.png");
+    IMG_SavePNG(surface, "bw.png");
 }
 
 void MonoColor(SDL_Surface* surface){
@@ -82,7 +86,7 @@ void MonoColor(SDL_Surface* surface){
             putpixel(surface,j,i,pixel);
         }
     }
-    IMG_SavePNG(surface, "textmono.png");
+    IMG_SavePNG(surface, "mono.png");
 }
 
 void ExtractBlock(SDL_Surface* surface){
@@ -124,7 +128,7 @@ void ExtractBlock(SDL_Surface* surface){
     draw_rectangle(surface, xstart, ystart, 1, yend - ystart);
     draw_rectangle(surface, xend, ystart, 1, yend - ystart);
     draw_rectangle(surface, xstart, yend, xend - xstart, 1);
-    IMG_SavePNG(surface, "cropped.png");
+    IMG_SavePNG(surface, "selected.png");
 }
 
 Uint32 getpixel(SDL_Surface *surface, int x, int y)
