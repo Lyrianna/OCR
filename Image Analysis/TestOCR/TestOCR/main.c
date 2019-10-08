@@ -96,8 +96,8 @@ void ExtractBlock(SDL_Surface* surface){
     int yend = 0;
     int firstmatch = 1;
     int lastwasblack = 0;
-    for(int y = 0; y < surface->h; y++){ //y
-        for(int x = 0; x < surface->w;x++){ //x
+    for(int y = 0; y < surface->h; y++){
+        for(int x = 0; x < surface->w;x++){
             Uint8 red = 0;
             Uint8 green = 0;
             Uint8 blue = 0;
@@ -153,7 +153,6 @@ Uint32 getpixel(SDL_Surface *surface, int x, int y)
 void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
     int bpp = surface->format->BytesPerPixel;
-    /* Here p is the address to the pixel we want to set */
     Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 
     switch(bpp) {
