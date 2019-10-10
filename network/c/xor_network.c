@@ -11,5 +11,6 @@ double sigmoid( double x)
 
 double sigmoid_prime(double x)
 {
+
     return x*(1-x); //return sigmoid(x)*(1-sigmoid(x));
 }

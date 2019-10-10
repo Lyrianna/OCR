@@ -11,7 +11,7 @@ def sigmoid_derivative(x):
 
 
 # Input datasets
-inputs = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+inputs = ([[0, 0], [0, 1], [1, 0], [1, 1]])
 expected_output = np.array([[0], [1], [1], [0]])
 
 epochs = 10000
