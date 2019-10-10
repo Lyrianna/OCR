@@ -1,0 +1,4 @@
+#ifndef C_STRUCTURES_H
+#define C_STRUCTURES_H
+
+#endif //C_STRUCTURES_H
