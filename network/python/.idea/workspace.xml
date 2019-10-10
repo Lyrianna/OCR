@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba3ae5b4-c3af-471f-a42a-184590113df4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../c#/network/.idea/.idea.network/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../c#/network/.idea/.idea.network/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../c#/network/.idea/.idea.network/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../c#/network/.idea/.idea.network/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../c/MAKEFILE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../c/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../c/xor_network.c" beforeDir="false" afterPath="$PROJECT_DIR$/../c/xor_network.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../c/xor_network.h" beforeDir="false" afterPath="$PROJECT_DIR$/../c/xor_network.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xor_backprop.py" beforeDir="false" afterPath="$PROJECT_DIR$/xor_backprop.py" afterDir="false" />
-    </list>
+    <list default="true" id="ba3ae5b4-c3af-471f-a42a-184590113df4" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/xor_backprop.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+            <state relative-caret-position="153">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -133,14 +122,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24966975" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32956153" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32956153" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -158,8 +146,8 @@
     <entry file="file://$PROJECT_DIR$/fct.py.txt" />
     <entry file="file://$PROJECT_DIR$/xor_backprop.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+        <state relative-caret-position="153">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
