@@ -10,7 +10,7 @@ typedef struct Matrix{
     size_t n;
     size_t p;
     size_t size;
-    double *matrix[n][p];
+    double matrix[];
 } Matrix ;
 
 
