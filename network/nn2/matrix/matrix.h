@@ -14,7 +14,7 @@ typedef struct Matrix{
 } Matrix ;
 
 
-void printM(Matrix* mat);
+void printM(Matrix* mat, char s[]);
 void saveM(Matrix mat);
 void freeM(Matrix* mat);
 
@@ -27,5 +27,7 @@ Matrix* scalM(Matrix m, double s);
 Matrix* dotM(Matrix a, Matrix b);
 Matrix* transpM(Matrix *m);
 Matrix* sigM(Matrix m);
+
+Matrix* initwithvaluesM(size_t n, size_t p, double* m);
 
 #endif //NN2_MATRIX_H

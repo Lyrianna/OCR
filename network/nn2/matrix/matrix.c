@@ -4,11 +4,11 @@
 
 #include "matrix.h"
 
-void printM(Matrix* mat) {
+void printM(Matrix* mat, char s[]) {
     size_t rows = mat->n;
     size_t cols = mat->p;
 
-    printf("%s =\n", mat);
+    printf("%s =\n", s);
 
     for (size_t i = 0; i < rows; i++) {
         for (size_t j = 0; j < cols; j++) {
@@ -153,8 +153,8 @@ Matrix* dotM(Matrix a, Matrix b)
 
 Matrix* transpM(Matrix *m)
 {
-    size_t rows = m->n;
-    size_t cols = m->p;
+    size_t rows = m->p;
+    size_t cols = m->n;
 
     Matrix* result = initM(rows,cols);
 
@@ -178,4 +178,18 @@ Matrix* sigM(Matrix m)
     Matrix* result = initM(rows,cols);
     //TODO
     return result;
+}
+
+Matrix* initwithvaluesM(size_t n, size_t p, double* m)
+{
+    size_t size = n*p;
+
+    Matrix* init = malloc(sizeof(Matrix));
+
+    init->n = n;
+    init->p = p;
+    init->sizevector = size;
+    init->matrix = m;
+
+    return init;
 }
