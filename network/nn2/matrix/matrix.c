@@ -4,15 +4,15 @@
 
 #include "matrix.h"
 
-void printM(Matrix mat) {
-    size_t rows = mat.n;
-    size_t cols = mat.p;
+void printM(Matrix* mat) {
+    size_t rows = mat->n;
+    size_t cols = mat->p;
 
     printf("%s =\n", mat);
 
     for (size_t i = 0; i < rows; i++) {
         for (size_t j = 0; j < cols; j++) {
-            printf("%4g", mat.matrix[i * cols + j]);
+            printf("%4g", mat->matrix[i * cols + j]);
         }
 
         printf("\n");
@@ -57,16 +57,16 @@ Matrix* initM(size_t n, size_t p)
     return init;
 }
 
-Matrix* addM(Matrix mat1, Matrix mat2)
+Matrix* addM(Matrix* mat1, Matrix* mat2)
 {
-    if(mat1.n!= mat2.n || mat1.p != mat2.p)
+    if(mat1->n!= mat2->n || mat1->p != mat2->p)
     {
         errx(1, "ADD : matrices do not have the same dimension. M1(%i,%i) and M2(%i,%i).\n",
-                mat1.n,mat1.p,mat2.n,mat2.p);
+                mat1->n,mat1->p,mat2->n,mat2->p);
     }
 
-    size_t rows = mat1.n;
-    size_t cols = mat2.p;
+    size_t rows = mat1->n;
+    size_t cols = mat2->p;
 
     Matrix* result = initM(rows,cols);
 
@@ -74,7 +74,7 @@ Matrix* addM(Matrix mat1, Matrix mat2)
     {
         for (size_t j = 0; i < cols;i++)
         {
-            result->matrix[i*cols+j] = ((mat1.matrix[i*cols+j]) + (mat2.matrix[i*cols+j]));
+            result->matrix[i*cols+j] = ((mat1->matrix[i*cols+j]) + (mat2->matrix[i*cols+j]));
         }
     }
     return result;
@@ -146,9 +146,9 @@ Matrix* dotM(Matrix a, Matrix b)
     /*size_t rows = m.n;
     size_t cols = m.p;*/
 
-    Matrix* result = initM(/*TODO*/);
+    /*Matrix* result = initM(TODO);
     //TODO
-    return result;
+    return result;*/
 }
 
 Matrix* transpM(Matrix *m)

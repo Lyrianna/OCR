@@ -14,13 +14,13 @@ typedef struct Matrix{
 } Matrix ;
 
 
-void printM(Matrix mat);
+void printM(Matrix* mat);
 void saveM(Matrix mat);
 void freeM(Matrix* mat);
 
 Matrix* initM(size_t n, size_t p);
 
-Matrix* addM(Matrix mat1, Matrix mat2);
+Matrix* addM(Matrix* mat1, Matrix* mat2);
 Matrix* mulM(Matrix mat1, Matrix mat2);
 Matrix* hadaM(Matrix mat1, Matrix mat2);
 Matrix* scalM(Matrix m, double s);
