@@ -86,9 +86,9 @@ Matrix* mulM(Matrix mat1, Matrix mat2)
     size_t c1 = mat1.p;
     size_t c2 = mat2.p;
 
-    Matrix* result = initM(//TODO);
+    Matrix* result = initM(r1,c2);
 
-    for (size_t i = 0; i<r1; i++)
+    for(size_t i = 0; i<r1; i++)
     {
         for (size_t j = 0; j<c2; i++)
         {
@@ -98,14 +98,21 @@ Matrix* mulM(Matrix mat1, Matrix mat2)
             }
         }
     }
+    return result;
 }
 
 Matrix* hadaM(Matrix mat1, Matrix mat2)
 {
+    if(mat1.n!= mat2.n || mat1.p != mat2.p)
+    {
+        errx(1, "HADAMARD PRODUCT : matrices do not have the same dimension. M1(%i,%i) and M2(%i,%i).\n",
+             mat1.n,mat1.p,mat2.n,mat2.p);
+    }
+
     size_t rows = mat1.n;
     size_t cols = mat2.p;
 
-    Matrix* result = initM(//TODO);
+    Matrix* result = initM(rows,cols);
 
     for (size_t i = 0; i < rows; i++)
     {
@@ -114,6 +121,7 @@ Matrix* hadaM(Matrix mat1, Matrix mat2)
             result->matrix[i*cols+j] = mat1.matrix[i*cols+j] * mat2.matrix[i*cols+j];
         }
     }
+    return result;
 }
 
 Matrix* scalM(Matrix m, double s)
@@ -121,8 +129,16 @@ Matrix* scalM(Matrix m, double s)
     size_t rows = m.n;
     size_t cols = m.p;
 
-    Matrix* result = initM(//TODO);
-    //TODO
+    Matrix* result = initM(rows,cols);
+
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; i < cols;i++)
+        {
+            result->matrix[i*cols+j] = s*result->matrix[i*cols+j];
+        }
+    }
+    return result;
 }
 
 Matrix* dotM(Matrix a, Matrix b)
@@ -130,8 +146,9 @@ Matrix* dotM(Matrix a, Matrix b)
     /*size_t rows = m.n;
     size_t cols = m.p;*/
 
-    Matrix* result = initM(//TODO);
+    Matrix* result = initM(/*TODO*/);
     //TODO
+    return result;
 }
 
 Matrix* transpM(Matrix *m)
@@ -139,7 +156,7 @@ Matrix* transpM(Matrix *m)
     size_t rows = m->n;
     size_t cols = m->p;
 
-    Matrix* result = initM(//TODO);
+    Matrix* result = initM(rows,cols);
 
     for (size_t i=0; i<rows; i++)
     {
@@ -148,6 +165,7 @@ Matrix* transpM(Matrix *m)
             result->matrix[j*rows+i] = m->matrix[i*cols+j];
         }
     }
+    return result;
 }
 
 Matrix* sigM(Matrix m)
@@ -159,4 +177,5 @@ Matrix* sigM(Matrix m)
 
     Matrix* result = initM(rows,cols);
     //TODO
+    return result;
 }
