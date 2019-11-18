@@ -21,12 +21,11 @@ void freeM(Matrix* mat);
 Matrix* initM(size_t n, size_t p);
 
 Matrix* addM(Matrix* mat1, Matrix* mat2);
-Matrix* mulM(Matrix mat1, Matrix mat2);
-Matrix* hadaM(Matrix mat1, Matrix mat2);
-Matrix* scalM(Matrix m, double s);
-Matrix* dotM(Matrix a, Matrix b);
-Matrix* transpM(Matrix *m);
-Matrix* sigM(Matrix m);
+Matrix* mulM(Matrix* mat1, Matrix* mat2);
+Matrix* hadaM(Matrix* mat1, Matrix* mat2);
+Matrix* scalM(Matrix* m, double s);
+Matrix* transpM(Matrix* m);
+Matrix* sigM(Matrix* m);
 
 Matrix* initwithvaluesM(size_t n, size_t p, double* m);
 
