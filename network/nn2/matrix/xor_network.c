@@ -6,79 +6,77 @@
 #include "matrix.h"
 
 //NEURAL NETWORK - XOR - Sarah and Nephelie//
-
-
-double bias=1;//general bias
-
+//ADAPTATION TO MATRIX STARTED ON 17/11/2019 BY SARAH
 double lr = 2;//learning rate
+
 unsigned long int epoch = 10000;//number of epoch for the training
 
 size_t inputNb;//number/size of the input
 Matrix *input;
 Matrix *wanted_output
 
-Matrix *wanted_output;
-
 size_t hiddenNb = 30;//number of hidden neurons
-Matrix *hidden = initM(inputNb, hiddenNb);
-Matrix *hidden_weight = initM(1, hiddenNb);
+Matrix *hidden, *hidden_weight, *hidden_bias;
 
-size_t outputNb;
-Matrix *output = initM(hiddenNb, outputNb);//output neurons
-Matrix *output_weight =initM(1, outputNb);
+size_t outputNb;//output neurons
+Matrix *output, *output_weight, *output_bias;
 
-double error_values[4];//jsp
-Matrix *derivative_output = initM(hiddenNb, outputNb);
-Matrix *derivative_hidden = initM(inputNb, hiddenNb);
 
+Matrix *derivative_output, *derivative_hidden;
+
+Matrix *error_values;
 double weight_gradient[9];//jsp
 
-//Sigmoid functions
-double sigmoid( double x)
-{
-    return (double)(1/(1+exp(-x)));
-}
-
-double sigmoid_derivate(double x)
-{
-
-    return x*(1-x);
-}
-
 //initialization
+void initAll(){
+	*hidden = initm(inputNb, hiddenNb);
+	*hidden_weight = initM(hiddenNb, hiddenNb);
+	*hidden_bias = initM(inputNb, hiddenNb);
+
+	*output = initM(hiddenNb, outputNb)
+	*output_weight = initM(hiddenNb, outputNb);
+	*output_bias = initM(hiddenNb, outputNb);
+
+	*error_values = initM(outputNb,outputNb);
+	*derivative_output = initM(hiddenNb, outputNb);
+	*derivative_hidden = initM(inputNb, hiddenNb);
+}
+
 void generate_wgt()
 {
     srand(time(NULL));
-    for (int i = 0; i < 9; i++)
-            weights[i] =(double) (rand()/ (double)RAND_MAX*(2)-1);
+    for (int i = 0; i < (*(hidden_weight)->sizevector) ; i++)
+	    *(hidden_weight+i) =(double) (rand()/ (double)RAND_MAX*(2)-1);
+    for (int j = 0 ; j < (*(output_weight)->sizevector) ;j++)
+	    *(output_weight+j) =(double) (rand()/ (double)RAND_MAX*(2)-1);
+    for (int k = 0 ; k < (*(hidden_bias)->sizevector); k++)
+	    *(hidden_bias+k) =(double) (rand()/ (double)RAND_MAX*(2)-1);
+    for (int g = 0; g < (*(output_bias)->sizevector); g++)
+	    *(output_bias+g) =(double) (rand()/ (double)RAND_MAX*(2)-1);
+
 }
 
 //Feed forward
 
-void hidden_layers(int x)
+void hidden_layers()
 {
-    sum_hidden1 = (inputs[x][0]*weights[0]) + (inputs[x][1]*weights[2])
-    + (bias *weights[4]);
-    sum_hidden2 = (inputs[x][0]*weights[1]) + (inputs[x][1]*weights[3])
-    + (bias *weights[5]);
-    hidden1 = sigmoid(sum_hidden1);
-    hidden2 = sigmoid(sum_hidden2);
+	*hidden = mulM(inputs, hidden_weight);
+	*hidden = sigM(addM(hidden, hidden_bias));
 }
 
 void output_neurons()
 {
-    sum_output = (hidden1 * weights[6]) + (hidden2 * weights[7])
-    + (bias * weights[8]);
-    output = sigmoid(sum_output);
+	*output = mulM( hidden, output_weight);
+	*output = sigM( addM(output, output_bias));
 }
 
 //backpropagation
-void error(int x)
+void error()
 {
-    error_values[x] = wanted_outputs[x]- output;
+	*error_values = subM(wanted,output);
 }
 
-void derivatives(int x)
+void derivatives()
 {
     derivative_output = error_values[x] * sigmoid_derivate(output);
 
@@ -115,23 +113,21 @@ void update_weights()
 void train_neural(Matrix *in , Matrix *wanted_out)
 {
 	*input = *in;
-	*wanted_output = wanted_out;
+	*wanted_output = *wanted_out;
 	inputNb = *inputs->n;
 	outputNb = *wanted_output->n;
+	initAll();
 	unsigned long int k = 0;
     while ( k < epoch)
     {
-        for (int i = 0; i < 4; i++)
-        {
-            hidden_layers(i);
+	    hidden_layers();
             output_neurons();
-            error(i);
-            derivatives(i);
-            weight_gradient_update(i);
+            error();
+            derivatives();
+            weight_gradient_update();
             update_weights();
-            displayepoch(i);
-        }
-        k+=1;
+            displayepoch();
+	    k+=1;
     }
 }
 

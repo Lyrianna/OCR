@@ -21,6 +21,7 @@ void freeM(Matrix* mat);
 Matrix* initM(size_t n, size_t p);
 
 Matrix* addM(Matrix* mat1, Matrix* mat2);
+Matrix* subM(Matrix* mat1, Matrix* mat2);
 Matrix* mulM(Matrix* mat1, Matrix* mat2);
 Matrix* hadaM(Matrix* mat1, Matrix* mat2);
 Matrix* scalM(Matrix* m, double s);

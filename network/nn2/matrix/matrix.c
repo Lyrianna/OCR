@@ -86,6 +86,30 @@ Matrix* addM(Matrix* mat1, Matrix* mat2)
     return result;
 }
 
+//Substract 2 matrices in a new matrix
+Matrix* subM(Matrix* mat1, Matrix* mat2)
+{
+    if(mat1->n!= mat2->n || mat1->p != mat2->p)
+    {
+        errx(1, "ADD : matrices do not have the same dimension. M1(%i*%i) and M2(%i*%i).\n",
+                mat1->n,mat1->p,mat2->n,mat2->p);
+    }
+
+    size_t rows = mat1->n;
+    size_t cols = mat2->p;
+
+    Matrix* result = initM(rows,cols);
+
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols;j++)
+        {
+            result->matrix[i*cols+j] = ((mat1->matrix[i*cols+j]) - (mat2->matrix[i*cols+j]));
+        }
+    }
+    return result;
+}
+
 //Multiply 2 matrices (DEBUGGED)
 Matrix* mulM(Matrix* mat1, Matrix* mat2)
 {
