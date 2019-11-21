@@ -4,8 +4,12 @@
 
 #ifndef NN2_MATRIX_H
 #define NN2_MATRIX_H
+
 #include <stdbool.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <err.h>
 
 typedef struct Matrix{
 

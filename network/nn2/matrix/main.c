@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "../xor_network.h"
 #include "matrix.h"
 
 #define ROWS1 1
@@ -65,12 +62,6 @@ double m5_times_m4[ROWS5 * COLS4];
 
 int main()
 {
-	/*printf("\nThe groupe HELE is happy to show you its XOR machine!\n");
-    generate_wgt();
-    train_neural();
-    save_datas();
-    printf("\n");*/
-
     //TODO - INIT
     Matrix* mat1 = initwithvaluesM(ROWS1,COLS1,m1);
     Matrix* mat2 = initwithvaluesM(ROWS2,COLS2,m2);
@@ -78,11 +69,11 @@ int main()
     Matrix* mat4 = initwithvaluesM(ROWS4,COLS4,m4);
     Matrix* mat5 = initwithvaluesM(ROWS5,COLS5,m5);
 
-    printM(mat1,"mat1");
+    /*printM(mat1,"mat1");
     printM(mat2,"mat2");
     printM(mat3,"mat3");
     printM(mat4,"mat4");
-    printM(mat5,"mat5");
+    printM(mat5,"mat5");*/
 
     //TODO - TRANSPOSE MATRICE
     Matrix* mat1_tr = transpM(mat1);
@@ -92,11 +83,11 @@ int main()
     Matrix* mat5_tr = transpM(mat5);
 
 
-    printM(mat1_tr,"mat1_tr");
+    /*printM(mat1_tr,"mat1_tr");
     printM(mat2_tr,"mat2_tr");
     printM(mat3_tr,"mat3_tr");
     printM(mat4_tr,"mat4_tr");
-    printM(mat5_tr,"mat5_tr");
+    printM(mat5_tr,"mat5_tr");*/
 
     //TODO - ADD MATRICES
     Matrix* mat3_plus_mat3 = addM(mat3,mat3);

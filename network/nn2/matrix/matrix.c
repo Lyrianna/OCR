@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <err.h>
-
 #include "matrix.h"
 
 // Created by Néphélie on 13/11/2019.
