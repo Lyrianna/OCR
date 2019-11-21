@@ -25,7 +25,7 @@ Matrix *output, *output_weight, *output_bias;
 Matrix *derivative_output, *derivative_hidden;
 
 Matrix *error_values;
-double weight_gradient[9];//jsp
+Matrix *weight_gradient;
 
 //initialization
 void initAll(){
@@ -44,6 +44,7 @@ void initAll(){
     initM2(error_values, outputNb, outputNb);
     initM2(derivative_output, hiddenNb, outputNb);
     initM2(derivative_hidden, inputNb, hiddenNb);
+    initM2(weight_gradient,inputNb*inputNb,inputNb*inputNb);
 }
 
 void generate_wgt()
@@ -64,13 +65,13 @@ void generate_wgt()
 
 void hidden_layers()
 {
-	hidden = mulM(input, hidden_weight);
+	hidden = hadaM(input, hidden_weight);
 	hidden = sigM(addM(hidden, hidden_bias),false);
 }
 
 void output_neurons()
 {
-	output = mulM( hidden, output_weight);
+	output = hadaM( hidden, output_weight);
 	output = sigM( addM(output, output_bias),false);
 }
 
@@ -82,13 +83,8 @@ void error()
 
 void derivatives()
 {
-    derivative_output = mulM(error_values,sigM(output,true));
-
-    derivative_hidden1 = sigmoid_derivate(hidden1) * weights[6]
-    * derivative_output;
-
-    derivative_hidden2 = sigmoid_derivate(hidden2) * weights[7]
-    * derivative_output;
+    derivative_output = hadaM(error_values,sigM(output,true));
+    derivative_hidden = hadaM(hadaM(sigM(derivative_hidden,true),weight),derivative_output);
 }
 
 //update of weights and bias
@@ -118,8 +114,8 @@ void train_neural(Matrix *in , Matrix *wanted_out)
 {
 	*input = *in;
 	*wanted_output = *wanted_out;
-	inputNb = *inputs->n;
-	outputNb = *wanted_output->n;
+	inputNb = input->n;
+	outputNb = wanted_output->n;
 	initAll();
 	unsigned long int k = 0;
     while ( k < epoch)

@@ -243,3 +243,5 @@ Matrix* initwithvaluesM(size_t n, size_t p, double* m)
 
     return init;
 }
+
+Matrix* dotM(Matrix* mat1, Matrix* mat2);

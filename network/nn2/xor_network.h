@@ -1,34 +1,30 @@
 #ifndef XOR_NETWORK_H
 #define XOR_NETWORK_H
 
-#include "matrix.h"
-#include "matrix.c"
+#include "matrix/matrix.h"
+#include "matrix/matrix.c"
 #define ALPHABET = [abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ,.];
-
-//Sigmoid functions
-double sigmoid(double x);
-double sigmoid_derivate(double x);
 
 //initialization
 void generate_wgt();
 
 //Feed forward
-void hidden_layers(int x);
+void hidden_layers();
 void output_neurons();
 
 //Backpropagation
 void error();
-void derivatives(int x);
+void derivatives();
 
 //Update of weights and bias
-void weight_gradient_update(int x);
+void weight_gradient_update();
 void update_weights();
 
 //XOR training
 void train_neural();
 
 //Displays the results
-void displayepoch(int x);
+void displayepoch();
 
 //Save datas
 void save_datas();
