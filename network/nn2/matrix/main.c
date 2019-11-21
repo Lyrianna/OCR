@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "xor_network.h"
-#include <stdio.h>
+#include "../xor_network.h"
 #include "matrix.h"
 
 #define ROWS1 1
@@ -66,11 +65,11 @@ double m5_times_m4[ROWS5 * COLS4];
 
 int main()
 {
-	printf("\nThe groupe HELE is happy to show you its XOR machine!\n");
+	/*printf("\nThe groupe HELE is happy to show you its XOR machine!\n");
     generate_wgt();
     train_neural();
     save_datas();
-    printf("\n");
+    printf("\n");*/
 
     //TODO - INIT
     Matrix* mat1 = initwithvaluesM(ROWS1,COLS1,m1);

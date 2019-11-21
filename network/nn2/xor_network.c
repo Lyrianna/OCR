@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 #include "xor_network.h"
-#include "matrix.h"
+#include "matrix/matrix.h"
 
 //NEURAL NETWORK - XOR - Sarah and Nephelie//
 //ADAPTATION TO MATRIX STARTED ON 17/11/2019 BY SARAH AND NEPHELIE
