@@ -23,23 +23,46 @@ void printM(Matrix* mat, char s[])
 
 //Save the space of matrice (NOT
 // TODO : to review (save properties of matrices) + do loadM
-void saveM(Matrix mat)
+void saveM(Matrix *mat, bool iscontinuous)
 {
     FILE* fichier = NULL;
-    fichier = fopen("datasaved.txt", "w");
+    if(iscontinuous)
+        fichier = fopen("datasaved.txt","a");
+    else
+        fichier = fopen("datasaved.txt", "w");
 
     if (fichier != NULL)
     {
-        for (int i = 0; i < mat.n; i++)
+        fprintf(fichier,"%lu %lu\n",mat->n,mat->p);
+        for (int i = 0; i < mat->n; i++)
         {
-            for (int j = 0; j < mat.p; ++j)
+            for (int j = 0; j < mat->p; ++j)
             {
-                fprintf(fichier,"%lf ",mat.matrix[i*mat.n+j]);
+                fprintf(fichier,"%lf ",mat->matrix[i*mat->n+j]);
+                /*fprintf(fichier,"helloworld");*/
             }
         }
+        fputs("\n\n",fichier);
 
         fclose(fichier);
     }
+    else
+        errx(1,"SAVEMATRIX : Impossible to open datasaved.txt.");
+}
+
+Matrix* loadM(FILE *filename)
+{
+    FILE* fichier = NULL;
+    fichier = fopen(filename,"r");
+
+    if (fichier != NULL)
+    {
+
+
+        fclose(fichier);
+    }
+    else
+        errx(1,"LOADMATRIX : No file datasaved.txt.");
 }
 
 //Free the space init with the matrice (NOT)
@@ -248,26 +271,4 @@ Matrix* initwithvaluesM(size_t n, size_t p, double* m)
     init->matrix = m;
 
     return init;
-}
-
-Matrix* dotM(Matrix* mat1, Matrix* mat2)
-{
-    if(mat1->n!= mat2->p)
-    {
-        errx(1, "DOT : mat1 row not same dimension as mat2 col. M1(%i,%i) and M2(%i,%i).\n",
-             mat1->n,mat1->p,mat2->n,mat2->p);
-    }
-
-    size_t rows = mat1->n;
-    size_t cols = mat2->p;
-
-    Matrix *result = initM(rows,cols);
-
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-
-        }
-    }
-
-
 }

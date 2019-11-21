@@ -21,7 +21,8 @@ typedef struct Matrix{
 
 
 void printM(Matrix* mat, char s[]);
-void saveM(Matrix mat);
+void saveM(Matrix *mat, bool iscontinuous);
+Matrix* loadM(FILE *filename);
 void freeM(Matrix* mat);
 
 Matrix* initM(size_t n, size_t p);
