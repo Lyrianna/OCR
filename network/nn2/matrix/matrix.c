@@ -128,6 +128,12 @@ Matrix* subM(Matrix* mat1, Matrix* mat2)
 //Multiply 2 matrices (DEBUGGED)
 Matrix* mulM(Matrix* mat1, Matrix* mat2)
 {
+    if(mat1->n!= mat2->p)
+    {
+        errx(1, "DOT : mat1 row not same dimension as mat2 col. M1(%i,%i) and M2(%i,%i).\n",
+             mat1->n,mat1->p,mat2->n,mat2->p);
+    }
+
     size_t r1 = mat1->n;
     size_t c1 = mat1->p;
     size_t c2 = mat2->p;
@@ -148,7 +154,7 @@ Matrix* mulM(Matrix* mat1, Matrix* mat2)
 }
 
 //Hadamar Product on matrices (DEBUGGED)
-Matrix* hadaM(Matrix* mat1, Matrix* mat2)
+Matrix* dotM(Matrix* mat1, Matrix* mat2)
 {
     if(mat1->n!= mat2->n || mat1->p != mat2->p)
     {
@@ -244,4 +250,24 @@ Matrix* initwithvaluesM(size_t n, size_t p, double* m)
     return init;
 }
 
-Matrix* dotM(Matrix* mat1, Matrix* mat2);
+Matrix* dotM(Matrix* mat1, Matrix* mat2)
+{
+    if(mat1->n!= mat2->p)
+    {
+        errx(1, "DOT : mat1 row not same dimension as mat2 col. M1(%i,%i) and M2(%i,%i).\n",
+             mat1->n,mat1->p,mat2->n,mat2->p);
+    }
+
+    size_t rows = mat1->n;
+    size_t cols = mat2->p;
+
+    Matrix *result = initM(rows,cols);
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+
+        }
+    }
+
+
+}
