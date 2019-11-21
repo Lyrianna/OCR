@@ -4,6 +4,8 @@
 
 #ifndef NN2_MATRIX_H
 #define NN2_MATRIX_H
+#include <stdbool.h>
+#include <math.h>
 
 typedef struct Matrix{
 
@@ -19,7 +21,7 @@ void saveM(Matrix mat);
 void freeM(Matrix* mat);
 
 Matrix* initM(size_t n, size_t p);
-void initM2(Matrix *mat, size_t n, size_t p)
+void initM2(Matrix *mat, size_t n, size_t p);
 
 Matrix* addM(Matrix* mat1, Matrix* mat2);
 Matrix* subM(Matrix* mat1, Matrix* mat2);
@@ -27,7 +29,7 @@ Matrix* mulM(Matrix* mat1, Matrix* mat2);
 Matrix* hadaM(Matrix* mat1, Matrix* mat2);
 Matrix* scalM(Matrix* m, double s);
 Matrix* transpM(Matrix* m);
-Matrix* sigM(Matrix* m);
+Matrix* sigM(Matrix* m, bool is_derivate);
 
 Matrix* initwithvaluesM(size_t n, size_t p, double* m);
 

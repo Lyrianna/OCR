@@ -17,7 +17,7 @@ void hidden_layers(int x);
 void output_neurons();
 
 //Backpropagation
-void error(int x);
+void error();
 void derivatives(int x);
 
 //Update of weights and bias

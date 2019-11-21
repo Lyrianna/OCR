@@ -122,9 +122,15 @@ int main()
     Matrix* mat4_had_mat5tr = hadaM(mat4,mat5_tr);
     Matrix* mat5_had_mat4tr = hadaM(mat5,mat4_tr);
 
-    printM(mat3_had_mat3, "mat3_had_mat3");
+    /*printM(mat3_had_mat3, "mat3_had_mat3");
     printM(mat4_had_mat5tr,"mat4_had_mat5tr");
-    printM(mat5_had_mat4tr,"mat5_had_mat4tr");
+    printM(mat5_had_mat4tr,"mat5_had_mat4tr");*/
+
+    //TODO - SIGMOID ON MATRICES
+    /*mat1 = sigM(mat1,false);
+    printM(mat1,"mat1");
+    mat1 = sigM(mat1,true);
+    printM(mat1,"mat1");*/
 
     return 0;
 }

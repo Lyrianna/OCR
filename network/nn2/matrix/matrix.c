@@ -7,14 +7,17 @@
 // Created by Néphélie on 13/11/2019.
 
 //Print a matrice on console (DEBUGGED)
-void printM(Matrix* mat, char s[]) {
+void printM(Matrix* mat, char s[])
+{
     size_t rows = mat->n;
     size_t cols = mat->p;
 
     printf("%s =\n", s);
 
-    for (size_t i = 0; i < rows; i++) {
-        for (size_t j = 0; j < cols; j++) {
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
             printf("%4g", mat->matrix[i * cols + j]);
         }
 
@@ -33,7 +36,8 @@ void saveM(Matrix mat)
     {
         for (int i = 0; i < mat.n; i++)
         {
-            for (int j = 0; j < mat.p; ++j) {
+            for (int j = 0; j < mat.p; ++j)
+            {
                 fprintf(fichier,"%lf ",mat.matrix[i*mat.n+j]);
             }
         }
@@ -49,7 +53,7 @@ void freeM(Matrix* mat)
     free(mat);
 }
 
-//Init a matrices with no special values (DEBUGGED)
+//Init a matrices with no special values as matrices + not defined globally (DEBUGGED)
 Matrix* initM(size_t n, size_t p)
 {
     size_t size = n*p;
@@ -63,6 +67,8 @@ Matrix* initM(size_t n, size_t p)
 
     return init;
 }
+
+//Same as before but with Matrix initialized globally
 void initM2(Matrix *mat, size_t n, size_t p)
 {
     size_t size = n*p;
@@ -73,8 +79,6 @@ void initM2(Matrix *mat, size_t n, size_t p)
     mat->p = p;
     mat->sizevector = size;
     mat->matrix = calloc(size, sizeof(double));
-
-    return init;
 }
 
 //Add 2 matrices in a new matrice (DEBUGGED)
@@ -206,28 +210,26 @@ Matrix* transpM(Matrix* m)
     }
     return result;
 }
-/*
-//Sigmoid functions
-double sigmoid( double x)
-{
-    return (double)(1/(1+exp(-x)));
-}
-
-double sigmoid_derivate(double x)
-{
-
-    return x*(1-x);
-}
- */
 
 //Calculate the sigmoid of each value in matrice (NOT)
-Matrix* sigM(Matrix* m)
+Matrix* sigM(Matrix* m, bool is_derivate)
 {
     size_t rows = m->n;
     size_t cols = m->p;
-
     Matrix* result = initM(rows,cols);
-    //TODO
+
+    if (is_derivate)
+    {
+        for (int i = 0; i < m->sizevector; ++i) {
+            result->matrix[i] = (double)(1/(1+exp(-(m->matrix[i]))));
+        }
+    }
+    else
+    {
+        for (int i = 0; i < m->sizevector; ++i) {
+            result->matrix[i] = (m->matrix[i])*(1-(m->matrix[i]));
+        }
+    }
     return result;
 }
 

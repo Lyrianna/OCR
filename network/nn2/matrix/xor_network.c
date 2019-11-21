@@ -1,13 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include <math.h>
 #include "xor_network.h"
 #include "matrix.h"
 
 //NEURAL NETWORK - XOR - Sarah and Nephelie//
 //ADAPTATION TO MATRIX STARTED ON 17/11/2019 BY SARAH AND NEPHELIE
-double lr = 2;//learning rate
+
+double lr = 2; //learning rate
 
 unsigned long int epoch = 10000;//number of epoch for the training
 
@@ -29,14 +29,18 @@ double weight_gradient[9];//jsp
 
 //initialization
 void initAll(){
+
+    //Hidden layers
     initM2(hidden, inputNb, hiddenNb);
 	initM2(hidden_weight, hiddenNb, hiddenNb);
 	initM2(hidden_bias, inputNb, hiddenNb);
 
+	//Output Layer
     initM2(output, hiddenNb, outputNb);
     initM2(output_weight, hiddenNb, outputNb);
     initM2(output_bias, hiddenNb, outputNb);
 
+    //Update weights
     initM2(error_values, outputNb, outputNb);
     initM2(derivative_output, hiddenNb, outputNb);
     initM2(derivative_hidden, inputNb, hiddenNb);
@@ -61,16 +65,16 @@ void generate_wgt()
 void hidden_layers()
 {
 	hidden = mulM(input, hidden_weight);
-	hidden = sigM(addM(hidden, hidden_bias));
+	hidden = sigM(addM(hidden, hidden_bias),false);
 }
 
 void output_neurons()
 {
 	output = mulM( hidden, output_weight);
-	output = sigM( addM(output, output_bias));
+	output = sigM( addM(output, output_bias),false);
 }
 
-//backpropagation
+//Backpropagation
 void error()
 {
 	error_values = subM(wanted_output,output);
@@ -78,7 +82,7 @@ void error()
 
 void derivatives()
 {
-    derivative_output = error_values[x] * sigmoid_derivate(output);
+    derivative_output = mulM(error_values,sigM(output,true));
 
     derivative_hidden1 = sigmoid_derivate(hidden1) * weights[6]
     * derivative_output;
