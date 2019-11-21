@@ -1,5 +1,5 @@
 //
-// Created by Lyrianna on 13/11/2019.
+// Created by Néphélie on 13/11/2019.
 //
 
 #ifndef NN2_MATRIX_H
@@ -19,6 +19,7 @@ void saveM(Matrix mat);
 void freeM(Matrix* mat);
 
 Matrix* initM(size_t n, size_t p);
+void initM2(Matrix *mat, size_t n, size_t p)
 
 Matrix* addM(Matrix* mat1, Matrix* mat2);
 Matrix* subM(Matrix* mat1, Matrix* mat2);

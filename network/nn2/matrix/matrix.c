@@ -4,6 +4,8 @@
 
 #include "matrix.h"
 
+// Created by Néphélie on 13/11/2019.
+
 //Print a matrice on console (DEBUGGED)
 void printM(Matrix* mat, char s[]) {
     size_t rows = mat->n;
@@ -58,6 +60,19 @@ Matrix* initM(size_t n, size_t p)
     init->p = p;
     init->sizevector = size;
     init->matrix = calloc(size, sizeof(double));
+
+    return init;
+}
+void initM2(Matrix *mat, size_t n, size_t p)
+{
+    size_t size = n*p;
+
+    mat = malloc(sizeof(Matrix));
+
+    mat->n = n;
+    mat->p = p;
+    mat->sizevector = size;
+    mat->matrix = calloc(size, sizeof(double));
 
     return init;
 }

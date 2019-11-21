@@ -6,14 +6,14 @@
 #include "matrix.h"
 
 //NEURAL NETWORK - XOR - Sarah and Nephelie//
-//ADAPTATION TO MATRIX STARTED ON 17/11/2019 BY SARAH
+//ADAPTATION TO MATRIX STARTED ON 17/11/2019 BY SARAH AND NEPHELIE
 double lr = 2;//learning rate
 
 unsigned long int epoch = 10000;//number of epoch for the training
 
 size_t inputNb;//number/size of the input
 Matrix *input;
-Matrix *wanted_output
+Matrix *wanted_output;
 
 size_t hiddenNb = 30;//number of hidden neurons
 Matrix *hidden, *hidden_weight, *hidden_bias;
@@ -29,30 +29,30 @@ double weight_gradient[9];//jsp
 
 //initialization
 void initAll(){
-	*hidden = initm(inputNb, hiddenNb);
-	*hidden_weight = initM(hiddenNb, hiddenNb);
-	*hidden_bias = initM(inputNb, hiddenNb);
+    initM2(hidden, inputNb, hiddenNb);
+	initM2(hidden_weight, hiddenNb, hiddenNb);
+	initM2(hidden_bias, inputNb, hiddenNb);
 
-	*output = initM(hiddenNb, outputNb)
-	*output_weight = initM(hiddenNb, outputNb);
-	*output_bias = initM(hiddenNb, outputNb);
+    initM2(output, hiddenNb, outputNb);
+    initM2(output_weight, hiddenNb, outputNb);
+    initM2(output_bias, hiddenNb, outputNb);
 
-	*error_values = initM(outputNb,outputNb);
-	*derivative_output = initM(hiddenNb, outputNb);
-	*derivative_hidden = initM(inputNb, hiddenNb);
+    initM2(error_values, outputNb, outputNb);
+    initM2(derivative_output, hiddenNb, outputNb);
+    initM2(derivative_hidden, inputNb, hiddenNb);
 }
 
 void generate_wgt()
 {
     srand(time(NULL));
-    for (int i = 0; i < (*(hidden_weight)->sizevector) ; i++)
-	    *(hidden_weight+i) =(double) (rand()/ (double)RAND_MAX*(2)-1);
-    for (int j = 0 ; j < (*(output_weight)->sizevector) ;j++)
-	    *(output_weight+j) =(double) (rand()/ (double)RAND_MAX*(2)-1);
-    for (int k = 0 ; k < (*(hidden_bias)->sizevector); k++)
-	    *(hidden_bias+k) =(double) (rand()/ (double)RAND_MAX*(2)-1);
-    for (int g = 0; g < (*(output_bias)->sizevector); g++)
-	    *(output_bias+g) =(double) (rand()/ (double)RAND_MAX*(2)-1);
+    for (int i = 0; i < (hidden_weight->sizevector) ; i++)
+	    hidden_weight->matrix[i] = (double) (rand()/ (double)RAND_MAX*(2)-1);
+    for (int j = 0 ; j < (output_weight->sizevector) ;j++)
+	    output_weight->matrix[j] =(double) (rand()/ (double)RAND_MAX*(2)-1);
+    for (int k = 0 ; k < (hidden_bias->sizevector); k++)
+	    hidden_bias->matrix[k] =(double) (rand()/ (double)RAND_MAX*(2)-1);
+    for (int g = 0; g < (output_bias->sizevector); g++)
+	    output_bias->matrix[g] = (double) (rand()/ (double)RAND_MAX*(2)-1);
 
 }
 
@@ -60,20 +60,20 @@ void generate_wgt()
 
 void hidden_layers()
 {
-	*hidden = mulM(inputs, hidden_weight);
-	*hidden = sigM(addM(hidden, hidden_bias));
+	hidden = mulM(input, hidden_weight);
+	hidden = sigM(addM(hidden, hidden_bias));
 }
 
 void output_neurons()
 {
-	*output = mulM( hidden, output_weight);
-	*output = sigM( addM(output, output_bias));
+	output = mulM( hidden, output_weight);
+	output = sigM( addM(output, output_bias));
 }
 
 //backpropagation
 void error()
 {
-	*error_values = subM(wanted,output);
+	error_values = subM(wanted_output,output);
 }
 
 void derivatives()

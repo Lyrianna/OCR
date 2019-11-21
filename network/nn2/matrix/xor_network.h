@@ -1,6 +1,10 @@
 #ifndef XOR_NETWORK_H
 #define XOR_NETWORK_H
 
+#include "matrix.h"
+#include "matrix.c"
+#define ALPHABET = [abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ,.];
+
 //Sigmoid functions
 double sigmoid(double x);
 double sigmoid_derivate(double x);
