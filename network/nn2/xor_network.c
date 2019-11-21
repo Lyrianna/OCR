@@ -88,7 +88,7 @@ void derivatives()
 }
 
 //update of weights and bias
-void weight_gradient_update(int x)
+void weight_gradient_update()
 {
     weight_gradient[0] = sigmoid(inputs[x][0]) * derivative_hidden1;
     weight_gradient[1] = sigmoid(inputs[x][0]) * derivative_hidden2;
