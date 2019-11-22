@@ -25,7 +25,6 @@ Matrix *output, *output_weight, *output_bias;
 Matrix *derivative_output, *derivative_hidden;
 
 Matrix *error_values;
-Matrix *weight_gradient;
 
 //initialization
 void initAll(){
@@ -65,30 +64,30 @@ void generate_wgt()
 
 void hidden_layers()
 {
-	hidden = hadaM(input, hidden_weight);
+	hidden = dotM(input, hidden_weight);
 	hidden = sigM(addM(hidden, hidden_bias),false);
 }
 
 void output_neurons()
 {
-	output = hadaM( hidden, output_weight);
+	output = dotM( hidden, output_weight);
 	output = sigM( addM(output, output_bias),false);
 }
 
 //Backpropagation
-void error()
+void error() //error for each case
 {
 	error_values = subM(wanted_output,output);
 }
 
-void derivatives()
+void derivatives()//repercution of the error for each layer
 {
-    derivative_output = hadaM(error_values,sigM(output,true));
-    derivative_hidden = hadaM(hadaM(sigM(derivative_hidden,true),weight),derivative_output);
+    derivative_output = dotM(error_values,sigM(output,true));
+    derivative_hidden = dotM(dotM(sigM(derivative_hidden,true),weight),derivative_output);
 }
 
 //update of weights and bias
-void weight_gradient_update()
+/*void weight_gradient_update()
 {
     weight_gradient[0] = sigmoid(inputs[x][0]) * derivative_hidden1;
     weight_gradient[1] = sigmoid(inputs[x][0]) * derivative_hidden2;
@@ -100,13 +99,25 @@ void weight_gradient_update()
     weight_gradient[7] = hidden2 * derivative_output;
     weight_gradient[8] = sigmoid(bias) * derivative_output;//bias gradient
     //for the case 4,5 and 8 it is about changing the fixed bias
-}
+}*/
 
-void update_weights()
+void update_weights()//update of the different matrices
 {
-    for (int i = 0; i < 9;i++)
-        weights[i] += lr * weight_gradient[i];
-    //weight are updated with the weight
+	//update of the weight btw input and hidden layer
+	//hidden_w += dot(input, derivative_hidden)*lr
+	hidden_weight =sum(hidden_weight, scalM(dotM(input, derivative_hidden), lr));
+
+	//update of the bias of the hidden layer
+	//hidden_bias += dot(sigmoid(hidden_bias), derivative_hidden)*lr))
+	hidden_bias = sumM(hidden_bias, scalM(dotM(sigM(hidden_bias,0), derivative_hidden), lr));
+	
+   	//update of the weight btw hidden and output layer
+   	//output_w += dot(input, derivative_output)*lr
+     output_weight = sumM(output_weight, scalM(dotM(hidden, derivative_output), lr));
+     
+	//update of the bias of the output layer
+	//output_bias += dot(sigmoid(output_bias), derivative_output)*lr))
+	output_bias = sumM(output_bias, scalM(dotM(derivative_output, mulM(sigM(output_bias, 0),derivative_output)), lr));
 }
 
 //training
@@ -124,7 +135,7 @@ void train_neural(Matrix *in , Matrix *wanted_out)
             output_neurons();
             error();
             derivatives();
-            weight_gradient_update();
+            //weight_gradient_update();
             update_weights();
             displayepoch();
 	    k+=1;
