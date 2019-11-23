@@ -49,13 +49,13 @@ void initAll(){
 void generate_wgt()
 {
     srand(time(NULL));
-    for (int i = 0; i < (hidden_weight->sizevector) ; i++)
+    for (size_t i = 0; i < (hidden_weight->sizevector) ; i++)
 	    hidden_weight->matrix[i] = (double) (rand()/ (double)RAND_MAX*(2)-1);
-    for (int j = 0 ; j < (output_weight->sizevector) ;j++)
+    for (size_t j = 0 ; j < (output_weight->sizevector) ;j++)
 	    output_weight->matrix[j] =(double) (rand()/ (double)RAND_MAX*(2)-1);
-    for (int k = 0 ; k < (hidden_bias->sizevector); k++)
+    for (size_t k = 0 ; k < (hidden_bias->sizevector); k++)
 	    hidden_bias->matrix[k] =(double) (rand()/ (double)RAND_MAX*(2)-1);
-    for (int g = 0; g < (output_bias->sizevector); g++)
+    for (size_t g = 0; g < (output_bias->sizevector); g++)
 	    output_bias->matrix[g] = (double) (rand()/ (double)RAND_MAX*(2)-1);
 
 }

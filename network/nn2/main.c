@@ -8,6 +8,7 @@
 #include "matrix/matrix.h"
 #include <math.h>
 #include <stdbool.h>
+#include <err.h>
 
 #define ROWS1 1
 #define COLS1 2
@@ -69,7 +70,7 @@ double m2_times_m2[ROWS2 * COLS2];
 double m4_times_m5[ROWS4 * COLS5];
 double m5_times_m4[ROWS5 * COLS4];
 
-int main()
+int main(int argc, char** argv)
 {
     //TODO - INIT
     Matrix* mat1 = initwithvaluesM(ROWS1,COLS1,m1);
@@ -140,14 +141,6 @@ int main()
     saveM(mat3_plus_mat3,true);
     saveM(mat5_times_mat4,true);*/
 
-
-
-    /*printf("\nThe groupe HELE is happy to show you its XOR machine!\n");
-    generate_wgt();
-    train_neural();
-    save_datas();
-    printf("\n");*/
-
     /*Matrix *matrixarray[8];
 
     load_datas(matrixarray);
@@ -169,6 +162,11 @@ int main()
     printM(m55,"m5");
     printM(m6,"m6");
     printM(m7,"m7");*/
+
+    if (argc == 1 || argc>2)
+        errx(1,"MAIN : No matrice is specified.");
+    else
+        loadM();
 
 
 

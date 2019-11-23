@@ -45,6 +45,29 @@ void saveM(Matrix *mat, bool iscontinuous)
         errx(1,"SAVEMATRIX : Impossible to open datasaved.txt.");
 }
 
+Matrix* loadM(char* filename)
+{
+    FILE* fichier = fopen(filename,"r");
+
+    if (fichier != NULL)
+    {
+        int taille[2] = {0};
+        fscanf(fichier, "%d %d",&taille[0],&taille[1]);
+
+        int size = taille[0]*taille[1];
+        fgetc(fichier);
+
+        double* matrixvalues = malloc(sizeof(double)*size);
+
+        fread(matrixvalues, sizeof(double),size,fichier);
+
+        Matrix* result = initwithvaluesM(taille[0],taille[1], matrixvalues);
+        return result;
+    }
+    else
+        errx(1,"LOADM : Impossible to open file.");
+}
+
 //Free the space init with the matrice (NOT)
 void freeM(Matrix* mat)
 {

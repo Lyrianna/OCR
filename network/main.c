@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "nn2/matrix/matrix.h"
+#include "matrix/matrix.h"
 
 #define ROWS1 1
 #define COLS1 2
@@ -109,9 +109,9 @@ int main()
     printM(mat5_times_mat4,"mat5_times_mat4");*/
 
     //TODO - HADAMAR PRODUCT
-    Matrix* mat3_had_mat3 = hadaM(mat3,mat3);
-    Matrix* mat4_had_mat5tr = hadaM(mat4,mat5_tr);
-    Matrix* mat5_had_mat4tr = hadaM(mat5,mat4_tr);
+    Matrix* mat3_had_mat3 = dotM(mat3,mat3);
+    Matrix* mat4_had_mat5tr = dotM(mat4,mat5_tr);
+    Matrix* mat5_had_mat4tr = dotM(mat5,mat4_tr);
 
     printM(mat3_had_mat3, "mat3_had_mat3");
     printM(mat4_had_mat5tr,"mat4_had_mat5tr");
