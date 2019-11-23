@@ -123,7 +123,7 @@ void train_neural(Matrix *in , Matrix *wanted_out)
             derivatives();
             //weight_gradient_update();
             update_weights();
-            displayepoch();
+            //displayepoch();
 	    k+=1;
     }
 }
@@ -158,9 +158,9 @@ void save_datas()
 
 int taille[2] = {0};
 
-void load_datas()
+void load_datas(Matrix* matrixarray[])
 {
-    FILE* fichier = fopen("./matrix/datasaved.txt","r");
+    FILE* fichier = fopen("../datasaved.txt","r");
 
     if (fichier != NULL)
     {
@@ -171,6 +171,7 @@ void load_datas()
             fscanf(fichier, "%d %d",&taille[0],&taille[1]);
 
             int size = taille[0]*taille[1];
+            fgetc(fichier);
             double* matrixvalues = malloc(sizeof(double)*size);
 
             fread(matrixvalues, sizeof(double),size,fichier);
@@ -179,10 +180,8 @@ void load_datas()
 
             i++;
 
-            while (fgetc(fichier) == '\n')
-            {
-                fgetc(fichier);
-            }
+            fgetc(fichier);
+            fgetc(fichier);
         }
 
         fclose(fichier);

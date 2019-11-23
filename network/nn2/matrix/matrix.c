@@ -36,13 +36,7 @@ void saveM(Matrix *mat, bool iscontinuous)
     if (fichier != NULL)
     {
         fprintf(fichier,"%lu %lu\n",mat->n,mat->p);
-        for (int i = 0; i < mat->n; i++)
-        {
-            for (int j = 0; j < mat->p; ++j)
-            {
-                fprintf(fichier,"%lf ",mat->matrix[i*mat->n+j]);
-            }
-        }
+        fwrite(mat->matrix, sizeof(double),mat->sizevector,fichier);
         fputs("\n\n",fichier);
 
         fclose(fichier);
