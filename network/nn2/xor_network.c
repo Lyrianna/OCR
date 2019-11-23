@@ -11,8 +11,6 @@ double lr = 2; //learning rate
 
 unsigned long int epoch = 10000;//number of epoch for the training
 
-Matrix* matrixarray[8];
-
 size_t inputNb;//number/size of the input
 Matrix *input;
 Matrix *wanted_output;
@@ -180,6 +178,7 @@ void load_datas()
             matrixarray[i] = initwithvaluesM(taille[0],taille[1], matrixvalues);
 
             i++;
+
             while (fgetc(fichier) == '\n')
             {
                 fgetc(fichier);

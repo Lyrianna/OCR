@@ -140,12 +140,31 @@ int main()
     saveM(mat3_plus_mat3,true);
     saveM(mat5_times_mat4,true);
 
+
+
     /*printf("\nThe groupe HELE is happy to show you its XOR machine!\n");
     generate_wgt();
     train_neural();
     save_datas();
     printf("\n");*/
 
+    Matrix m0 = matrixarray[0];
+    Matrix m1 = matrixarray[1];
+    Matrix m2 = matrixarray[2];
+    Matrix m3 = matrixarray[3];
+    Matrix m4 = matrixarray[4];
+    Matrix m5 = matrixarray[5];
+    Matrix m6 = matrixarray[6];
+    Matrix m7 = matrixarray[7];
+
+    printM(m0);
+    printM(m1);
+    printM(m2);
+    printM(m3);
+    printM(m4);
+    printM(m5);
+    printM(m6);
+    printM(m7);
 
 
 

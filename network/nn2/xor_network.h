@@ -2,6 +2,7 @@
 #define XOR_NETWORK_H
 
 #include "matrix/matrix.h"
+#define Matrix *matrixarray[8];
 #define ALPHABET = [abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ,.];
 
 //initialization
