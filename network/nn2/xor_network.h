@@ -2,7 +2,6 @@
 #define XOR_NETWORK_H
 
 #include "matrix/matrix.h"
-#include "matrix/matrix.c"
 #define ALPHABET = [abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ,.];
 
 //initialization
@@ -28,5 +27,8 @@ void displayepoch();
 
 //Save datas
 void save_datas();
+
+//loadmatric
+void load_datas();
 
 #endif

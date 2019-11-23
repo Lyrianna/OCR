@@ -1,4 +1,6 @@
 #include "matrix.h"
+#include <string.h>
+#include "../xor_network.h"
 
 // Created by Néphélie on 13/11/2019.
 
@@ -27,9 +29,9 @@ void saveM(Matrix *mat, bool iscontinuous)
 {
     FILE* fichier = NULL;
     if(iscontinuous)
-        fichier = fopen("datasaved.txt","a");
+        fichier = fopen("../datasaved.txt","a");
     else
-        fichier = fopen("datasaved.txt", "w");
+        fichier = fopen("../datasaved.txt", "w");
 
     if (fichier != NULL)
     {
@@ -39,7 +41,6 @@ void saveM(Matrix *mat, bool iscontinuous)
             for (int j = 0; j < mat->p; ++j)
             {
                 fprintf(fichier,"%lf ",mat->matrix[i*mat->n+j]);
-                /*fprintf(fichier,"helloworld");*/
             }
         }
         fputs("\n\n",fichier);
@@ -48,21 +49,6 @@ void saveM(Matrix *mat, bool iscontinuous)
     }
     else
         errx(1,"SAVEMATRIX : Impossible to open datasaved.txt.");
-}
-
-Matrix* loadM(FILE *filename)
-{
-    FILE* fichier = NULL;
-    fichier = fopen(filename,"r");
-
-    if (fichier != NULL)
-    {
-
-
-        fclose(fichier);
-    }
-    else
-        errx(1,"LOADMATRIX : No file datasaved.txt.");
 }
 
 //Free the space init with the matrice (NOT)
@@ -245,13 +231,13 @@ Matrix* sigM(Matrix* m, bool is_derivate)
 
     if (is_derivate)
     {
-        for (int i = 0; i < m->sizevector; ++i) {
+        for (size_t i = 0; i < m->sizevector; ++i) {
             result->matrix[i] = (double)(1/(1+exp(-(m->matrix[i]))));
         }
     }
     else
     {
-        for (int i = 0; i < m->sizevector; ++i) {
+        for (size_t i = 0; i < m->sizevector; ++i) {
             result->matrix[i] = (m->matrix[i])*(1-(m->matrix[i]));
         }
     }

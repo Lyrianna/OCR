@@ -1,7 +1,6 @@
 //
 // Created by Néphélie on 13/11/2019.
 //
-
 #ifndef NN2_MATRIX_H
 #define NN2_MATRIX_H
 
@@ -22,7 +21,6 @@ typedef struct Matrix{
 
 void printM(Matrix* mat, char s[]);
 void saveM(Matrix *mat, bool iscontinuous);
-Matrix* loadM(FILE *filename);
 void freeM(Matrix* mat);
 
 Matrix* initM(size_t n, size_t p);

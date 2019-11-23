@@ -124,6 +124,12 @@ int main()
 
     saveM(mat1,false);
     saveM(mat2,true);
+    saveM(mat3,true);
+    saveM(mat4,true);
+    saveM(mat5,true);
+    saveM(mat3_plus_mat3,true);
+    saveM(mat3_plus_mat3,true);
+    saveM(mat5_times_mat4,true);
 
     return 0;
 }

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "matrix.h"
+#include "nn2/matrix/matrix.h"
 
 #define ROWS1 1
 #define COLS1 2
