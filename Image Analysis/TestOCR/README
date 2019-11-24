@@ -1,0 +1,10 @@
+make
+./main filename [-h]
+
+-h Histo Equalization
+
+You will get a .png file for each step of the program.
+The letters will be in the Letters folder, if it does not exist, make sure to create one
+
+Kindly yours
+Pierre Pelletier
