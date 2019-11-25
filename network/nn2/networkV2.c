@@ -1,21 +1,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include "xor_network.h"
+#include "networkV2.h"
 #include "matrix/matrix.h"
 
-//NEURAL NETWORK - XOR - Sarah and Nephelie//
+//NEURAL NETWORK - Sarah and Nephelie//
 //ADAPTATION TO MATRIX STARTED ON 17/11/2019 BY SARAH AND NEPHELIE
 
 double lr = 2; //learning rate
 
 unsigned long int epoch = 10000;//number of epoch for the training
 
-size_t inputNb;//number/size of the input
+size_t inputNb;//number of neurons in the input
 Matrix *input;
 Matrix *wanted_output;
 
-size_t hiddenNb = 30;//number of hidden neurons
+size_t hiddenNb = 40;//number of hidden neurons
 Matrix *hidden, *hidden_weight, *hidden_bias;
 
 size_t outputNb;//output neurons
@@ -31,19 +31,19 @@ Matrix *error_values;
 void initAll(){
 
     //Hidden layers
-    initM2(hidden, inputNb, hiddenNb);
-	initM2(hidden_weight, hiddenNb, hiddenNb);
-	initM2(hidden_bias, inputNb, hiddenNb);
+    initM2(hidden, 1, hiddenNb);
+    initM2(hidden_weight, inputNb, hiddenNb);
+    initM2(hidden_bias, 1, hiddenNb);
 
-	//Output Layer
-    initM2(output, hiddenNb, outputNb);
+    //Output Layer
+    initM2(output, 1, outputNb);
     initM2(output_weight, hiddenNb, outputNb);
-    initM2(output_bias, hiddenNb, outputNb);
+    initM2(output_bias, 1, outputNb);
 
     //Update weights
-    initM2(error_values, outputNb, outputNb);
-    initM2(derivative_output, hiddenNb, outputNb);
-    initM2(derivative_hidden, inputNb, hiddenNb);
+    initM2(error_values, 1, outputNb);
+    initM2(derivative_output, 1, outputNb);
+    initM2(derivative_hidden, 1, hiddenNb);
 }
 
 void generate_wgt()
@@ -84,26 +84,26 @@ void error() //error for each case
 void derivatives()//repercution of the error for each layer
 {
     derivative_output = dotM(error_values,sigM(output,true));
-    derivative_hidden = dotM(dotM(sigM(derivative_hidden,true),hidden_weight),derivative_output);
+    derivative_hidden = dotM(mulM(derivative_output, transpM(output_weight)),sigM(hidden, true));
 }
 
 void update_weights()//update of the different matrices
 {
 	//update of the weight btw input and hidden layer
 	//hidden_w += dot(input, derivative_hidden)*lr
-	hidden_weight =addM(hidden_weight, scalM(dotM(input, derivative_hidden), lr));
+	hidden_weight =addM(hidden_weight, scalM(mulM(transpM(input), derivative_hidden), lr));
 
 	//update of the bias of the hidden layer
 	//hidden_bias += dot(sigmoid(hidden_bias), derivative_hidden)*lr))
-	hidden_bias = addM(hidden_bias, scalM(dotM(sigM(hidden_bias,0), derivative_hidden), lr));
+	hidden_bias = addM(hidden_bias, scalM(dotM(sigM(hidden_bias,false), derivative_hidden), lr));
 	
    	//update of the weight btw hidden and output layer
    	//output_w += dot(input, derivative_output)*lr
-     output_weight = addM(output_weight, scalM(dotM(hidden, derivative_output), lr));
+	output_weight = addM(output_weight, scalM(mulM(transpM(hidden), derivative_output), lr));
      
 	//update of the bias of the output layer
 	//output_bias += dot(sigmoid(output_bias), derivative_output)*lr))
-	output_bias = addM(output_bias, scalM(dotM(derivative_output, mulM(sigM(output_bias, 0),derivative_output)), lr));
+	output_bias = addM(output_bias, scalM(dotM(sigM(output_bias, false),derivative_output), lr));
 }
 
 //training
@@ -120,12 +120,23 @@ void train_neural(Matrix *in , Matrix *wanted_out)
 	    hidden_layers();
             output_neurons();
             error();
-            derivatives();
-            //weight_gradient_update();
+            derivatives();           
             update_weights();
             //displayepoch();
 	    k+=1;
     }
+    //savedatas();//saves the important datas of the NN
+}
+
+void character_translator(Matrix *in, Matrix *outp)
+{
+        *input = *in;
+        inputNb = input->n;
+	output = outp;//output matrix - gives the final result
+        initAll();
+	hidden_layers();
+	output_neurons();
+	//displayepoch();
 }
 
 /*void displayepoch(int x)//displays the results of the start and the last epoch
@@ -141,6 +152,24 @@ void train_neural(Matrix *in , Matrix *wanted_out)
 	printf("	%lf xor %lf = %lf\n", inputs[x][0],inputs[x][1],output);
      }
 }*/
+
+void freeAll(){
+
+    //Hidden layers
+    freeM(hidden);
+    freeM(hidden_weight);
+    freeM(hidden_bias);
+
+    //Output Layer
+    freeM(output);
+    freeM(output_weight);
+    freeM(output_bias);
+
+    //Update weights
+    freeM(error_values);
+    freeM(derivative_output);
+    freeM(derivative_hidden);
+}
 
 void save_datas()
 {

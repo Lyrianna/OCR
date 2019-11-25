@@ -6,7 +6,7 @@ CFLAGS= -Wall -Wextra -std=c99 -pedantic -O2
 LDFLAGS=
 LDLIBS= -lm
 
-SRC = xor_network.c main.c ./matrix/matrix.c
+SRC = networkV2.c main.c ./matrix/matrix.c
 OBJ = ${SRC:.c=.o}
 DEP = ${SRC:.c=.d}
 

@@ -7,6 +7,7 @@
 
 //initialization
 void generate_wgt();
+void initAll();
 
 //Feed forward
 void hidden_layers();
@@ -17,11 +18,13 @@ void error();
 void derivatives();
 
 //Update of weights and bias
-void weight_gradient_update();
 void update_weights();
 
-//XOR training
+//training
 void train_neural();
+
+//character finder
+void character_translator(Matrix *in, Matrix *outp);
 
 //Displays the results
 void displayepoch();
@@ -31,5 +34,8 @@ void save_datas();
 
 //loadmatric
 void load_datas(Matrix* matrixarray[]);
+
+//free the memory
+void freeAll();
 
 #endif

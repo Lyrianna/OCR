@@ -3,7 +3,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
-#include "xor_network.h"
+#include "networkV2.h"
 #include <stdio.h>
 #include "matrix/matrix.h"
 #include <math.h>

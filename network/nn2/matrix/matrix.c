@@ -1,6 +1,6 @@
 #include "matrix.h"
 #include <string.h>
-#include "../xor_network.h"
+#include "../networkV2.h"
 
 // Created by Néphélie on 13/11/2019.
 
