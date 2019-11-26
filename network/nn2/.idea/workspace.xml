@@ -38,6 +38,7 @@
   <component name="ProjectId" id="1U171kbpxFS2OBUb3m9jfOql1Br" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="RunDashboard">
@@ -53,7 +54,7 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="nn2" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="train" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nn2" TARGET_NAME="nn2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="nn2" RUN_TARGET_NAME="nn2">
+    <configuration name="nn2" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nn2" TARGET_NAME="nn2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="nn2" RUN_TARGET_NAME="nn2">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -76,6 +77,7 @@
       <workItem from="1574765483863" duration="1545000" />
       <workItem from="1574777367412" duration="1946000" />
       <workItem from="1574793240165" duration="1696000" />
+      <workItem from="1574797200628" duration="274000" />
     </task>
     <task id="LOCAL-00001" summary="début debug">
       <created>1574778198483</created>
@@ -106,16 +108,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="début debug" />
     <option name="LAST_COMMIT_MESSAGE" value="début debug" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/networkV2.c</url>
-          <line>70</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -114,7 +114,9 @@ void train_neural(Matrix *in , Matrix *wanted_out)
 {
     printf("MATRICE TRAINING");
 	input = in;
+	freeM(in);
 	wanted_output = wanted_out;
+	freeM(wanted_out);
 	inputNb = input->p;
 	outputNb = wanted_output->p;
 	initAll();
