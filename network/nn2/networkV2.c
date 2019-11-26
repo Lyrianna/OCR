@@ -65,13 +65,13 @@ void generate_wgt()
 
 void hidden_layers()
 {
-	//hidden = dotM(input, hidden_weight); //TODO
+	hidden = mulM(input, hidden_weight); //TODO
 	hidden = sigM(addM(hidden, hidden_bias),false);
 }
 
 void output_neurons()
 {
-	//output = dotM( hidden, output_weight); //TODO
+	output = mulM(hidden, output_weight); //TODO
 	output = sigM( addM(output, output_bias),false);
 }
 
@@ -112,7 +112,7 @@ void train_neural(Matrix *in , Matrix *wanted_out)
     printf("MATRICE TRAINING");
 	input = in;
 	wanted_output = wanted_out;
-	inputNb = input->n;
+	inputNb = input->p;
 	outputNb = wanted_output->p;
 	initAll();
 	generate_wgt();
@@ -124,7 +124,6 @@ void train_neural(Matrix *in , Matrix *wanted_out)
 	    error();
         derivatives();
         update_weights();
-        //displayepoch();
 	    k+=1;
     }
     save_datas();//saves the important datas of the NN
