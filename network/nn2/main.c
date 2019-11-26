@@ -10,6 +10,13 @@
 #include <stdbool.h>
 #include <err.h>
 
+double xor = {
+	(0,1),
+	(1,0),
+	(1,1),
+	(0,0)
+}
+
 int main(int argc, char** argv)
 {
 
