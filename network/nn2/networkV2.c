@@ -12,21 +12,24 @@ double lr = 2; //learning rate
 unsigned long int epoch = 10000;//number of epoch for the training
 
 size_t inputNb;//number of neurons in the input
-Matrix *input;
-Matrix *wanted_output;
+Matrix *input = NULL;
+Matrix *wanted_output = NULL;
 
 size_t hiddenNb = 40;//number of hidden neurons
-Matrix *hidden;
-Matrix *hidden_weight;
-Matrix *hidden_bias;
+Matrix *hidden = NULL;
+Matrix *hidden_weight = NULL;
+Matrix *hidden_bias = NULL;
 
 size_t outputNb;//output neurons
-Matrix *output, *output_weight, *output_bias;
+Matrix *output = NULL;
+Matrix *output_weight = NULL;
+Matrix *output_bias = NULL;
 
 
-Matrix *derivative_output, *derivative_hidden;
+Matrix *derivative_output = NULL;
+Matrix *derivative_hidden = NULL;
 
-Matrix *error_values;
+Matrix *error_values = NULL;
 
 //initialization of matrices
 void initAll(){
@@ -65,13 +68,13 @@ void generate_wgt()
 
 void hidden_layers()
 {
-	hidden = mulM(input, hidden_weight); //TODO
+	hidden = mulM(input, hidden_weight);
 	hidden = sigM(addM(hidden, hidden_bias),false);
 }
 
 void output_neurons()
 {
-	output = mulM(hidden, output_weight); //TODO
+	output = mulM(hidden, output_weight);
 	output = sigM( addM(output, output_bias),false);
 }
 
