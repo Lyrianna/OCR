@@ -39,7 +39,7 @@ int main(int argc, char** argv)
                 character_translator((char)arg);
         }
     }*/
-    printf("MAIN");
+    printf("MAIN\n");
     train_neural(xor,wanted_output);
 
     return 0;

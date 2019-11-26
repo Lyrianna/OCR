@@ -16,7 +16,9 @@ Matrix *input;
 Matrix *wanted_output;
 
 size_t hiddenNb = 40;//number of hidden neurons
-Matrix *hidden, *hidden_weight, *hidden_bias;
+Matrix *hidden;
+Matrix *hidden_weight;
+Matrix *hidden_bias;
 
 size_t outputNb;//output neurons
 Matrix *output, *output_weight, *output_bias;
@@ -30,19 +32,19 @@ Matrix *error_values;
 void initAll(){
 
     //Hidden layers
-    initM2(hidden, 1, hiddenNb);
-    initM2(hidden_weight, inputNb, hiddenNb);
-    initM2(hidden_bias, 1, hiddenNb);
+    hidden = initM(1,hiddenNb);
+    hidden_weight = initM(inputNb,hiddenNb);
+    hidden_bias = initM(1,hiddenNb);
 
     //Output Layer
-    initM2(output, 1, outputNb);
-    initM2(output_weight, hiddenNb, outputNb);
-    initM2(output_bias, 1, outputNb);
+    output = initM(1,outputNb);
+    output_weight = initM(hiddenNb,outputNb);
+    output_bias = initM(1,outputNb);
 
     //Update weights
-    initM2(error_values, 1, outputNb);
-    initM2(derivative_output, 1, outputNb);
-    initM2(derivative_hidden, 1, hiddenNb);
+    error_values = initM(1,outputNb);
+    derivative_output = initM(1,outputNb);
+    derivative_hidden = initM(1,hiddenNb);
 }
 
 void generate_wgt()
@@ -63,13 +65,13 @@ void generate_wgt()
 
 void hidden_layers()
 {
-	hidden = dotM(input, hidden_weight);
+	//hidden = dotM(input, hidden_weight); //TODO
 	hidden = sigM(addM(hidden, hidden_bias),false);
 }
 
 void output_neurons()
 {
-	output = dotM( hidden, output_weight);
+	//output = dotM( hidden, output_weight); //TODO
 	output = sigM( addM(output, output_bias),false);
 }
 
@@ -111,7 +113,7 @@ void train_neural(Matrix *in , Matrix *wanted_out)
 	input = in;
 	wanted_output = wanted_out;
 	inputNb = input->n;
-	outputNb = wanted_output->n;
+	outputNb = wanted_output->p;
 	initAll();
 	generate_wgt();
 	unsigned long int k = 0;

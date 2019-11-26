@@ -132,7 +132,7 @@ Matrix* subM(Matrix* mat1, Matrix* mat2)
 {
     if(mat1->n!= mat2->n || mat1->p != mat2->p)
     {
-        errx(1, "ADD : matrices do not have the same dimension. M1(%i*%i) and M2(%i*%i).\n",
+        errx(1, "SUB : matrices do not have the same dimension. M1(%i*%i) and M2(%i*%i).\n",
                 mat1->n,mat1->p,mat2->n,mat2->p);
     }
 
@@ -156,7 +156,7 @@ Matrix* mulM(Matrix* mat1, Matrix* mat2)
 {
     if(mat1->n!= mat2->p)
     {
-        errx(1, "DOT : mat1 row not same dimension as mat2 col. M1(%i,%i) and M2(%i,%i).\n",
+        errx(1, "MUL : mat1 row not same dimension as mat2 col. M1(%i,%i) and M2(%i,%i).\n",
              mat1->n,mat1->p,mat2->n,mat2->p);
     }
 
