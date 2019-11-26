@@ -107,6 +107,7 @@ void update_weights()//update of the different matrices
 //training
 void train_neural(Matrix *in , Matrix *wanted_out)
 {
+    printf("MATRICE TRAINING");
 	*input = *in;
 	*wanted_output = *wanted_out;
 	inputNb = input->n;
@@ -123,7 +124,7 @@ void train_neural(Matrix *in , Matrix *wanted_out)
             //displayepoch();
 	    k+=1;
     }
-    //savedatas();//saves the important datas of the NN
+    save_datas();//saves the important datas of the NN
 }
 
 void character_translator(char filename)
