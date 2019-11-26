@@ -12,10 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="956b0aaf-6cd2-45e0-a8b1-f4a5bb283400" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../datasaved.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/networkV2.c" beforeDir="false" afterPath="$PROJECT_DIR$/networkV2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../python/venv/lib64" beforeDir="false" afterPath="$PROJECT_DIR$/../python/venv/lib64" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,6 +74,8 @@
       <workItem from="1574712532042" duration="872000" />
       <workItem from="1574759442991" duration="1525000" />
       <workItem from="1574764608047" duration="586000" />
+      <workItem from="1574765483863" duration="1545000" />
+      <workItem from="1574777367412" duration="813000" />
     </task>
     <servers />
   </component>
@@ -93,5 +94,13 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="CMakeRunConfiguration">
+        <watch expression="hidden_weight" language="ObjectiveC" />
+        <watch expression="hidden" language="ObjectiveC" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

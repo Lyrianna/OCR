@@ -108,20 +108,21 @@ void update_weights()//update of the different matrices
 void train_neural(Matrix *in , Matrix *wanted_out)
 {
     printf("MATRICE TRAINING");
-	*input = *in;
-	*wanted_output = *wanted_out;
+	input = in;
+	wanted_output = wanted_out;
 	inputNb = input->n;
 	outputNb = wanted_output->n;
 	initAll();
+	generate_wgt();
 	unsigned long int k = 0;
     while ( k < epoch)
     {
 	    hidden_layers();
-            output_neurons();
-            error();
-            derivatives();           
-            update_weights();
-            //displayepoch();
+	    output_neurons();
+	    error();
+        derivatives();
+        update_weights();
+        //displayepoch();
 	    k+=1;
     }
     save_datas();//saves the important datas of the NN
