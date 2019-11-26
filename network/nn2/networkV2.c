@@ -26,8 +26,7 @@ Matrix *derivative_output, *derivative_hidden;
 
 Matrix *error_values;
 
-//initialization
-//TODO
+//initialization of matrices
 void initAll(){
 
     //Hidden layers
@@ -80,7 +79,6 @@ void error() //error for each case
 	error_values = subM(wanted_output,output);
 }
 
-//TODO
 void derivatives()//repercution of the error for each layer
 {
     derivative_output = dotM(error_values,sigM(output,true));
@@ -128,30 +126,17 @@ void train_neural(Matrix *in , Matrix *wanted_out)
     //savedatas();//saves the important datas of the NN
 }
 
-void character_translator(Matrix *in, Matrix *outp)
+void character_translator(char filename)
 {
-        *input = *in;
+    FILE* fichier = fopen(filename,'r');
+
+    *input;
         inputNb = input->n;
-	output = outp;//output matrix - gives the final result
+	output;//output matrix - gives the final result
         initAll();
 	hidden_layers();
 	output_neurons();
-	//displayepoch();
 }
-
-/*void displayepoch(int x)//displays the results of the start and the last epoch
-{
-    if (epoch==0){
-	    if (x == 0)
-		    printf("\nThis is the start of our untrained XOR:\n");
-	printf("	%lf xor %lf = %lf\n", inputs[x][0],inputs[x][1],output);
-    }
-     if (epoch==9999){
-	     if (x ==0)
-		printf("\nThis is the final results of our trained XOR:\n");
-	printf("	%lf xor %lf = %lf\n", inputs[x][0],inputs[x][1],output);
-     }
-}*/
 
 void freeAll(){
 

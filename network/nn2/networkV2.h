@@ -24,7 +24,7 @@ void update_weights();
 void train_neural();
 
 //character finder
-void character_translator(Matrix *in, Matrix *outp);
+void character_translator(char filename);
 
 //Displays the results
 void displayepoch();

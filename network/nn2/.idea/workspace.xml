@@ -12,11 +12,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="956b0aaf-6cd2-45e0-a8b1-f4a5bb283400" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matrix/matrix.c" beforeDir="false" afterPath="$PROJECT_DIR$/matrix/matrix.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xor_network.c" beforeDir="false" afterPath="$PROJECT_DIR$/xor_network.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/networkV2.c" beforeDir="false" afterPath="$PROJECT_DIR$/networkV2.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/networkV2.h" beforeDir="false" afterPath="$PROJECT_DIR$/networkV2.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../python/venv/lib64" beforeDir="false" afterPath="$PROJECT_DIR$/../python/venv/lib64" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,6 +74,8 @@
       <option name="presentableId" value="Default" />
       <updated>1574512039261</updated>
       <workItem from="1574512045231" duration="1269000" />
+      <workItem from="1574712532042" duration="872000" />
+      <workItem from="1574759442991" duration="1201000" />
     </task>
     <servers />
   </component>
@@ -84,7 +87,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

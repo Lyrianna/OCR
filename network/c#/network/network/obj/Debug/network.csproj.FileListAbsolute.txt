@@ -1,6 +1,0 @@
-D:\EPITA_GIT\OCR\network\c#\network\network\bin\Debug\network.exe
-D:\EPITA_GIT\OCR\network\c#\network\network\bin\Debug\network.pdb
-D:\EPITA_GIT\OCR\network\c#\network\network\obj\Debug\network.csprojAssemblyReference.cache
-D:\EPITA_GIT\OCR\network\c#\network\network\obj\Debug\network.csproj.CoreCompileInputs.cache
-D:\EPITA_GIT\OCR\network\c#\network\network\obj\Debug\network.exe
-D:\EPITA_GIT\OCR\network\c#\network\network\obj\Debug\network.pdb
