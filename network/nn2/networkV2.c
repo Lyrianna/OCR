@@ -53,8 +53,9 @@ void initAll(){
 void generate_wgt()
 {
     srand(time(NULL));
-    for (size_t i = 0; i < (hidden_weight->sizevector) ; i++)
-	    hidden_weight->matrix[i] = (double) (rand()/ (double)RAND_MAX*(2)-1);
+    for (size_t i = 0; i < (hidden_weight->sizevector) ; i++) {
+        hidden_weight->matrix[i] = (double) (rand() / (double) RAND_MAX * (2) - 1);
+    }
     for (size_t j = 0 ; j < (output_weight->sizevector) ;j++)
 	    output_weight->matrix[j] =(double) (rand()/ (double)RAND_MAX*(2)-1);
     for (size_t k = 0 ; k < (hidden_bias->sizevector); k++)
@@ -113,22 +114,32 @@ void update_weights()//update of the different matrices
 void train_neural(Matrix *in , Matrix *wanted_out)
 {
     printf("MATRICE TRAINING");
-	input = in;
-	freeM(in);
-	wanted_output = wanted_out;
-	freeM(wanted_out);
+
+    input = in;
+    wanted_output = wanted_out;
+
 	inputNb = input->p;
-	outputNb = wanted_output->p;
+	outputNb = wanted_out->p;
+
+	freeM(in);
+	freeM(wanted_out);
+
 	initAll();
 	generate_wgt();
+
 	unsigned long int k = 0;
     while ( k < epoch)
     {
 	    hidden_layers();
+	    printf("hidden layers done");
 	    output_neurons();
+        printf("output neurons done");
 	    error();
+        printf("error done");
         derivatives();
+        printf("derivatives done");
         update_weights();
+        printf("update weights done");
 	    k+=1;
     }
     save_datas();//saves the important datas of the NN
