@@ -54,14 +54,14 @@ void generate_wgt()
 {
     srand(time(NULL));
     for (size_t i = 0; i < (hidden_weight->sizevector) ; i++) {
-        hidden_weight->matrix[i] = (double) (rand() / (double) RAND_MAX * (2) - 1);
+        hidden_weight->matrix[i] =(rand() / (double) RAND_MAX * (2) - 1);
     }
     for (size_t j = 0 ; j < (output_weight->sizevector) ;j++)
-	    output_weight->matrix[j] =(double) (rand()/ (double)RAND_MAX*(2)-1);
+	    output_weight->matrix[j] = (rand()/ (double)RAND_MAX*(2)-1);
     for (size_t k = 0 ; k < (hidden_bias->sizevector); k++)
-	    hidden_bias->matrix[k] =(double) (rand()/ (double)RAND_MAX*(2)-1);
+	    hidden_bias->matrix[k] = (rand()/ (double)RAND_MAX*(2)-1);
     for (size_t g = 0; g < (output_bias->sizevector); g++)
-	    output_bias->matrix[g] = (double) (rand()/ (double)RAND_MAX*(2)-1);
+	    output_bias->matrix[g] = (rand()/ (double)RAND_MAX*(2)-1);
 
 }
 
@@ -145,9 +145,9 @@ void train_neural(Matrix *in , Matrix *wanted_out)
     save_datas();//saves the important datas of the NN
 }
 
-void character_translator(char filename)
+/*void character_translator(char filename)
 {
-    FILE* fichier = fopen(filename,'r');
+    //FILE* fichier = fopen(filename,'r');
 
     *input;
         inputNb = input->n;
@@ -155,7 +155,7 @@ void character_translator(char filename)
         initAll();
 	hidden_layers();
 	output_neurons();
-}
+}*/
 
 void freeAll(){
 

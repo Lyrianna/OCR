@@ -1,6 +1,5 @@
 #include "matrix.h"
 #include <string.h>
-#include "../networkV2.h"
 
 // Created by Néphélie on 13/11/2019.
 
@@ -16,7 +15,7 @@ void printM(Matrix* mat, char s[])
     {
         for (size_t j = 0; j < cols; j++)
         {
-            printf("%4g", mat->matrix[i * cols + j]);
+            printf("%e", mat->matrix[i * cols + j]);
         }
 
         printf("\n");
@@ -54,7 +53,7 @@ Matrix* loadM(char* filename)
         int taille[2] = {0};
         fscanf(fichier, "%d %d",&taille[0],&taille[1]);
 
-        int size = taille[0]*taille[1];
+        size_t size = taille[0]*taille[1];
         fgetc(fichier);
 
         double* matrixvalues = malloc(sizeof(double)*size);
@@ -108,7 +107,7 @@ Matrix* addM(Matrix* mat1, Matrix* mat2)
 {
     if(mat1->n!= mat2->n || mat1->p != mat2->p)
     {
-        errx(1, "ADD : matrices do not have the same dimension. M1(%i*%i) and M2(%i*%i).\n",
+        errx(1, "ADD : matrices do not have the same dimension. M1(%zi*%zi) and M2(%zi*%zi).\n",
                 mat1->n,mat1->p,mat2->n,mat2->p);
     }
 
@@ -132,7 +131,7 @@ Matrix* subM(Matrix* mat1, Matrix* mat2)
 {
     if(mat1->n!= mat2->n || mat1->p != mat2->p)
     {
-        errx(1, "SUB : matrices do not have the same dimension. M1(%i*%i) and M2(%i*%i).\n",
+        errx(1, "SUB : matrices do not have the same dimension. M1(%zi*%zi) and M2(%zi*%zi).\n",
                 mat1->n,mat1->p,mat2->n,mat2->p);
     }
 
@@ -154,9 +153,9 @@ Matrix* subM(Matrix* mat1, Matrix* mat2)
 //Multiply 2 matrices (DEBUGGED)
 Matrix* mulM(Matrix* mat1, Matrix* mat2)
 {
-    if(mat1->p != mat2->n)
+    if(mat1->n != mat2->p)
     {
-        errx(1, "MUL : mat1 col not same dimension as mat2 row. M1(%i,%i) and M2(%i,%i).\n",
+        errx(1, "MUL : mat1 row not same dimension as mat2 col. M1(%zi,%zi) and M2(%zi,%zi).\n",
              mat1->n,mat1->p,mat2->n,mat2->p);
     }
 
@@ -184,7 +183,7 @@ Matrix* dotM(Matrix* mat1, Matrix* mat2)
 {
     if(mat1->n!= mat2->n || mat1->p != mat2->p)
     {
-        errx(1, "HADAMARD PRODUCT : matrices do not have the same dimension. M1(%i,%i) and M2(%i,%i).\n",
+        errx(1, "HADAMARD PRODUCT : matrices do not have the same dimension. M1(%zi,%zi) and M2(%zi,%zi).\n",
              mat1->n,mat1->p,mat2->n,mat2->p);
     }
 
@@ -249,7 +248,7 @@ Matrix* sigM(Matrix* m, bool is_derivate)
     if (is_derivate)
     {
         for (size_t i = 0; i < m->sizevector; ++i) {
-            result->matrix[i] = (double)(1/(1+exp(-(m->matrix[i]))));
+            result->matrix[i] = (1/(1+exp(-(m->matrix[i]))));
         }
     }
     else

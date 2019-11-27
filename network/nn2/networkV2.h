@@ -21,7 +21,7 @@ void derivatives();
 void update_weights();
 
 //training
-void train_neural();
+void train_neural(Matrix *in , Matrix *wanted_out);
 
 //character finder
 void character_translator(char filename);
