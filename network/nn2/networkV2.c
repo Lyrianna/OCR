@@ -143,6 +143,7 @@ void train_neural(Matrix *in , Matrix *wanted_out)
 	    k+=1;
     }
     save_datas();//saves the important datas of the NN
+    freeAll();
 }
 
 /*void character_translator(char filename)

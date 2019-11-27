@@ -13,11 +13,10 @@
   <component name="ChangeListManager">
     <list default="true" id="956b0aaf-6cd2-45e0-a8b1-f4a5bb283400" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matrix/main.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matrix/matrix.c" beforeDir="false" afterPath="$PROJECT_DIR$/matrix/matrix.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/networkV2.c" beforeDir="false" afterPath="$PROJECT_DIR$/networkV2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/networkV2.h" beforeDir="false" afterPath="$PROJECT_DIR$/networkV2.h" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -88,6 +87,8 @@
       <workItem from="1574845774476" duration="110000" />
       <workItem from="1574852806030" duration="3358000" />
       <workItem from="1574857353437" duration="445000" />
+      <workItem from="1574885143172" duration="54000" />
+      <workItem from="1574885211667" duration="1368000" />
     </task>
     <task id="LOCAL-00001" summary="début debug">
       <created>1574778198483</created>
