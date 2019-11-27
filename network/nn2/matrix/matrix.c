@@ -153,7 +153,7 @@ Matrix* subM(Matrix* mat1, Matrix* mat2)
 //Multiply 2 matrices (DEBUGGED)
 Matrix* mulM(Matrix* mat1, Matrix* mat2)
 {
-    if(mat1->n != mat2->p)
+    if(mat1->p != mat2->n)
     {
         errx(1, "MUL : mat1 row not same dimension as mat2 col. M1(%zi,%zi) and M2(%zi,%zi).\n",
              mat1->n,mat1->p,mat2->n,mat2->p);
