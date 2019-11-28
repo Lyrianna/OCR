@@ -15,7 +15,7 @@ void printM(Matrix* mat, char s[])
     {
         for (size_t j = 0; j < cols; j++)
         {
-            printf("%4g", mat->matrix[i * cols + j]);
+            printf("%4g ", mat->matrix[i * cols + j]);
         }
 
         printf("\n");
@@ -214,7 +214,7 @@ Matrix* scalM(Matrix* m, double s)
     {
         for (size_t j = 0; j < cols;j++)
         {
-            result->matrix[i*cols+j] = s*result->matrix[i*cols+j];
+            result->matrix[i*cols+j] = s*m->matrix[i*cols+j];
         }
     }
     return result;
@@ -245,7 +245,7 @@ Matrix* sigM(Matrix* m, bool is_derivate)
     size_t cols = m->p;
     Matrix* result = initM(rows,cols);
 
-    if (is_derivate)
+    if (!is_derivate)
     {
         for (size_t i = 0; i < m->sizevector; ++i) {
             result->matrix[i] = (1/(1+exp(-(m->matrix[i]))));

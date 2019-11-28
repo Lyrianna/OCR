@@ -11,21 +11,24 @@ double lr = 2; //learning rate
 
 unsigned long int epoch = 10000;//number of epoch for the training
 
+//inputs
 size_t inputNb;//number of neurons in the input
 Matrix *input = NULL;
 Matrix *wanted_output = NULL;
 
+//hidden layer
 size_t hiddenNb = 40;//number of hidden neurons
 Matrix *hidden = NULL;
 Matrix *hidden_weight = NULL;
 Matrix *hidden_bias = NULL;
 
+//output layer
 size_t outputNb;//output neurons
 Matrix *output = NULL;
 Matrix *output_weight = NULL;
 Matrix *output_bias = NULL;
 
-
+//matrices for the gradient
 Matrix *derivative_output = NULL;
 Matrix *derivative_hidden = NULL;
 
@@ -54,16 +57,14 @@ void initAll(){
 void generate_wgt()
 {
     srand(time(NULL));
-    for (size_t i = 0; i < (hidden_weight->sizevector) ; i++) {
+    for (size_t i = 0; i < (hidden_weight->sizevector) ; i++) 
         hidden_weight->matrix[i] =(rand() / (double) RAND_MAX * (2) - 1);
-    }
     for (size_t j = 0 ; j < (output_weight->sizevector) ;j++)
-	    output_weight->matrix[j] = (rand()/ (double)RAND_MAX*(2)-1);
+	    output_weight->matrix[j] = (rand()/ (double)RAND_MAX*(2)-1);   
     for (size_t k = 0 ; k < (hidden_bias->sizevector); k++)
 	    hidden_bias->matrix[k] = (rand()/ (double)RAND_MAX*(2)-1);
-    for (size_t g = 0; g < (output_bias->sizevector); g++)
+	for (size_t g = 0; g < (output_bias->sizevector); g++)
 	    output_bias->matrix[g] = (rand()/ (double)RAND_MAX*(2)-1);
-
 }
 
 //Feed forward
@@ -95,10 +96,10 @@ void update_weights()//update of the different matrices
 {
 	//update of the weight btw input and hidden layer
 	//hidden_w += dot(input, derivative_hidden)*lr
-	hidden_weight =addM(hidden_weight, scalM(mulM(transpM(input), derivative_hidden), lr));
+	hidden_weight = addM(hidden_weight, scalM(mulM(transpM(input), derivative_hidden), lr));
 
 	//update of the bias of the hidden layer
-	//hidden_bias += dot(sigmoid(hidden_bias), derivative_hidden)*lr))
+	//hidden_bias += dot(sigmoid(hidden_bias), derivative_hidden)*lr
 	hidden_bias = addM(hidden_bias, scalM(dotM(sigM(hidden_bias,false), derivative_hidden), lr));
 	
    	//update of the weight btw hidden and output layer
@@ -119,7 +120,7 @@ void train_neural(Matrix *in , Matrix *wanted_out)
     input->p = (in->n)*(in->p);
 
     wanted_output = wanted_out;
-
+    
     inputNb = input->p;
     outputNb = wanted_out->p;
 
@@ -140,6 +141,9 @@ void train_neural(Matrix *in , Matrix *wanted_out)
         update_weights();
 	    k+=1;
     }
+    printM(wanted_output, "wanted");
+    printf("\n");
+    printM(output, "outputttt");
     save_datas();//saves the important datas of the NN
 
     freeAll();//frees all the matrix used in the NN
@@ -206,6 +210,7 @@ void load_datas(Matrix* matrixarray[])
             int size = taille[0]*taille[1];
             fgetc(fichier);
             double* matrixvalues = malloc(sizeof(double)*size);
+
 
             fread(matrixvalues, sizeof(double),size,fichier);
 
