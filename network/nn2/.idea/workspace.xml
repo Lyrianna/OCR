@@ -13,9 +13,6 @@
   <component name="ChangeListManager">
     <list default="true" id="956b0aaf-6cd2-45e0-a8b1-f4a5bb283400" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/networkV2.c" beforeDir="false" afterPath="$PROJECT_DIR$/networkV2.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -88,7 +85,9 @@
       <workItem from="1574852806030" duration="3358000" />
       <workItem from="1574857353437" duration="445000" />
       <workItem from="1574885143172" duration="54000" />
-      <workItem from="1574885211667" duration="1368000" />
+      <workItem from="1574885211667" duration="1467000" />
+      <workItem from="1574923320251" duration="844000" />
+      <workItem from="1574924653804" duration="269000" />
     </task>
     <task id="LOCAL-00001" summary="début debug">
       <created>1574778198483</created>
@@ -111,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574856081411</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="rm segfault causée par ma débilité profonde">
+      <created>1574886600477</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1574886600477</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +139,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="début debug" />
     <MESSAGE value="-1 segfault" />
-    <option name="LAST_COMMIT_MESSAGE" value="-1 segfault" />
+    <MESSAGE value="rm segfault causée par ma débilité profonde" />
+    <option name="LAST_COMMIT_MESSAGE" value="rm segfault causée par ma débilité profonde" />
   </component>
 </project>

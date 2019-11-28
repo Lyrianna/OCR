@@ -63,24 +63,25 @@ void generate_wgt()
 	    hidden_bias->matrix[k] = (rand()/ (double)RAND_MAX*(2)-1);
     for (size_t g = 0; g < (output_bias->sizevector); g++)
 	    output_bias->matrix[g] = (rand()/ (double)RAND_MAX*(2)-1);
-printf("%zi n %zi p %zi sizevector\n", input-> n, input->p, input->sizevector);//debug
+printf("input : %zi n %zi p %zi sizevector\n", input-> n, input->p, input->sizevector);//debug
 
 }
 
 //Feed forward
 
 void hidden_layers(){
-        printf("1\nn hidden : %zi p hidden:%zi\n",hidden->n, hidden->p);
-        printf("%zi n %zi p %zi sizevector\n", input-> n, input->p, input->sizevector);
+    printf("n hidden : %zi p hidden:%zi\n",hidden->n, hidden->p);
+    printf("input: %zi n %zi p %zi sizevector\n", input-> n, input->p, input->sizevector);
 	hidden = mulM(input, hidden_weight);
 
-        printf("2\n");
-        printf("n hidden : %zi p hidden:%zi\n",hidden->n, hidden->p);
-        printf("%zi n %zi p %zi sizevector\n", input-> n, input->p, input->sizevector);
+	printf("2\n");
+	printf("n hidden : %zi p hidden:%zi\n",hidden->n, hidden->p);
+	printf("input : %zi n %zi p %zi sizevector\n", input-> n, input->p, input->sizevector);
+
 	hidden = sigM(addM(hidden, hidden_bias),false);
 
 	printf("3 \nn hidden : %zi p hidden:%zi\n",hidden->n, hidden->p);
-	printf("%zi n %zi p %zi sizevector\n", input-> n, input->p, input->sizevector);
+	printf("input : %zi n %zi p %zi sizevector\n", input-> n, input->p, input->sizevector);
 }
 
 void output_neurons()
@@ -133,10 +134,11 @@ void train_neural(Matrix *in , Matrix *wanted_out)
     inputNb = input->p;
     outputNb = wanted_out->p;
 
-    initAll();
-    generate_wgt();
     freeM(in);
     freeM(wanted_out);
+
+    initAll();
+    generate_wgt();
     unsigned long int k = 0;
 
     while ( k < epoch)
