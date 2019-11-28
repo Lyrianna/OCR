@@ -114,7 +114,7 @@ void update_weights()//update of the different matrices
 //training
 void train_neural(Matrix *in , Matrix *wanted_out)
 {
-    printf("MATRICE TRAINING\n");
+    printf("-- MATRICE TRAINING --\n");
     input = in;
     input->n = 1;//the matrix formation is change to fit the NN
     input->p = (in->n)*(in->p);
