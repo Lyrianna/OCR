@@ -139,6 +139,7 @@ void train_neural(Matrix *in , Matrix *wanted_out)
 
     initAll();
     generate_wgt();
+
     unsigned long int k = 0;
 
     while ( k < epoch)

@@ -34,6 +34,6 @@ Matrix* scalM(Matrix* m, double s);
 Matrix* transpM(Matrix* m);
 Matrix* sigM(Matrix* m, bool is_derivate);
 
-Matrix* initwithvaluesM(size_t n, size_t p, double* m);
+Matrix* initwithvaluesM(size_t n, size_t p, double *m);
 
 #endif //NN2_MATRIX_H

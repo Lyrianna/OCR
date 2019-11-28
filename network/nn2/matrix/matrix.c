@@ -15,7 +15,7 @@ void printM(Matrix* mat, char s[])
     {
         for (size_t j = 0; j < cols; j++)
         {
-            printf("%e", mat->matrix[i * cols + j]);
+            printf("%4g", mat->matrix[i * cols + j]);
         }
 
         printf("\n");
@@ -261,7 +261,7 @@ Matrix* sigM(Matrix* m, bool is_derivate)
 }
 
 //Init a matrix with special values (DEBUGGED)
-Matrix* initwithvaluesM(size_t n, size_t p, double* m)
+Matrix* initwithvaluesM(size_t n, size_t p, double *m)
 {
     size_t size = n*p;
 
