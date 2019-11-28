@@ -15,7 +15,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/matrix/matrix.c" beforeDir="false" afterPath="$PROJECT_DIR$/matrix/matrix.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matrix/matrix.h" beforeDir="false" afterPath="$PROJECT_DIR$/matrix/matrix.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/networkV2.c" beforeDir="false" afterPath="$PROJECT_DIR$/networkV2.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,7 +42,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/matrix" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
@@ -94,6 +93,7 @@
       <workItem from="1574924653804" duration="2312000" />
       <workItem from="1574940651581" duration="3233000" />
       <workItem from="1574944906039" duration="48000" />
+      <workItem from="1574945441936" duration="1356000" />
     </task>
     <task id="LOCAL-00001" summary="début debug">
       <created>1574778198483</created>
@@ -160,11 +160,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/networkV2.c</url>
-          <line>127</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/matrix/main.c</url>
           <line>49</line>
           <option name="timeStamp" value="4" />
@@ -174,12 +169,12 @@
           <line>48</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.c</url>
-          <line>24</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="CMakeRunConfiguration">
+        <watch expression="result-&gt;matrix" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

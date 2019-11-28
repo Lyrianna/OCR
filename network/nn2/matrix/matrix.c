@@ -34,7 +34,7 @@ void saveM(Matrix *mat, bool iscontinuous)
 
     if (fichier != NULL)
     {
-        fprintf(fichier,"%lu %lu\n",mat->n,mat->p);
+        fprintf(fichier,"%d %d\n",mat->n,mat->p);
         fwrite(mat->matrix, sizeof(double),mat->sizevector,fichier);
         fputs("\n\n",fichier);
 
@@ -212,7 +212,7 @@ Matrix* scalM(Matrix* m, double s)
 
     for (size_t i = 0; i < rows; i++)
     {
-        for (size_t j = 0; i < cols;i++)
+        for (size_t j = 0; j < cols;j++)
         {
             result->matrix[i*cols+j] = s*result->matrix[i*cols+j];
         }

@@ -9,20 +9,18 @@
 
 int main(int argc, char** argv)
 {
-    short xorx[8] = {
+    double xorx[] = {
             0,1,1,0,1,1,0,0
     };
-    short *xor1 = xorx;
 
-    double *wanted_ouput = {
+    double wanted_ouput[] = {
             0,
             0,
             1,
             0
     };
 
-    Matrix* xor = initwithvaluesM(2,4, xor1);
-    printM(xor,"XOR");
+    Matrix* xor = initwithvaluesM(4,2, xorx);
     Matrix* wanted_output = initwithvaluesM(1,4,wanted_ouput);
     /*if (argc == 1 || argc>2)
         errx(1,"MAIN : No matrice is specified.");

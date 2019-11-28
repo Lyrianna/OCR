@@ -63,25 +63,14 @@ void generate_wgt()
 	    hidden_bias->matrix[k] = (rand()/ (double)RAND_MAX*(2)-1);
     for (size_t g = 0; g < (output_bias->sizevector); g++)
 	    output_bias->matrix[g] = (rand()/ (double)RAND_MAX*(2)-1);
-printf("input : %zi n %zi p %zi sizevector\n", input-> n, input->p, input->sizevector);//debug
 
 }
 
 //Feed forward
 
 void hidden_layers(){
-    printf("n hidden : %zi p hidden:%zi\n",hidden->n, hidden->p);
-    printf("input: %zi n %zi p %zi sizevector\n", input-> n, input->p, input->sizevector);
 	hidden = mulM(input, hidden_weight);
-
-	printf("2\n");
-	printf("n hidden : %zi p hidden:%zi\n",hidden->n, hidden->p);
-	printf("input : %zi n %zi p %zi sizevector\n", input-> n, input->p, input->sizevector);
-
 	hidden = sigM(addM(hidden, hidden_bias),false);
-
-	printf("3 \nn hidden : %zi p hidden:%zi\n",hidden->n, hidden->p);
-	printf("input : %zi n %zi p %zi sizevector\n", input-> n, input->p, input->sizevector);
 }
 
 void output_neurons()
@@ -134,8 +123,8 @@ void train_neural(Matrix *in , Matrix *wanted_out)
     inputNb = input->p;
     outputNb = wanted_out->p;
 
-    freeM(in);
-    freeM(wanted_out);
+    //freeM(in);
+    //freeM(wanted_out);
 
     initAll();
     generate_wgt();
@@ -145,15 +134,10 @@ void train_neural(Matrix *in , Matrix *wanted_out)
     while ( k < epoch)
     {
 	    hidden_layers();
-	    printf("hidden layers done");
 	    output_neurons();
-        printf("output neurons done");
 	    error();
-        printf("error done");
         derivatives();
-        printf("derivatives done");
         update_weights();
-        printf("update weights done");
 	    k+=1;
     }
     save_datas();//saves the important datas of the NN
