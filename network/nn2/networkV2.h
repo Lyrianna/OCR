@@ -3,7 +3,7 @@
 
 #include "matrix/matrix.h"
 
-#define ALPHABET = [abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ,.];
+
 
 //initialization
 void generate_wgt();
@@ -24,7 +24,7 @@ void update_weights();
 void train_neural(Matrix *in , Matrix *wanted_out);
 
 //character finder
-void character_translator(char filename);
+void character_translator(Matrix* in, char* filename);
 
 //Displays the results
 void displayepoch();

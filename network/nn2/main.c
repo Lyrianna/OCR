@@ -35,6 +35,10 @@ int main(int argc, char** argv)
         }
     }*/
     train_neural(xor,wanted_output);
+    character_translator(xor,"miaou.txt");
+
+    freeM(xor);
+    freeM(wanted_output);
 
     return 0;
 }

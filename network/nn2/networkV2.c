@@ -3,7 +3,9 @@
 #include <time.h>
 #include "networkV2.h"
 #include "matrix/matrix.h"
+#include <string.h>
 
+char* ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ,.";
 //NEURAL NETWORK - Sarah and Nephelie//
 //ADAPTATION TO MATRIX STARTED ON 17/11/2019 BY SARAH AND NEPHELIE
 
@@ -133,7 +135,7 @@ void train_neural(Matrix *in , Matrix *wanted_out)
     input->n = 1;//the matrix formation is change to fit the NN
     input->p = (in->n)*(in->p);
 
-    wanted_output = wanted_out;
+    wanted_output = wanted_out; //TODO
 
     inputNb = input->p;
     outputNb = wanted_out->p;
@@ -160,17 +162,38 @@ void train_neural(Matrix *in , Matrix *wanted_out)
     freeAll();//frees all the matrix used in the NN*/
 }
 
-/*void character_translator(char filename)
+void character_translator(Matrix* in, char* filename)
 {
-    //FILE* fichier = fopen(filename,'r');
+    FILE* fichier = fopen("datasaved.txt",'r');
 
-    *input;
-        inputNb = input->n;
-	output;//output matrix - gives the final result
-        initAll();
+    input = in;
+    inputNb = input->sizevector;
+    input->n = 1;//the matrix formation is change to fit the NN
+    input->p = (in->n)*(in->p);
+    outputNb = 64;
+
+	initAll();
 	hidden_layers();
 	output_neurons();
-}*/
+	int max = 0;
+    for (int i = 0; i < output->sizevector; ++i) {
+        if (output->matrix[i]>output->matrix[max])
+        {
+            max = i;
+        }
+    FILE* fichier = fopen("text.txt", "a");
+        if (fichier!=NULL)
+        {
+            for (int j = 0; j < 64; ++j) {
+                if (j==max)
+                {
+                    fputs(&ALPHABET[i],fichier);
+                }
+            }
+        }
+    }
+	freeAll();
+}
 
 void freeAll(){
 
