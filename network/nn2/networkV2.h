@@ -33,7 +33,7 @@ void displayepoch();
 void save_datas();
 
 //loadmatric
-void load_datas(Matrix* matrixarray[]);
+void load_datas(Matrix* matrixarray[], FILE* fichier);
 
 //free the memory
 void freeAll();

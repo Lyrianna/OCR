@@ -34,6 +34,7 @@ Matrix *derivative_hidden = NULL;
 
 Matrix *error_values = NULL;
 
+Matrix* matarray[8] = {0};
 //initialization of matrices
 void initAll(){
 
@@ -114,18 +115,28 @@ void update_weights()//update of the different matrices
 //training
 void train_neural(Matrix *in , Matrix *wanted_out)
 {
+
+    FILE* fichier = fopen("../datasaved.txt","r");
+    printf("allo");
+    if (fichier != NULL)
+    {
+        load_datas(matarray,fichier);
+        for (int i = 0; i < 8; ++i) {
+            printM(matarray[i],"Mat");
+        }
+    }
+    else
+        generate_wgt();
+
     printf("-- MATRICE TRAINING --\n");
     input = in;
     input->n = 1;//the matrix formation is change to fit the NN
     input->p = (in->n)*(in->p);
 
     wanted_output = wanted_out;
-    
+
     inputNb = input->p;
     outputNb = wanted_out->p;
-
-    //freeM(in);
-    //freeM(wanted_out);
 
     initAll();
     generate_wgt();
@@ -134,19 +145,19 @@ void train_neural(Matrix *in , Matrix *wanted_out)
 
     while ( k < epoch)
     {
-	    hidden_layers();
-	    output_neurons();
-	    error();
+        hidden_layers();
+        output_neurons();
+        error();
         derivatives();
         update_weights();
-	    k+=1;
+        k+=1;
     }
     printM(wanted_output, "wanted");
     printf("\n");
     printM(output, "outputttt");
     save_datas();//saves the important datas of the NN
 
-    freeAll();//frees all the matrix used in the NN
+    freeAll();//frees all the matrix used in the NN*/
 }
 
 /*void character_translator(char filename)
@@ -195,9 +206,8 @@ void save_datas()
 
 int taille[2] = {0};
 
-void load_datas(Matrix* matrixarray[])
+void load_datas(Matrix* matrixarray[], FILE* fichier)
 {
-    FILE* fichier = fopen("../datasaved.txt","r");
 
     if (fichier != NULL)
     {
@@ -223,6 +233,15 @@ void load_datas(Matrix* matrixarray[])
         }
 
         fclose(fichier);
+
+        hidden = matrixarray[0];
+        hidden_weight = matrixarray[1];
+        hidden_bias = matrixarray[2];
+        output = matrixarray[3];
+        output_weight = matrixarray[4];
+        output_bias = matrixarray[4];
+        derivative_output = matrixarray[6];
+        derivative_hidden = matrixarray[7];
     }
     else
         errx(1,"LOADMATRIX : No file datasaved.txt.");
