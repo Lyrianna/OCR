@@ -12,7 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="956b0aaf-6cd2-45e0-a8b1-f4a5bb283400" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/networkV2.c" beforeDir="false" afterPath="$PROJECT_DIR$/networkV2.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +93,7 @@
       <workItem from="1574945441936" duration="1655000" />
       <workItem from="1574947114656" duration="91000" />
       <workItem from="1575028026366" duration="975000" />
-      <workItem from="1575106276907" duration="8336000" />
+      <workItem from="1575106276907" duration="8612000" />
     </task>
     <task id="LOCAL-00001" summary="début debug">
       <created>1574778198483</created>
@@ -172,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575125439582</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="train presque fonctionnel">
+      <created>1575126104021</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1575126104021</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,7 +206,8 @@
     <MESSAGE value="Code compilant" />
     <MESSAGE value="Fct de training" />
     <MESSAGE value="Send pour test main" />
-    <option name="LAST_COMMIT_MESSAGE" value="Send pour test main" />
+    <MESSAGE value="train presque fonctionnel" />
+    <option name="LAST_COMMIT_MESSAGE" value="train presque fonctionnel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

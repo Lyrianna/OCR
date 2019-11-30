@@ -167,7 +167,7 @@ void train_neural(Matrix *in , Matrix *wanted_out, bool istherearg, unsigned lon
 
 void character_translator(Matrix* in, char* filename)
 {
-    FILE* fichier = fopen("datasaved.txt",'r');
+    FILE* fichier = fopen("datasaved.txt","r");
 
     input = in;
     inputNb = input->sizevector;
