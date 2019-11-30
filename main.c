@@ -3,8 +3,8 @@
 //
 #include <stdio.h>
 //#include <stdlib.h>
-#include "networkV2.h"
-#include "matrix/matrix.h"
+#include "nn2/networkV2.h"
+#include "nn2/matrix/matrix.h"
 //#include <math.h>
 #include <string.h>
 
@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 
     Matrix* xor = initwithvaluesM(4,2, xorx);
     Matrix* wanted_output = initwithvaluesM(1,4,wanted_ouput);
-
+    printf("%s\n",argv[1]);
     if (argc == 1 || argc>3)
         errx(1,"MAIN : No matrice is specified.");
     else

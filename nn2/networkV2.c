@@ -114,9 +114,8 @@ void update_weights()//update of the different matrices
 //training
 void train_neural(Matrix *in , Matrix *wanted_out, bool istherearg, unsigned long int epochuser)
 {
-
     FILE* fichier = fopen("../datasaved.txt","r");
-    printf("allo");
+
     if (fichier != NULL)
     {
         load_datas(matarray,fichier);
