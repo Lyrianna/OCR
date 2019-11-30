@@ -168,6 +168,7 @@ void train_neural(Matrix *in , Matrix *wanted_out, bool istherearg, unsigned lon
 void character_translator(Matrix* in, char* filename)
 {
     FILE* fichier = fopen("datasaved.txt","r");
+    load_datas(matarray,fichier);
 
     input = in;
     inputNb = input->sizevector;
@@ -179,7 +180,7 @@ void character_translator(Matrix* in, char* filename)
 	hidden_layers();
 	output_neurons();
 	int max = 0;
-    for (int i = 0; i < output->sizevector; ++i) {
+    for (size_t i = 0; i < output->sizevector; ++i) {
         if (output->matrix[i]>output->matrix[max])
         {
             max = i;
