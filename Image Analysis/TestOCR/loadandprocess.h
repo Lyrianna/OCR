@@ -15,6 +15,7 @@
 #include "otsu.h"
 #include "letter.h"
 #include "segmentation.h"
+#include "renegade.h"
 
 int loadimage(char *filename,SDL_Surface *seg_letters, int *nbletters);
 void BlackAndWhite(SDL_Surface* surface);
@@ -27,6 +28,7 @@ SDL_Surface CropImage(SDL_Surface surface, int x1,int x2, int y1,int y2);
 SDL_Surface* GetLines(SDL_Surface surface,size_t *arraysize);
 SDL_Surface ImproveLine(SDL_Surface surface);
 SDL_Surface* GetLetters(SDL_Surface surface,size_t *arraysize);
+int endswithspace(SDL_Surface surface, int average);
 SDL_Surface ImproveLetter(SDL_Surface surface);
 void ExtractLetters(SDL_Surface *surface, SDL_Surface *seg_letters, int *totalsize);
 

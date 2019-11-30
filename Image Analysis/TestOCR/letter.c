@@ -39,12 +39,14 @@ int** makesquare(SDL_Surface letter){
     float yratio = letter.h/(float)28;
     for(int i = 0; i < 28; i++){
         matrix[i] = calloc(28,sizeof(int));
+    }
+    for(int i = 0; i < 28; i++){
         for(int j = 0; j < 28;j++){
             Uint32 pixel = getpixel(&letter,i*xratio, j*yratio);
             Uint8 black;
             SDL_GetRGB(pixel,letter.format,&black,&black,&black);
-            if(black == 255)
-                matrix[i][j] = 1;
+            if(black == 0)
+                matrix[j][i] = 1;
         }
     }
     return matrix;

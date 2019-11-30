@@ -22,11 +22,12 @@ int loadimage(char *filename, SDL_Surface *seg_letters,int *nbletters){
     IMG_Init(~0);
     SDL_Surface *surface =  IMG_Load(filename);
     if(surface != NULL){
-        printf("Success\n");
+        printf("SDL Initialized\n");
         BlackAndWhite(surface);
         MonoColor(surface);
         ExtractBlock(surface);
         ExtractLetters(surface,seg_letters,nbletters);
+        printf("Letters have been extracted\n");
     }
     else{
         printf("Failed ! %s\n", IMG_GetError());
@@ -200,6 +201,7 @@ SDL_Surface* GetLetters(SDL_Surface surface, size_t *arraysize){
     int index = 0;
     *arraysize = 1;
     int previous_x = 0;
+    int average = 0;
     for(int x = 0; x < surface.w; x++){
         if(blackinline == 0){
             lastwaswhite = 1;
@@ -218,8 +220,15 @@ SDL_Surface* GetLetters(SDL_Surface surface, size_t *arraysize){
             }
         }
         if(blackinline == 1 && lastwaswhite == 1){
+            average = (average**arraysize + (x - previous_x))/(*arraysize+1);
             letters = realloc(letters, (*arraysize)*sizeof(SDL_Surface));
             *(letters + index) = CropImage(surface, previous_x, x, 0, surface.h);
+            if(endswithspace(*(letters + index),average)){
+                (*arraysize)+=1;
+                index += 1;
+                letters = realloc(letters, (*arraysize)*sizeof(SDL_Surface));
+                *(letters + index) = *SDL_CreateRGBSurface(0,1,1,32,0,0,0,0);
+            }
             (*arraysize)+=1;
             index += 1;
             previous_x = x;
@@ -227,7 +236,29 @@ SDL_Surface* GetLetters(SDL_Surface surface, size_t *arraysize){
     }
     letters = realloc(letters, *arraysize*(sizeof(SDL_Surface)));
     *(letters + index) = CropImage(surface, previous_x, surface.w, 0, surface.h);
-    return letters;
+    if(index != 0){
+        int newsize = *arraysize;
+        SDL_Surface *norenegade = renegade(letters,&newsize,average);
+        *arraysize = newsize;
+        return norenegade;
+    }
+    else{
+        return letters;
+    }
+}
+
+int endswithspace(SDL_Surface surface, int average){
+    int asbeenblack = 0;
+    for(int i = (surface.w)*0.7f - 1; i < surface.w && !asbeenblack; i++){
+        for(int j = 0; j < surface.h; j++){
+            Uint8 black;
+            Uint32 pixel = getpixel(&surface,i,j);
+            SDL_GetRGB(pixel,surface.format,&black,&black,&black);
+            if(black == 0)
+                asbeenblack = 1;
+        }
+    }
+    return !asbeenblack && (surface.w > average*1.3f);
 }
 
 SDL_Surface* GetLines(SDL_Surface surface,size_t *arraysize){
