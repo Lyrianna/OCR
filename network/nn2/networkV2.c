@@ -3,15 +3,12 @@
 #include <time.h>
 #include "networkV2.h"
 #include "matrix/matrix.h"
-#include <string.h>
 
 char* ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ,.";
 //NEURAL NETWORK - Sarah and Nephelie//
 //ADAPTATION TO MATRIX STARTED ON 17/11/2019 BY SARAH AND NEPHELIE
 
 double lr = 2; //learning rate
-
-unsigned long int epoch = 10000;//number of epoch for the training
 
 //inputs
 size_t inputNb;//number of neurons in the input
@@ -115,7 +112,7 @@ void update_weights()//update of the different matrices
 }
 
 //training
-void train_neural(Matrix *in , Matrix *wanted_out)
+void train_neural(Matrix *in , Matrix *wanted_out, bool istherearg, unsigned long int epochuser)
 {
 
     FILE* fichier = fopen("../datasaved.txt","r");
@@ -144,6 +141,12 @@ void train_neural(Matrix *in , Matrix *wanted_out)
     generate_wgt();
 
     unsigned long int k = 0;
+    unsigned long int epoch = 10000;
+
+    if (istherearg)
+        epoch = epochuser;
+
+    printf("epoch = %lu",epoch);
 
     while ( k < epoch)
     {

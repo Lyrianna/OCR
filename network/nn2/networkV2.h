@@ -21,7 +21,7 @@ void derivatives();
 void update_weights();
 
 //training
-void train_neural(Matrix *in , Matrix *wanted_out);
+void train_neural(Matrix *in , Matrix *wanted_out, bool istherearg, unsigned long int epochuser);
 
 //character finder
 void character_translator(Matrix* in, char* filename);

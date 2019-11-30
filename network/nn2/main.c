@@ -22,23 +22,23 @@ int main(int argc, char** argv)
 
     Matrix* xor = initwithvaluesM(4,2, xorx);
     Matrix* wanted_output = initwithvaluesM(1,4,wanted_ouput);
-    /*if (argc == 1 || argc>2)
+
+    if (argc == 1 || argc>3)
         errx(1,"MAIN : No matrice is specified.");
     else
     {
         int arg = (int) atoi(argv[1]);
+
+        bool istherearg = (argc==3) ? true : false ;
+
         switch (arg) {
             case 'train':
-                train_neural(xor,wanted_output);
+                train_neural(xor,wanted_output,istherearg,(int) atoi(argv[2]));
             default:
-                character_translator((char)arg);
+                return 1;
+                //character_translator(in,filename,istherearg,argv[2]);
         }
-    }*/
-    train_neural(xor,wanted_output);
-    character_translator(xor,"miaou.txt");
-
-    freeM(xor);
-    freeM(wanted_output);
+    }
 
     return 0;
 }
