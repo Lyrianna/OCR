@@ -12,12 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="956b0aaf-6cd2-45e0-a8b1-f4a5bb283400" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matrix/datasaved.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/matrix/matrix.c" beforeDir="false" afterPath="$PROJECT_DIR$/matrix/matrix.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/networkV2.c" beforeDir="false" afterPath="$PROJECT_DIR$/networkV2.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/networkV2.h" beforeDir="false" afterPath="$PROJECT_DIR$/networkV2.h" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,7 +93,7 @@
       <workItem from="1574945441936" duration="1655000" />
       <workItem from="1574947114656" duration="91000" />
       <workItem from="1575028026366" duration="975000" />
-      <workItem from="1575106276907" duration="7418000" />
+      <workItem from="1575106276907" duration="7824000" />
     </task>
     <task id="LOCAL-00001" summary="début debug">
       <created>1574778198483</created>
@@ -156,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575110311261</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Send pour test main">
+      <created>1575125085856</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1575125085856</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,7 +184,8 @@
     <MESSAGE value="changement de place du free" />
     <MESSAGE value="Code compilant" />
     <MESSAGE value="Fct de training" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fct de training" />
+    <MESSAGE value="Send pour test main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Send pour test main" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
