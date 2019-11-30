@@ -11,9 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="956b0aaf-6cd2-45e0-a8b1-f4a5bb283400" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/networkV2.c" beforeDir="false" afterPath="$PROJECT_DIR$/networkV2.c" afterDir="false" />
-    </list>
+    <list default="true" id="956b0aaf-6cd2-45e0-a8b1-f4a5bb283400" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +91,7 @@
       <workItem from="1574945441936" duration="1655000" />
       <workItem from="1574947114656" duration="91000" />
       <workItem from="1575028026366" duration="975000" />
-      <workItem from="1575106276907" duration="8612000" />
+      <workItem from="1575106276907" duration="9041000" />
     </task>
     <task id="LOCAL-00001" summary="début debug">
       <created>1574778198483</created>
@@ -179,7 +177,21 @@
       <option name="project" value="LOCAL" />
       <updated>1575126104021</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="train presque fonctionnel">
+      <created>1575126147269</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1575126147269</updated>
+    </task>
+    <task id="LOCAL-00014" summary="train presque fonctionnel">
+      <created>1575126218225</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1575126218225</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
