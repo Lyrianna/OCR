@@ -35,7 +35,7 @@ int main(int argc, char** argv)
             case 'train':
                 train_neural(xor,wanted_output,istherearg,(int) atoi(argv[2]));
             default:
-                printf("echec");
+                printf("echec\n");
                 return 1;
                 //character_translator(in,filename,istherearg,argv[2]);
         }
