@@ -1,20 +1,25 @@
-CC=gcc -g
+# Compilers and options
+CC=gcc
+CPPFLAGS= -MMD
+CFLAGS= -Wall -Wextra -std=c99 -pedantic -O2
+#CFLAGS= -g
+LDFLAGS=
+LDLIBS= -lm
 
-CPPFLAGS= `sdl2-config --cflags` -MMD
-CFLAGS= -Wall -Wextra -Werror -std=c99
-LDFLAGS= `sdl2-config --libs`
-LDLIBS= `sdl2-config --libs` -lSDL2_image
-DEPS= nn2/networkV2.h nn2/matrix/matrix.h
+SRC = ./nn2/networkV2.c main.c ./nn2/matrix/matrix.c
+OBJ = ${SRC:.c=.o}
+DEP = ${SRC:.c=.d}
 
-%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS) $(LDLIBS)
+all: main
 
+main: ${OBJ}
 
-all: main.o nn2/networkV2.o nn2/matrix/matrix.h
-	$(CC) -o OCR main.o $(LDLIBS)
+-include ${DEP}
+
+#$(info WARNING, WARNING ARE IGNORED REMOVE -w OPTION)
 
 clean:
-	${RM} *.o
-	${RM} *.d
-	${RM} OCR
-	${RM} *.png
+	rm -f ${OBJ} ${DEP}
+	rm -f main
+
+ # END

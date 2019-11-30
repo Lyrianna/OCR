@@ -7,7 +7,7 @@
 #include "nn2/matrix/matrix.h"
 //#include <math.h>
 #include <string.h>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 int main(int argc, char** argv)
 {

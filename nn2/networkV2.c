@@ -166,7 +166,7 @@ void train_neural(Matrix *in , Matrix *wanted_out, bool istherearg, unsigned lon
     freeAll();//frees all the matrix used in the NN*/
 }
 
-void character_translator(Matrix* in, char* filename)
+/*void character_translator(Matrix* in, char* filename)
 {
     FILE* fichier2 = fopen("datasaved.txt","r");
     load_datas(matarray,fichier2);
@@ -198,7 +198,7 @@ void character_translator(Matrix* in, char* filename)
         }
     }
 	freeAll();
-}
+}*/
 
 void freeAll(){
 
