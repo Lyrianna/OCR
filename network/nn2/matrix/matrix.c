@@ -33,7 +33,7 @@ void saveM(Matrix *mat, bool iscontinuous)
 
     if (fichier != NULL)
     {
-        fprintf(fichier,"%d %d\n",mat->n,mat->p);
+        fprintf(fichier,"%ld %ld\n",mat->n,mat->p);
         fwrite(mat->matrix, sizeof(double),mat->sizevector,fichier);
         fputs("\n\n",fichier);
 
