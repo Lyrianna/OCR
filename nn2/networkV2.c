@@ -33,7 +33,7 @@ Matrix *derivative_hidden = NULL;
 
 Matrix *error_values = NULL;
 
-Matrix* matarray[8] = {0};
+Matrix* matarray[7] = {0};
 //initialization of matrices
 void initAll(){
 
@@ -119,12 +119,16 @@ void train_neural(Matrix *in , Matrix *wanted_out, bool istherearg, unsigned lon
     if (fichier != NULL)
     {
         load_datas(matarray,fichier);
-        for (int i = 0; i < 8; ++i) {
+        for (int i = 0; i < 7; ++i) {
             printM(matarray[i],"Mat");
         }
     }
     else
+    {
+        initAll();
         generate_wgt();
+    }
+
 
     printf("-- MATRICE TRAINING --\n");
     input = in;
@@ -144,8 +148,6 @@ void train_neural(Matrix *in , Matrix *wanted_out, bool istherearg, unsigned lon
 
     if (istherearg)
         epoch = epochuser;
-
-    printf("epoch = %lu",epoch);
 
     while ( k < epoch)
     {
@@ -221,7 +223,6 @@ void save_datas()
     saveM(hidden,false);
     saveM(hidden_weight,true);
     saveM(hidden_bias,true);
-    saveM(output,true);
     saveM(output_weight,true);
     saveM(output_bias,true);
     saveM(derivative_output,true);
@@ -239,7 +240,7 @@ void load_datas(Matrix* matrixarray[], FILE* fichier)
     {
         int i = 0;
 
-        while (i<8)
+        while (i<7)
         {
             fscanf(fichier, "%d %d",&taille[0],&taille[1]);
 
@@ -263,11 +264,10 @@ void load_datas(Matrix* matrixarray[], FILE* fichier)
         hidden = matrixarray[0];
         hidden_weight = matrixarray[1];
         hidden_bias = matrixarray[2];
-        output = matrixarray[3];
-        output_weight = matrixarray[4];
+        output_weight = matrixarray[3];
         output_bias = matrixarray[4];
-        derivative_output = matrixarray[6];
-        derivative_hidden = matrixarray[7];
+        derivative_output = matrixarray[5];
+        derivative_hidden = matrixarray[6];
     }
     else
         errx(1,"LOADMATRIX : No file datasaved.txt.");

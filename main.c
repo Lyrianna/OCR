@@ -29,7 +29,6 @@ int main(int argc, char** argv)
     else
     {
         char* arg = argv[1];
-        printf("%s",argv[1]);
         bool istherearg = (argc==3) ? true : false ;
 
         if (strcmp(arg, "train") == 0)
