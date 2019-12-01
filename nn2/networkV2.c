@@ -7,7 +7,7 @@ char* ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789,
 double lr = 2; //learning rate
 
 //inputs
-size_t inputNb;//number of neurons in the input
+size_t inputNb = 784;//number of neurons in the input
 Matrix *input, *wanted_output;
 
 //hidden layer
@@ -15,7 +15,7 @@ size_t hiddenNb = 40;//number of hidden neurons
 Matrix *hidden, *hidden_weight, *hidden_bias = NULL;
 
 //output layer
-size_t outputNb;//output neurons
+size_t outputNb = 64;//output neurons
 Matrix *output, *output_weight, *output_bias = NULL;
 
 //matrices for the gradient
@@ -127,7 +127,7 @@ void train_neural(bool istherearg, unsigned long int epochuser)
         for (int i = 0; i < 28; ++i) {
             printf("-- MATRICE TRAINING --\n");
 
-            char str[32] = "./BDI/Training/arialalphabet/"; //path to folder with writing
+            char str[32] = "../BDI/Training/arialalphabet/"; //path to folder with writing
             char str2[2];
 
             sprintf(str2,"%u",i); //number of matrice to write (in the ordrer of ALPHABET) put in str2
@@ -143,8 +143,8 @@ void train_neural(bool istherearg, unsigned long int epochuser)
 
             wanted_output = createouttrain(i);
 
-            inputNb = input->p;
-            outputNb = wanted_output->p;
+            //inputNb = input->p;
+            //outputNb = wanted_output->p;
             hidden_layers();
             output_neurons();
             error();
