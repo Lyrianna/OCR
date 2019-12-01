@@ -39,7 +39,7 @@ Letter* seg_segmentation(char *filename,int *size){
 
 
 Letter* getLetters(SDL_Surface *seg_letters, int size){
-	Letter* letters = malloc(size*sizeof(Letter) + 1);
+	Letter* letters = calloc(size + 1,sizeof(Letter));
 	for(int i = 0; i < size; i++){
 		if(seg_letters + i != NULL){
 			int** matrix = malloc(28*28*sizeof(int));

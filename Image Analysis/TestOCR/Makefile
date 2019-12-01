@@ -1,4 +1,4 @@
-CC=gcc -g
+CC=gcc -g -fsanitize=address
 
 CPPFLAGS= `sdl2-config --cflags` -MMD
 CFLAGS= -Wall -Wextra -Werror -std=c99

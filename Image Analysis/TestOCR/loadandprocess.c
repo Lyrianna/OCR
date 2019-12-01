@@ -128,7 +128,6 @@ void ExtractLetters(SDL_Surface *surface,SDL_Surface *seg_letters,int *totalsize
         *(lines + i) = ImproveLine(*(lines + i));
         size_t *nbletters = malloc(sizeof(size_t));
         SDL_Surface *letters = GetLetters(*(lines + i), nbletters);
-        seg_letters = realloc(seg_letters,(*nbletters + (size_t)letterindex + 1)*sizeof(SDL_Surface));
         for(size_t j = 0; j < *nbletters; j++){
             *(letters + j) = ImproveLetter(*(letters + j));
             if((*(letters + j)).w != 0 && (*(letters + j)).h != 0){
