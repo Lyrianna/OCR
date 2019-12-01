@@ -1,10 +1,6 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
 #include "networkV2.h"
-#include "matrix/matrix.h"
 
-char* ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ,.";
+char* ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789,.";
 //NEURAL NETWORK - Sarah and Nephelie//
 //ADAPTATION TO MATRIX STARTED ON 17/11/2019 BY SARAH AND NEPHELIE
 
@@ -112,36 +108,19 @@ void update_weights()//update of the different matrices
 }
 
 //training
-void train_neural(Matrix *in , Matrix *wanted_out, bool istherearg, unsigned long int epochuser)
+void train_neural(bool istherearg, unsigned long int epochuser)
 {
     FILE* fichier = fopen("../datasaved.txt","r");
 
     if (fichier != NULL)
     {
         load_datas(matarray,fichier);
-        for (int i = 0; i < 7; ++i) {
-            printM(matarray[i],"Mat");
-        }
     }
     else
     {
         initAll();
         generate_wgt();
     }
-
-
-    printf("-- MATRICE TRAINING --\n");
-    input = in;
-    input->n = 1;//the matrix formation is change to fit the NN
-    input->p = (in->n)*(in->p);
-
-    wanted_output = wanted_out; //TODO
-
-    inputNb = input->p;
-    outputNb = wanted_out->p;
-
-    initAll();
-    generate_wgt();
 
     unsigned long int k = 0;
     unsigned long int epoch = 10000;
@@ -151,11 +130,35 @@ void train_neural(Matrix *in , Matrix *wanted_out, bool istherearg, unsigned lon
 
     while ( k < epoch)
     {
-        hidden_layers();
-        output_neurons();
-        error();
-        derivatives();
-        update_weights();
+        for (int i = 0; i < 28; ++i) {
+            printf("-- MATRICE TRAINING --\n");
+
+            char str[32] = "../BDI/Training/arialalphabet/"; //path to folder with writing
+            char str2[2];
+
+            sprintf(str2,"%u",i); //number of matrice to write (in the ordrer of ALPHABET) put in str2
+            strcat(str,str2); //concatenate the 2 str
+
+            input = loadM(str); //load the matrice with the path
+
+            printf("-- MATRICE TRAINING --\n");
+
+            //the matrix formation is change to fit the NN
+            input->p = (input->n)*(input->p);
+            input->n = 1;
+
+            wanted_output = createouttrain(i);
+
+            inputNb = input->p;
+            outputNb = wanted_output->p;
+
+            hidden_layers();
+            output_neurons();
+            error();
+            derivatives();
+            update_weights();
+        }
+
         k+=1;
     }
     printM(wanted_output, "wanted");
@@ -164,6 +167,14 @@ void train_neural(Matrix *in , Matrix *wanted_out, bool istherearg, unsigned lon
     save_datas();//saves the important datas of the NN
 
     freeAll();//frees all the matrix used in the NN*/
+}
+
+//create the wantedouput based on the i of its place in the output layer
+Matrix* createouttrain(int i)
+{
+    Matrix* result = initM(1,64);
+    result->matrix[i] = 1;
+    return result;
 }
 
 /*void character_translator(Matrix* in, char* filename)

@@ -49,17 +49,26 @@ Matrix* loadM(char* filename)
 
     if (fichier != NULL)
     {
-        int taille[2] = {0};
-        fscanf(fichier, "%d %d",&taille[0],&taille[1]);
-
-        size_t size = taille[0]*taille[1];
-        fgetc(fichier);
-
+        size_t size = 28*28;
         double* matrixvalues = malloc(sizeof(double)*size);
 
-        fread(matrixvalues, sizeof(double),size,fichier);
+        for (int i = 0; i < 28; ++i) {
+            for (int j = 0; j < 28; ++j) {
+                char e = fgetc(fichier);
+                double f = 5;
+                //double f = (e == 48) ? 0: 1;
+                if (e == 48)
+                    f = 0;
+                else if (e == 49)
+                    f = 1;
+                matrixvalues[i*28+j] = f;
+            }
+            fgetc(fichier);
+            fgetc(fichier);
 
-        Matrix* result = initwithvaluesM(taille[0],taille[1], matrixvalues);
+        }
+
+        Matrix* result = initwithvaluesM(28,28, matrixvalues);
         return result;
     }
     else

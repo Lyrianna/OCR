@@ -7,7 +7,7 @@
 #include "nn2/matrix/matrix.h"
 //#include <math.h>
 #include <string.h>
-#include <SDL2/SDL.h>
+//#include <SDL2/SDL.h>
 
 int main(int argc, char** argv)
 {
@@ -34,12 +34,14 @@ int main(int argc, char** argv)
 
         if (strcmp(arg, "train") == 0)
         {
-            train_neural(xor,wanted_output,istherearg,(int) atoi(argv[2]));
+            train_neural(istherearg,(int) atoi(argv[2]));
         }
 
         /*else
                 character_translator(in,filename,istherearg,argv[2]);*/
     }
+
+    Matrix* test = loadM("../BDI/Training/arialalphabet/10");
 
     return 0;
 }

@@ -2,6 +2,11 @@
 #define XOR_NETWORK_H
 
 #include "matrix/matrix.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+#include "networkV2.h"
+#include <string.h>
 
 
 
@@ -21,7 +26,8 @@ void derivatives();
 void update_weights();
 
 //training
-void train_neural(Matrix *in , Matrix *wanted_out, bool istherearg, unsigned long int epochuser);
+void train_neural(bool istherearg, unsigned long int epochuser);
+Matrix* createouttrain(int i);
 
 //character finder
 void character_translator(Matrix* in, char* filename);
