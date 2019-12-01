@@ -1,33 +1,27 @@
 #include "networkV2.h"
 
 char* ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789,.";
+
 //NEURAL NETWORK - Sarah and Nephelie//
-//ADAPTATION TO MATRIX STARTED ON 17/11/2019 BY SARAH AND NEPHELIE
 
 double lr = 2; //learning rate
 
 //inputs
 size_t inputNb;//number of neurons in the input
-Matrix *input = NULL;
-Matrix *wanted_output = NULL;
+Matrix *input, *wanted_output;
 
 //hidden layer
 size_t hiddenNb = 40;//number of hidden neurons
-Matrix *hidden = NULL;
-Matrix *hidden_weight = NULL;
-Matrix *hidden_bias = NULL;
+Matrix *hidden, *hidden_weight, *hidden_bias = NULL;
 
 //output layer
 size_t outputNb;//output neurons
-Matrix *output = NULL;
-Matrix *output_weight = NULL;
-Matrix *output_bias = NULL;
+Matrix *output, *output_weight, *output_bias = NULL;
 
 //matrices for the gradient
-Matrix *derivative_output = NULL;
-Matrix *derivative_hidden = NULL;
+Matrix *derivative_output, *derivative_hidden = NULL;
 
-Matrix *error_values = NULL;
+Matrix *error_values;
 
 Matrix* matarray[7] = {0};
 //initialization of matrices
@@ -111,7 +105,7 @@ void update_weights()//update of the different matrices
 void train_neural(bool istherearg, unsigned long int epochuser)
 {
     FILE* fichier = fopen("../datasaved.txt","r");
-
+    //TODO: initialiser inputNb et outputNb avant d'entrer dans la boucle!
     if (fichier != NULL)
     {
         load_datas(matarray,fichier);
@@ -151,7 +145,6 @@ void train_neural(bool istherearg, unsigned long int epochuser)
 
             inputNb = input->p;
             outputNb = wanted_output->p;
-
             hidden_layers();
             output_neurons();
             error();

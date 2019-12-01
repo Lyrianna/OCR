@@ -270,11 +270,9 @@ Matrix* sigM(Matrix* m, bool is_derivate)
 
 //Computes the softmax of each value in the matrix given
 Matrix* softmaxM(Matrix* m){
-	size_t rows = m->n;
-	size_t cols = m->p;
-	Matrix* result = initM(rows,cols);
-
+	Matrix* result = initM(m->n,m->p);
 	double max = m->matrix[0];
+
 	for (size_t i = 0 ; i < m->sizevector;i++)
 		if (max < m->matrix[i])
 			max = m->matrix[i];
