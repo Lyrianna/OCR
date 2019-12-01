@@ -1,18 +1,19 @@
-! [OCR] (https://projet-ocr-epita.web-edu.fr/images/logo.jpg)
+![OCR](https://projet-ocr-epita.web-edu.fr/images/logo.jpg)
 # A super cool Optical Character Recognition System.
 
-**HELE** (for _SaraH-PierrE-PauL-NepheliE_) is a groupe formed at the school EPITA so as to work on a project which is creating a version of an OCR.
+**HELE** (for _SaraH-PierrE-PauL-NepheliE_) is a groupe formed at the school EPITA so as to work on a project.
 An [optical character recognition system](https://searchcontentmanagement.techtarget.com/definition/OCR-optical-character-recognition) is developed as part of the EPITA second year project. It is powered by artificial intelligence with a [neural network](http://neuralnetworksanddeeplearning.com/index.html) which is able to learn a tones of different character such as Unicode table.
 
-This software is capable of extracting a text from an image with a photo or not by segmenting the image in the different letters composing the page and by putting them in the neural network which match those characters with the expected.
+This software is capable of extracting a text from an image with a photo by segmenting the image. It segments the page in the different letters, and return the character expected with the neural network.
 
-##REQUIREMENTS
-The HELE's OCR require the following C librairies to work:
+## REQUIREMENTS
+
+The HELE's OCR requires the following C librairies to work:
 
 - [SDL](https://www.libsdl.org/ "SDL")
 - [GTK+](https://www.gtk.org/ "GTK+")
 
-##INSTALLATION
+## INSTALLATION
 Before installing, make sure that you fill all the requirements. Please refer to _Requirements_ section.
 
 <ul>
@@ -22,7 +23,8 @@ Before installing, make sure that you fill all the requirements. Please refer to
 	<pre><code>$ make<br><code>
 
 </ul>
-##How it Works ?
+
+## HOW IT WORKS ?
 
 The OCR is processing as follow:
 
@@ -42,7 +44,8 @@ To launch it, please refer to section _Installation_.
 
 Code programmation de notre OCR pour notre projet de S3 dans l'école EPITA.
 
-##CREDITS
-Students of Epita at the origin of the code : <tt>Unikarah</tt>,<tt>Lyrianna</tt>,<tt>Pierre</tt> and <tt>Paul</tt>
+## CREDITS
+Students of Epita at the origin of the code : <tt>Unikarah</tt>, <tt>Lyrianna</tt>, <tt>Pierre</tt> and <tt>Paul</tt>.
 
 Please take the time to see our website [projetocr](https://projet-ocr-epita.web-edu.fr/).
+
