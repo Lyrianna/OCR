@@ -133,12 +133,12 @@ void train_neural(bool istherearg, unsigned long int epochuser)
         for (int i = 0; i < 28; ++i) {
             printf("-- MATRICE TRAINING --\n");
 
-            char str[32] = "../BDI/Training/arialalphabet/"; //path to folder with writing
+            char str[32] = "./BDI/Training/arialalphabet/"; //path to folder with writing
             char str2[2];
 
             sprintf(str2,"%u",i); //number of matrice to write (in the ordrer of ALPHABET) put in str2
-            strcat(str,str2); //concatenate the 2 str
-
+	    strcat(str,str2); //concatenate the 2 str
+	    printf("str = %s\n",str);
             input = loadM(str); //load the matrice with the path
 
             printf("-- MATRICE TRAINING --\n");
