@@ -60,7 +60,7 @@ void generate_wgt()
 //Feed forward
 
 void hidden_layers(){
-	hidden = mulM(input, hidden_weight);
+    hidden = mulM(input, hidden_weight);
 	hidden = sigM(addM(hidden, hidden_bias),false);
 }
 
