@@ -9,7 +9,7 @@ char* ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ,.";
 //NEURAL NETWORK - Sarah and Nephelie//
 //ADAPTATION TO MATRIX STARTED ON 17/11/2019 BY SARAH AND NEPHELIE
 
-double lr = 2; //learning rate
+double lr = 0.2; //learning rate
 
 unsigned long int epoch = 1000;//number of epoch for the training
 
@@ -74,13 +74,13 @@ void hidden_layers(){
 void output_neurons()
 {
 	output = mulM(hidden, output_weight);
-	output = softmaxM(add(output, output_bias));
+	output = sigM(addM(output, softmaxM(output_bias)), false);
 }
 
 //Backpropagation
 void error() //error for each case
 {
-	error_values = subM(output, wanted_output);
+	error_values = subM(wanted_output, output);
 }
 
 void derivatives()//repercution of the error for each layer
@@ -94,22 +94,22 @@ void update_weights()//update of the different matrices
 {
 	//update of the weight btw input and hidden layer
 	//hidden_w += dot(input, derivative_hidden)*lr
-	hidden_weight = subM(hidden_weight, scalM(mulM(transpM(input),
+	hidden_weight = addM(hidden_weight, scalM(mulM(transpM(input),
 					derivative_hidden), lr));
 
 	//update of the bias of the hidden layer
 	//hidden_bias += dot(sigmoid(hidden_bias), derivative_hidden)*lr
-	hidden_bias = subM(hidden_bias, scalM(dotM(sigM(hidden_bias,false),
+	hidden_bias = addM(hidden_bias, scalM(dotM(sigM(hidden_bias,false),
 					derivative_hidden), lr));
 	
    	//update of the weight btw hidden and output layer
    	//output_w += dot(input, derivative_output)*lr
-	output_weight = subM(output_weight, scalM(mulM(transpM(hidden),
+	output_weight = addM(output_weight, scalM(mulM(transpM(hidden),
 					derivative_output), lr));
      
 	//update of the bias of the output layer
-	//output_bias += dot(sigmoid(output_bias), derivative_output)*lr))
-	output_bias = subM(output_bias, scalM(dotM(softmaxM(output_bias),
+	//output_bias += dot(softmax(output_bias), derivative_output)*lr))
+	output_bias = addM(output_bias, scalM(dotM(softmaxM(output_bias),
 					derivative_output), lr));
 }
 
