@@ -268,6 +268,24 @@ Matrix* sigM(Matrix* m, bool is_derivate)
     return result;
 }
 
+//Computes the softmax of each value in the matrix given
+Matrix* softmaxM(Matrix* m){
+	size_t rows = m->n;
+	size_t cols = m->p;
+	Matrix* result = initM(rows,cols);
+
+	double max = m->matrix[0];
+	for (size_t i = 0 ; i < m->sizevector;i++)
+		if (max < m->matrix[i])
+			max = m->matrix[i];
+	double sum_of_exp = 0;
+	for (size_t i = 0 ; i < m->sizevector;i++)
+		sum_of_exp +=exp(m->matrix[i]-max);
+	for (size_t j = 0 ; j < m->sizevector; j++)
+		result->matrix[j]=exp(m->matrix[j]-max)/sum_of_exp;
+	return result;
+}
+
 //Init a matrix with special values (DEBUGGED)
 Matrix* initwithvaluesM(size_t n, size_t p, double *m)
 {

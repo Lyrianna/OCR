@@ -34,7 +34,7 @@ Matrix* dotM(Matrix* mat1, Matrix* mat2);
 Matrix* scalM(Matrix* m, double s);
 Matrix* transpM(Matrix* m);
 Matrix* sigM(Matrix* m, bool is_derivate);
-
+Matrix* softmaxM(Matrix* m);
 Matrix* initwithvaluesM(size_t n, size_t p, double *m);
 
 #endif //NN2_MATRIX_H
