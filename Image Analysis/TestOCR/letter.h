@@ -16,6 +16,7 @@ typedef struct Letter{
     int posy;
     SDL_Surface image;
     int **matrix;
+    int newline;
 } Letter;
 
 

@@ -4,6 +4,10 @@
 //Oubliez pas de free les lettres après vous en être servi
 
 void debug_matrix(Letter l){
+	if(l.newline == 1){
+		printf("NEW LINE \n");
+		return;
+	}
 	for(int i = 0; i < 28; i++){
 		for(int j = 0; j < 28; j++){
 			printf("%d",l.matrix[i][j]);
@@ -20,14 +24,15 @@ Letter* seg_segmentation(char *filename,int *size){
 	}
 	int *nbletters = malloc(sizeof(int));
 	int value = loadimage(filename,seg_letters,nbletters);
+	seg_letters = realloc(seg_letters,*nbletters*sizeof(SDL_Surface));
 	if(value != 0){
 		printf("Error while loading your image !\n");
 		return NULL;
 	}
 	Letter *letters = getLetters(seg_letters,*nbletters);
-	for(int i = 0; i < *nbletters;i++){
-		debug_matrix(*(letters + i));
-		printf("\n\n\n\n");
+	for(int i = 0; i < *nbletters; i++){
+		debug_matrix(letters[i]);
+		printf("\n\n");
 	}
 	IMG_Quit();
 	SDL_Quit();	
@@ -41,11 +46,17 @@ Letter* seg_segmentation(char *filename,int *size){
 Letter* getLetters(SDL_Surface *seg_letters, int size){
 	Letter* letters = calloc(size + 1,sizeof(Letter));
 	for(int i = 0; i < size; i++){
-		if(seg_letters + i != NULL){
+		if((seg_letters + i)->h == 2){
+			Letter l;
+			l.newline = 1;
+			letters[i] = l;
+		}
+		else if(seg_letters + i != NULL){
 			int** matrix = malloc(28*28*sizeof(int));
 			matrix = makesquare(*(seg_letters + i));
 			Letter l;
 			l.matrix = matrix;
+			l.newline = 0;
 			letters[i] = l;	
 		}
 	}

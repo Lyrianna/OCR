@@ -135,6 +135,9 @@ void ExtractLetters(SDL_Surface *surface,SDL_Surface *seg_letters,int *totalsize
                 letterindex++;
             }
         }
+        SDL_Surface newline = *SDL_CreateRGBSurface(0,2,2,32,0,0,0,0);
+        *(seg_letters + letterindex) = newline;
+        letterindex++;
     }
     *totalsize = letterindex;
 }
