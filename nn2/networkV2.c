@@ -141,11 +141,8 @@ void train_neural(bool istherearg, unsigned long int epochuser)
 
     while ( k < epoch)
     {
-
+        printf(" ----- EPOCH NUMBER %lu -----\n",k);
         for (int i = 0; i < 64; ++i) {
-
-            printf("-- MATRICE TRAINING --\n");
-            printf("-- CHARACTER IS %c\n",ALPHABET[i]);
             input = alphabettrain[i];
 
             //the matrix formation is change to fit the NN
@@ -159,10 +156,6 @@ void train_neural(bool istherearg, unsigned long int epochuser)
             error();
             derivatives();
             update_weights();
-
-            printM(hidden_weight,"hidden weight\n");
-            printM(output_weight,"out weight\n");
-            printM(hidden,"hidden\n");
         }
 
         k+=1;
@@ -172,7 +165,7 @@ void train_neural(bool istherearg, unsigned long int epochuser)
     printf("\n");
     printM(output, "outputttt");
     save_datas();//saves the important datas of the NN
-
+    printf("saved datas\n");
     freeAll();//frees all the matrix used in the NN
 }
 
@@ -184,39 +177,53 @@ Matrix* createouttrain(int i)
     return result;
 }
 
-/*void character_translator(Matrix* in, char* filename)
+void ocr(Matrix* in)
 {
     FILE* fichier2 = fopen("datasaved.txt","r");
     load_datas(matarray,fichier2);
 
     input = in;
-    inputNb = input->sizevector;
     input->n = 1;//the matrix formation is change to fit the NN
     input->p = (in->n)*(in->p);
-    outputNb = 64;
+    bool isspace = false;
 
 	initAll();
 	hidden_layers();
 	output_neurons();
+
 	int max = 0;
+
     for (size_t i = 0; i < output->sizevector; ++i) {
         if (output->matrix[i]>output->matrix[max])
         {
             max = i;
-        }//TODO : space
+        }
+
     FILE* fichier = fopen("text.txt", "a");
         if (fichier!=NULL)
         {
-            for (int j = 0; j < 64; ++j) {
-                if (j==max)
-                {
-                    fputs(&ALPHABET[i],fichier);
+            for (size_t k = 0; k < input->sizevector; ++k)
+            {
+                if (input->matrix[k] == 0)
+                    isspace = true;
+            }
+            if (isspace)
+            {
+                fputs(" ",fichier);
+            }
+            else
+            {
+                for (int j = 0; j < 64; ++j) {
+                    if (j==max)
+                    {
+                        fputs(&ALPHABET[i],fichier);
+                    }
                 }
             }
         }
     }
 	freeAll();
-}*/
+}
 
 void freeAll(){
 
@@ -234,6 +241,13 @@ void freeAll(){
     freeM(error_values);
     freeM(derivative_output);
     freeM(derivative_hidden);
+
+    for (int i = 0; i < 7; ++i) {
+        freeM(matarray[i]);
+    }
+    for (int j = 0; j < 64; ++j) {
+        freeM(alphabettrain[j]);
+    }
 }
 
 void save_datas()

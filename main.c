@@ -5,24 +5,11 @@
 #include "nn2/networkV2.h"
 #include "nn2/matrix/matrix.h"
 #include <string.h>
-//#include <SDL2/SDL.h>
+#include <SDL2/SDL.h>
+#include "Image Analysis/TestOCR/segmentation.h"
 
 int main(int argc, char** argv)
 {
-    double xorx[] = {
-            0,1,1,0,1,1,0,0
-    };
-
-    double wanted_ouput[] = {
-            0,
-            0,
-            1,
-            0
-    };
-
-    Matrix* xor = initwithvaluesM(4,2,xorx);
-    Matrix* wanted_output = initwithvaluesM(1,4,wanted_ouput);
-    printf("%s\n",argv[1]);
     if (argc == 1 || argc>3)
         errx(1,"MAIN : No matrice is specified.");
     else
@@ -35,8 +22,16 @@ int main(int argc, char** argv)
             train_neural(istherearg,(int) atoi(argv[2]));
         }
 
-        /*else
-                character_translator(in,filename,istherearg,argv[2]);*/
+        else
+        {
+            int *size = NULL;
+            Letter* letters = seg_segmentation(argv[2],size);
+            for (int i = 0; i < size; ++i) {
+                Matrix* input = initwithvaluesM(28, 28, (double *) letters[i].matrix);
+                ocr(input);
+            }
+        }
+
     }
 
     Matrix* test = loadM("../BDI/Training/arialalphabet/10");

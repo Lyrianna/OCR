@@ -30,7 +30,7 @@ void train_neural(bool istherearg, unsigned long int epochuser);
 Matrix* createouttrain(int i);
 
 //character finder
-void character_translator(Matrix* in, char* filename);
+void ocr(Matrix* in);
 
 //Displays the results
 void displayepoch();

@@ -213,19 +213,10 @@ Matrix* dotM(Matrix* mat1, Matrix* mat2)
 //Scalar product (NOT)
 Matrix* scalM(Matrix* m, double s)
 {
-    size_t rows = m->n;
-    size_t cols = m->p;
-
-    Matrix* result = initM(rows,cols);
-
-    for (size_t i = 0; i < rows; i++)
-    {
-        for (size_t j = 0; j < cols;j++)
-        {
-            result->matrix[i*cols+j] = s*m->matrix[i*cols+j];
-        }
+    for (int i = 0; i < m->sizevector; ++i) {
+        m->matrix[i] = s*m->matrix[i];
     }
-    return result;
+    return m;
 }
 
 //Transpose a matrix m (DEBUGGED)
@@ -243,45 +234,47 @@ Matrix* transpM(Matrix* m)
             result->matrix[j*rows+i] = m->matrix[i*cols+j];
         }
     }
+    freeM(m);
     return result;
 }
 
 //Calculate the sigmoid of each value in matrice (NOT)
 Matrix* sigM(Matrix* m, bool is_derivate)
 {
-    size_t rows = m->n;
-    size_t cols = m->p;
-    Matrix* result = initM(rows,cols);
 
     if (!is_derivate)
     {
         for (size_t i = 0; i < m->sizevector; ++i) {
-            result->matrix[i] = (1/(1+exp(-(m->matrix[i]))));
+            m->matrix[i] = (1/(1+exp(-(m->matrix[i]))));
         }
     }
     else
     {
         for (size_t i = 0; i < m->sizevector; ++i) {
-            result->matrix[i] = (m->matrix[i])*(1-(m->matrix[i]));
+            m->matrix[i] = (m->matrix[i])*(1-(m->matrix[i]));
         }
     }
-    return result;
+    return m;
 }
 
 //Computes the softmax of each value in the matrix given
 Matrix* softmaxM(Matrix* m){
-	Matrix* result = initM(m->n,m->p);
+
 	double max = m->matrix[0];
 
 	for (size_t i = 0 ; i < m->sizevector;i++)
 		if (max < m->matrix[i])
 			max = m->matrix[i];
+
 	double sum_of_exp = 0;
+
 	for (size_t i = 0 ; i < m->sizevector;i++)
 		sum_of_exp +=exp(m->matrix[i]-max);
+
 	for (size_t j = 0 ; j < m->sizevector; j++)
-		result->matrix[j]=exp(m->matrix[j]-max)/sum_of_exp;
-	return result;
+		m->matrix[j]=exp(m->matrix[j]-max)/sum_of_exp;
+
+	return m;
 }
 
 //Init a matrix with special values (DEBUGGED)

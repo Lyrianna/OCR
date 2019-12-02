@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
     }
     int size;
     Letter *l = seg_segmentation(argv[1], &size);
-    return l->matrix[0][0];
+    return (uint64_t)l;
 }
 
 void trainingmode(char *filename){
