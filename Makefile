@@ -1,7 +1,7 @@
 # Compilers and options
 CC=gcc -g -fsanitize=address
 CPPFLAGS= `sdl-2config --cflags` -MMD
-CFLAGS= -Wall -Wextra -Werror -std=c99 -pedantic -O2
+CFLAGS= -Wall -Wextra -std=c99 -pedantic -O2
 #CFLAGS= -g
 LDFLAGS= `sdl2-config --libs`
 LDLIBS= `sdl2-config --libs` -lSDL2_image -lm 
