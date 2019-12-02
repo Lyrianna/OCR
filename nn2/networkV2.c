@@ -277,14 +277,15 @@ void load_datas(Matrix* matrixarray[], FILE* fichier)
 
         while (i<7)
         {
-            fscanf(fichier, "%d %d",&taille[0],&taille[1]);
-
+            int mn = fscanf(fichier, "%d %d",&taille[0],&taille[1]);
+	    printf("use fscanf: %i", mn);
             int size = taille[0]*taille[1];
             fgetc(fichier);
             double* matrixvalues = malloc(sizeof(double)*size);
 
 
-            fread(matrixvalues, sizeof(double),size,fichier);
+            int pt = fread(matrixvalues, sizeof(double),size,fichier);
+	    printf("use fread = %i", pt);
 
             matrixarray[i] = initwithvaluesM(taille[0],taille[1], matrixvalues);
 
