@@ -2,10 +2,8 @@
 // Created by Lyrianna on 21/11/2019.
 //
 #include <stdio.h>
-//#include <stdlib.h>
 #include "nn2/networkV2.h"
 #include "nn2/matrix/matrix.h"
-//#include <math.h>
 #include <string.h>
 //#include <SDL2/SDL.h>
 
@@ -22,7 +20,7 @@ int main(int argc, char** argv)
             0
     };
 
-    Matrix* xor = initwithvaluesM(4,2, xorx);
+    Matrix* xor = initwithvaluesM(4,2,xorx);
     Matrix* wanted_output = initwithvaluesM(1,4,wanted_ouput);
     printf("%s\n",argv[1]);
     if (argc == 1 || argc>3)
