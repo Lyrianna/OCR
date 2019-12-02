@@ -212,7 +212,7 @@ Matrix* dotM(Matrix* mat1, Matrix* mat2)
 //Scalar product (NOT)
 Matrix* scalM(Matrix* m, double s)
 {
-    for (int i = 0; i < m->sizevector; ++i) {
+    for (size_t i = 0; i < m->sizevector; ++i) {
         m->matrix[i] = s*m->matrix[i];
     }
     return m;
