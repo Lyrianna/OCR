@@ -24,11 +24,13 @@ Matrix *derivative_output, *derivative_hidden = NULL;
 Matrix *error_values;
 
 Matrix* matarray[7] = {0};
+Matrix* alphabettrain[64];
 //initialization of matrices
 void initAll(){
 
     //Hidden layers
     hidden = initM(1,hiddenNb);
+    hidden_weight = initM(inputNb,hiddenNb);
     hidden_weight = initM(inputNb,hiddenNb);
     hidden_bias = initM(1,hiddenNb);
 
@@ -60,6 +62,7 @@ void generate_wgt()
 //Feed forward
 
 void hidden_layers(){
+
     hidden = mulM(input, hidden_weight);
 	hidden = sigM(addM(hidden, hidden_bias),false);
 }
@@ -119,23 +122,31 @@ void train_neural(bool istherearg, unsigned long int epochuser)
     unsigned long int k = 0;
     unsigned long int epoch = 10000;
 
-    if (istherearg)
+    if (istherearg) //put the user's epoch
         epoch = epochuser;
+
+    //put all matrices of train in an array
+    for (int j = 0; j < 64; ++j) {
+        printf("Init Alphabet\n");
+
+        char str[32] = "../BDI/Training/arialalphabet/"; //path to folder with writing
+        char str2[2];
+
+        sprintf(str2,"%u",j); //number of matrice to write (in the ordrer of ALPHABET) put in str2
+        strcat(str,str2); //concatenate the 2 str
+        printf("str = %s\n",str);
+
+        alphabettrain[j] = loadM(str); //load the matrice with the path
+    }
 
     while ( k < epoch)
     {
-        for (int i = 0; i < 28; ++i) {
-            printf("-- MATRICE TRAINING --\n");
 
-            char str[32] = "../BDI/Training/arialalphabet/"; //path to folder with writing
-            char str2[2];
-
-            sprintf(str2,"%u",i); //number of matrice to write (in the ordrer of ALPHABET) put in str2
-	    strcat(str,str2); //concatenate the 2 str
-	    printf("str = %s\n",str);
-            input = loadM(str); //load the matrice with the path
+        for (int i = 0; i < 64; ++i) {
 
             printf("-- MATRICE TRAINING --\n");
+            printf("-- CHARACTER IS %c\n",ALPHABET[i]);
+            input = alphabettrain[i];
 
             //the matrix formation is change to fit the NN
             input->p = (input->n)*(input->p);
@@ -143,23 +154,26 @@ void train_neural(bool istherearg, unsigned long int epochuser)
 
             wanted_output = createouttrain(i);
 
-            //inputNb = input->p;
-            //outputNb = wanted_output->p;
             hidden_layers();
             output_neurons();
             error();
             derivatives();
             update_weights();
+
+            printM(hidden_weight,"hidden weight\n");
+            printM(output_weight,"out weight\n");
+            printM(hidden,"hidden\n");
         }
 
         k+=1;
     }
+
     printM(wanted_output, "wanted");
     printf("\n");
     printM(output, "outputttt");
     save_datas();//saves the important datas of the NN
 
-    freeAll();//frees all the matrix used in the NN*/
+    freeAll();//frees all the matrix used in the NN
 }
 
 //create the wantedouput based on the i of its place in the output layer
@@ -189,7 +203,7 @@ Matrix* createouttrain(int i)
         if (output->matrix[i]>output->matrix[max])
         {
             max = i;
-        }
+        }//TODO : space
     FILE* fichier = fopen("text.txt", "a");
         if (fichier!=NULL)
         {
