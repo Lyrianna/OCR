@@ -234,7 +234,7 @@ Matrix* transpM(Matrix* m)
             result->matrix[j*rows+i] = m->matrix[i*cols+j];
         }
     }
-    freeM(m);
+    //freeM(m);
     return result;
 }
 

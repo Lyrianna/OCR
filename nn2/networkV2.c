@@ -90,23 +90,19 @@ void update_weights()//update of the different matrices
 {
 	//update of the weight btw input and hidden layer
 	//hidden_w += dot(input, derivative_hidden)*lr
-	hidden_weight = addM(hidden_weight, scalM(mulM(transpM(input),
-					derivative_hidden), lr));
+	hidden_weight = addM(hidden_weight, scalM(mulM(transpM(input), derivative_hidden), lr));
 
 	//update of the bias of the hidden layer
 	//hidden_bias += dot(sigmoid(hidden_bias), derivative_hidden)*lr
-	hidden_bias = addM(hidden_bias, scalM(dotM(sigM(hidden_bias,false),
-					derivative_hidden), lr));
+	hidden_bias = addM(hidden_bias, scalM(dotM(sigM(hidden_bias,false), derivative_hidden), lr));
 	
    	//update of the weight btw hidden and output layer
    	//output_w += dot(input, derivative_output)*lr
-	output_weight = addM(output_weight, scalM(mulM(transpM(hidden),
-					derivative_output), lr));
+	output_weight = addM(output_weight, scalM(mulM(transpM(hidden), derivative_output), lr));
      
 	//update of the bias of the output layer
 	//output_bias += dot(sigmoid(output_bias), derivative_output)*lr))
-	output_bias = addM(output_bias, scalM(dotM(softmaxM(output_bias),
-					derivative_output), lr));
+	output_bias = addM(output_bias, scalM(dotM(softmaxM(output_bias), derivative_output), lr));
 }
 
 //training
