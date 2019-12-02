@@ -309,7 +309,7 @@ char* reverse(char *buffer, int i, int j)
 }
 
 // Implement itoa() function in C
-/*char* itoa(int value, char* buffer, int base)
+char* itoa(int value, char* buffer, int base)
 {
     // consider absolute value of number
     int n = abs(value);
@@ -341,4 +341,4 @@ char* reverse(char *buffer, int i, int j)
 
     // reverse the string and return it
     return reverse(buffer, 0, i - 1);
-}*/
+}
