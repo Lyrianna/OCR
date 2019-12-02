@@ -129,7 +129,7 @@ void train_neural(bool istherearg, unsigned long int epochuser)
     for (int j = 0; j < 64; ++j) {
         printf("Init Alphabet\n");
 
-        char str[32] = "../BDI/Training/arialalphabet/"; //path to folder with writing
+        char str[32] = "./BDI/Training/arialalphabet/"; //path to folder with writing
         char str2[2];
 
         sprintf(str2,"%u",j); //number of matrice to write (in the ordrer of ALPHABET) put in str2
