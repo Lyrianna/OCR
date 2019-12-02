@@ -308,13 +308,9 @@ char* reverse(char *buffer, int i, int j)
     return buffer;
 }
 
-// Iterative function to implement itoa() function in C
-char* itoa(int value, char* buffer, int base)
+// Implement itoa() function in C
+/*char* itoa(int value, char* buffer, int base)
 {
-    // invalid input
-    if (base < 2 || base > 32)
-        return buffer;
-
     // consider absolute value of number
     int n = abs(value);
 
@@ -338,11 +334,11 @@ char* itoa(int value, char* buffer, int base)
     // If base is 10 and value is negative, the resulting string
     // is preceded with a minus sign (-)
     // With any other base, value is always considered unsigned
-    if (value < 0 && base == 10)
+    if (value < 0)
         buffer[i++] = '-';
 
     buffer[i] = '\0'; // null terminate string
 
     // reverse the string and return it
     return reverse(buffer, 0, i - 1);
-}
+}*/
