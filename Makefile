@@ -6,7 +6,7 @@ CFLAGS= -Wall -Wextra -std=c99 -pedantic -O2
 LDFLAGS=
 LDLIBS= -lm
 
-SRC = ./nn2/networkV2.c main.c ./nn2/matrix/matrix.c
+SRC = ./nn2/networkV2.c main.c ./nn2/matrix/matrix.c ./ImageAnalysis/TestOCR/segmentation.c
 OBJ = ${SRC:.c=.o}
 DEP = ${SRC:.c=.d}
 

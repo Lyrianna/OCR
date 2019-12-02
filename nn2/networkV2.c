@@ -1,5 +1,7 @@
 #include "networkV2.h"
 
+#include "ImageAnalysis/TestOCR/segmentation.h"
+
 char* ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789,.";
 
 //NEURAL NETWORK - Sarah and Nephelie//

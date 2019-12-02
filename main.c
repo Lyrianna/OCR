@@ -6,7 +6,6 @@
 #include "nn2/matrix/matrix.h"
 #include <string.h>
 #include <SDL2/SDL.h>
-#include "Image Analysis/TestOCR/segmentation.h"
 
 int main(int argc, char** argv)
 {
