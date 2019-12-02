@@ -24,8 +24,8 @@ int main(int argc, char** argv)
 
         else
         {
+            int *size = NULL;
             Letter* letters = seg_segmentation(argv[2],size);
-            //TODO: space
             for (int i = 0; i < size; ++i) {
                 Matrix* input = initwithvaluesM(28, 28, (double *) letters[i].matrix);
                 ocr(input);

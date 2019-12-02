@@ -183,10 +183,9 @@ void ocr(Matrix* in)
     load_datas(matarray,fichier2);
 
     input = in;
-    inputNb = input->sizevector;
     input->n = 1;//the matrix formation is change to fit the NN
     input->p = (in->n)*(in->p);
-    outputNb = 64;
+    bool isspace = false;
 
 	initAll();
 	hidden_layers();
@@ -203,10 +202,22 @@ void ocr(Matrix* in)
     FILE* fichier = fopen("text.txt", "a");
         if (fichier!=NULL)
         {
-            for (int j = 0; j < 64; ++j) {
-                if (j==max)
-                {
-                    fputs(&ALPHABET[i],fichier);
+            for (size_t k = 0; k < input->sizevector; ++k)
+            {
+                if (input->matrix[k] == 0)
+                    isspace = true;
+            }
+            if (isspace)
+            {
+                fputs(" ",fichier);
+            }
+            else
+            {
+                for (int j = 0; j < 64; ++j) {
+                    if (j==max)
+                    {
+                        fputs(&ALPHABET[i],fichier);
+                    }
                 }
             }
         }
