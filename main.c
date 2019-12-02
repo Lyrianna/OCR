@@ -1,6 +1,10 @@
 //
-// Created by Lyrianna on 21/11/2019.
+// Created by Néphélie Lambrinidis on 21/11/2019.
 //
+
+
+#include "./ImageAnalysis/TestOCR/letter.h"
+
 #include <stdio.h>
 #include "nn2/networkV2.h"
 #include "nn2/matrix/matrix.h"
