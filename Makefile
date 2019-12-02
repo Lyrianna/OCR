@@ -9,7 +9,7 @@ DEPS= ImageAnalysis/TestOCR/*.h ./nn2/networkV2.h ./nn2/matrix/matrix.h
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
-all: ./ImageAnalysis/TestOCR/letter.o ./ImageAnalysis/TestOCR/renegade.o ./ImageAnalysis/TestOCR/segmentation.o ./ImageAnalysis/TestOCR/otsu.o ./ImageAnalysis/TestOCR/loadandprocess.o ./nn2/networkV2.o ./nn2/matrix/matrix.o copy
+all: main.o ./ImageAnalysis/TestOCR/letter.o ./ImageAnalysis/TestOCR/renegade.o ./ImageAnalysis/TestOCR/segmentation.o ./ImageAnalysis/TestOCR/otsu.o ./ImageAnalysis/TestOCR/loadandprocess.o ./nn2/networkV2.o ./nn2/matrix/matrix.o copy
 	$(CC) -o OCR $(shell ls ./build/*.o) $(LDLIBS)
 
 #$(info WARNING, WARNING ARE IGNORED REMOVE -w OPTION)
