@@ -29,7 +29,7 @@ int main(int argc, char** argv)
         {
             int *size = NULL;
             Letter* letters = seg_segmentation(argv[2],size);
-            for (int i = 0; i < size; ++i) {
+            for (int i = 0; i < *size; ++i) {
                 Matrix* input = initwithvaluesM(28, 28, (double *) letters[i].matrix);
                 ocr(input);
             }
@@ -37,7 +37,7 @@ int main(int argc, char** argv)
 
     }
 
-    Matrix* test = loadM("../BDI/Training/arialalphabet/10");
+    //Matrix* test = loadM("../BDI/Training/arialalphabet/10");
 
     return 0;
 }
