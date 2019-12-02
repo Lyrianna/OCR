@@ -135,7 +135,8 @@ void train_neural(bool istherearg, unsigned long int epochuser)
         char str2[2];
 
 	 //number of matrice to write (in the ordrer of ALPHABET) put in str2
-        sprintf(str2,"%u",j);
+        //sprintf(str2,"%u",j);
+        itoa(j,str2,10);
         strcat(str,str2); //concatenate the 2 str
         printf("str = %s\n",str);
 
@@ -285,7 +286,7 @@ void load_datas(Matrix* matrixarray[], FILE* fichier)
 
 
             int pt = fread(matrixvalues, sizeof(double),size,fichier);
-	    printf("use fread = %i", pt);
+	        printf("use fread = %i", pt);
 
             matrixarray[i] = initwithvaluesM(taille[0],taille[1], matrixvalues);
 

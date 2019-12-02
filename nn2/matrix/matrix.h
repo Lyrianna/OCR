@@ -37,4 +37,11 @@ Matrix* sigM(Matrix* m, bool is_derivate);
 Matrix* softmaxM(Matrix* m);
 Matrix* initwithvaluesM(size_t n, size_t p, double *m);
 
+
+//WHAT ABOUT STRINGS
+
+char* itoa(int value, char* buffer, int base);
+char* reverse(char *buffer, int i, int j);
+void swap(char *x, char *y);
+
 #endif //NN2_MATRIX_H
