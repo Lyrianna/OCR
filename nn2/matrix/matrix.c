@@ -121,16 +121,14 @@ Matrix* addM(Matrix* mat1, Matrix* mat2)
     size_t rows = mat1->n;
     size_t cols = mat2->p;
 
-    Matrix* result = initM(rows,cols);
-
     for (size_t i = 0; i < rows; i++)
     {
         for (size_t j = 0; j < cols;j++)
         {
-            result->matrix[i*cols+j] = ((mat1->matrix[i*cols+j]) + (mat2->matrix[i*cols+j]));
+            mat1->matrix[i*cols+j] += mat2->matrix[i*cols+j];
         }
     }
-    return result;
+    return mat1;
 }
 
 //Substract 2 matrices in a new matrix
@@ -144,20 +142,18 @@ Matrix* subM(Matrix* mat1, Matrix* mat2)
 
     size_t rows = mat1->n;
     size_t cols = mat2->p;
-
-    Matrix* result = initM(rows,cols);
-
+    
     for (size_t i = 0; i < rows; i++)
     {
         for (size_t j = 0; j < cols;j++)
         {
-            result->matrix[i*cols+j] = ((mat1->matrix[i*cols+j]) - (mat2->matrix[i*cols+j]));
+            mat1->matrix[i*cols+j] -= mat2->matrix[i*cols+j];
         }
     }
-    return result;
+    return mat1;
 }
 
-//Multiply 2 matrices (DEBUGGED)
+//Multiply 2 matrices (NOT)
 Matrix* mulM(Matrix* mat1, Matrix* mat2)
 {
     if(mat1->p != mat2->n)
@@ -197,28 +193,26 @@ Matrix* dotM(Matrix* mat1, Matrix* mat2)
     size_t rows = mat1->n;
     size_t cols = mat2->p;
 
-    Matrix* result = initM(rows,cols);
-
     for (size_t i = 0; i < rows; i++)
     {
         for (size_t j = 0; j < cols;j++)
         {
-            result->matrix[i*cols+j] = mat1->matrix[i*cols+j] * mat2->matrix[i*cols+j];
+            mat1->matrix[i*cols+j] *= mat2->matrix[i*cols+j];
         }
     }
-    return result;
+    return mat1;
 }
 
-//Scalar product (NOT)
+//Scalar product (DEBUGGED)
 Matrix* scalM(Matrix* m, double s)
 {
     for (size_t i = 0; i < m->sizevector; ++i) {
-        m->matrix[i] = s*m->matrix[i];
+        m->matrix[i] *= s;
     }
     return m;
 }
 
-//Transpose a matrix m (DEBUGGED)
+//Transpose a matrix m (NOT)
 Matrix* transpM(Matrix* m)
 {
     size_t rows = m->n;
