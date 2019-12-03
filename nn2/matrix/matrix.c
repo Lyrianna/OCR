@@ -26,9 +26,9 @@ void saveM(Matrix *mat, bool iscontinuous)
 {
     FILE* fichier = NULL;
     if(iscontinuous)
-        fichier = fopen("../datasaved.txt","a");
+        fichier = fopen("datasaved.txt","a");
     else
-        fichier = fopen("../datasaved.txt", "w");
+        fichier = fopen("datasaved.txt", "w");
 
     if (fichier != NULL)
     {
