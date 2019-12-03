@@ -53,7 +53,7 @@ char* str_matrix(Letter l){
     }
 	for(int i = 0; i < 28; i++){
 		for(int j = 0; j < 28; j++){
-			s[strindex] = l.matrix[i][j] + '0';
+			s[strindex] = l.matrix[i*28 + j] + '0';
             strindex++;
 		}
 		s[strindex] = '\n';

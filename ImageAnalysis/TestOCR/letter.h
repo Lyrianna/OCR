@@ -15,12 +15,12 @@ typedef struct Letter{
     int posx;
     int posy;
     SDL_Surface image;
-    int **matrix;
+    int *matrix;
     int newline;
 } Letter;
 
 
-int** makesquare(SDL_Surface letter);
+int* makesquare(SDL_Surface letter);
 SDL_Surface makesquarehelper(SDL_Surface surface);
 int max(int a, int b);
 
