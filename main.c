@@ -38,7 +38,7 @@ int main(int argc, char** argv)
     }
 
     //Matrix* test = loadM("../BDI/Training/arialalphabet/10");
-
+	freeAll();
     return 0;
 }
 

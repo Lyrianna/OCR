@@ -96,18 +96,6 @@ Matrix* initM(size_t n, size_t p)
     return init;
 }
 
-//Same as before but with Matrix initialized globally
-void initM2(Matrix *mat, size_t n, size_t p)
-{
-    size_t size = n*p;
-
-    mat = malloc(sizeof(Matrix));
-
-    mat->n = n;
-    mat->p = p;
-    mat->sizevector = size;
-    mat->matrix = calloc(size, sizeof(double));
-}
 
 //Add 2 matrices in a new matrice (DEBUGGED)
 Matrix* addM(Matrix* mat1, Matrix* mat2)
@@ -217,9 +205,9 @@ Matrix* transpM(Matrix* m)
 {
     size_t rows = m->n;
     size_t cols = m->p;
-
+    
     Matrix* result = initM(cols,rows);
-
+    
     for (size_t i=0; i<rows; i++)
     {
         for(size_t j=0; j<cols; j++)

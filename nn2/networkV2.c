@@ -23,7 +23,7 @@ Matrix *derivative_output, *derivative_hidden;
 
 Matrix *error_values;
 
-Matrix* matarray[7] = {0};
+Matrix matarray[7] = {0};
 Matrix* alphabettrain[64];
 //initialization of matrices
 void initAll(){
@@ -69,7 +69,7 @@ void hidden_layers(){
 void output_neurons()
 {
 	output = mulM(hidden, output_weight);
-	output = sigM( addM(output, softmaxM(output_bias)),false);
+	output = sigM(addM(output, softmaxM(output_bias)),false);
 }
 
 //Backpropagation
@@ -80,25 +80,37 @@ void error() //error for each case
 
 void derivatives()//repercution of the error for each layer
 {
-    derivative_output = dotM(error_values,sigM(output,true));
-    derivative_hidden = dotM(mulM(derivative_output, transpM(output_weight)),
-		    sigM(hidden, true));
+	Matrix *temp1,*temp2;
+	derivative_output = dotM(error_values,sigM(output,true));
+	temp1 = transpM(output_weight);
+	temp2 = mulM(derivative_output, temp1);	
+    derivative_hidden = dotM(sigM(hidden, true), temp2);
+    freeM(temp1);
+    freeM(temp2);
 }
 
 void update_weights()//update of the different matrices
 {
+	Matrix *temp1,*temp2;
 	//update of the weight btw input and hidden layer
 	//hidden_w += dot(input, derivative_hidden)*lr
-	hidden_weight = addM(hidden_weight, scalM(mulM(transpM(input), derivative_hidden), lr));
-
+	temp1 = transpM(input);
+	temp2 = mulM(temp1, derivative_hidden);
+	hidden_weight = addM(hidden_weight, scalM(temp2, lr));
+	freeM(temp1);
+	freeM(temp2);
+	
 	//update of the bias of the hidden layer
 	//hidden_bias += dot(sigmoid(hidden_bias), derivative_hidden)*lr
 	hidden_bias = addM(hidden_bias, scalM(dotM(sigM(hidden_bias,false), derivative_hidden), lr));
 	
    	//update of the weight btw hidden and output layer
    	//output_w += dot(input, derivative_output)*lr
-	output_weight = addM(output_weight, scalM(mulM(transpM(hidden), derivative_output), lr));
-     
+   	temp1 = transpM(hidden);
+   	temp2 = mulM(temp1, derivative_output);
+	output_weight = addM(output_weight, scalM(temp2, lr));
+    freeM(temp1);
+	freeM(temp2);
 	//update of the bias of the output layer
 	//output_bias += dot(sigmoid(output_bias), derivative_output)*lr))
 	output_bias = addM(output_bias, scalM(dotM(softmaxM(output_bias), derivative_output), lr));
@@ -159,13 +171,10 @@ void train_neural(bool istherearg, unsigned long int epochuser)
             error();
             derivatives();
             update_weights();
-
-            freeM(wanted_output);
         }
 
         k+=1;
     }
-
 
     printM(output, "outputttt");
     save_datas();//saves the important datas of the NN
@@ -231,6 +240,8 @@ void ocr(Matrix* in)
 
 void freeAll(){
 
+	freeM(input);
+	
     //Hidden layers
     freeM(hidden);
     freeM(hidden_weight);
@@ -245,16 +256,15 @@ void freeAll(){
     freeM(error_values);
     freeM(derivative_output);
     freeM(derivative_hidden);
+    freeM(wanted_output);
 
     for (int i = 0; i < 7; ++i) {
-        freeM(matarray[i]);
+        freeM(&matarray[i]);
     }
     for (int j = 0; j < 64; ++j) {
         freeM(alphabettrain[j]);
     }
-
-    freeM(wanted_output);
-    freeM(input);
+    
 }
 
 void save_datas()
