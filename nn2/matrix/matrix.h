@@ -15,7 +15,7 @@ typedef struct Matrix{
     size_t n;
     size_t p;
     size_t sizevector;
-    double *matrix;
+    float *matrix;
 } Matrix ;
 
 
@@ -30,11 +30,11 @@ Matrix* addM(Matrix* mat1, Matrix* mat2);
 Matrix* subM(Matrix* mat1, Matrix* mat2);
 Matrix* mulM(Matrix* mat1, Matrix* mat2);
 Matrix* dotM(Matrix* mat1, Matrix* mat2);
-Matrix* scalM(Matrix* m, double s);
+Matrix* scalM(Matrix* m, float s);
 Matrix* transpM(Matrix* m);
 Matrix* sigM(Matrix* m, bool is_derivate);
 Matrix* softmaxM(Matrix* m);
-Matrix* initwithvaluesM(size_t n, size_t p, double *m);
+Matrix* initwithvaluesM(size_t n, size_t p, float *m);
 
 
 //WHAT ABOUT STRINGS

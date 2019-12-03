@@ -33,7 +33,7 @@ void saveM(Matrix *mat, bool iscontinuous)
     if (fichier != NULL)
     {
         fprintf(fichier,"%ld %ld\n",mat->n,mat->p);
-        fwrite(mat->matrix, sizeof(double),mat->sizevector,fichier);
+        fwrite(mat->matrix, sizeof(float),mat->sizevector,fichier);
         fputs("\n\n",fichier);
 
         fclose(fichier);
@@ -49,13 +49,13 @@ Matrix* loadM(char* filename)
     if (fichier != NULL)
     {
         size_t size = 28*28;
-        double* matrixvalues = malloc(sizeof(double)*size);
+        float* matrixvalues = malloc(sizeof(float)*size);
 
         for (int i = 0; i < 28; ++i) {
             for (int j = 0; j < 28; ++j) {
                 char e = fgetc(fichier);
-                double f = 5;
-                //double f = (e == 48) ? 0: 1;
+                float f = 5;
+                //float f = (e == 48) ? 0: 1;
                 if (e == 48)
                     f = 0;
                 else if (e == 49)
@@ -91,7 +91,7 @@ Matrix* initM(size_t n, size_t p)
     init->n = n;
     init->p = p;
     init->sizevector = size;
-    init->matrix = calloc(size, sizeof(double));
+    init->matrix = calloc(size, sizeof(float));
 
     return init;
 }
@@ -192,7 +192,7 @@ Matrix* dotM(Matrix* mat1, Matrix* mat2)
 }
 
 //Scalar product (DEBUGGED)
-Matrix* scalM(Matrix* m, double s)
+Matrix* scalM(Matrix* m, float s)
 {
     for (size_t i = 0; i < m->sizevector; ++i) {
         m->matrix[i] *= s;
@@ -240,13 +240,13 @@ Matrix* sigM(Matrix* m, bool is_derivate)
 //Computes the softmax of each value in the matrix given
 Matrix* softmaxM(Matrix* m){
 
-	double max = m->matrix[0];
+    float max = m->matrix[0];
 
 	for (size_t i = 0 ; i < m->sizevector;i++)
 		if (max < m->matrix[i])
 			max = m->matrix[i];
 
-	double sum_of_exp = 0;
+    float sum_of_exp = 0;
 
 	for (size_t i = 0 ; i < m->sizevector;i++)
 		sum_of_exp +=exp(m->matrix[i]-max);
@@ -258,7 +258,7 @@ Matrix* softmaxM(Matrix* m){
 }
 
 //Init a matrix with special values (DEBUGGED)
-Matrix* initwithvaluesM(size_t n, size_t p, double *m)
+Matrix* initwithvaluesM(size_t n, size_t p, float *m)
 {
     size_t size = n*p;
 

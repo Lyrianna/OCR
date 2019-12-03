@@ -1,11 +1,11 @@
 #include "networkV2.h"
-#include "../ImageAnalysis/TestOCR/letter.h"
+//#include "../ImageAnalysis/TestOCR/letter.h"
 
 char* ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789,.";
 
 //NEURAL NETWORK - Sarah and Nephelie//
 
-double lr = 0.1; //learning rate
+float lr = 0.1; //learning rate
 
 //inputs
 size_t inputNb = 784;//number of neurons in the input
@@ -51,13 +51,13 @@ void generate_wgt()
 {
     srand(time(NULL));
     for (size_t i = 0; i < (hidden_weight->sizevector) ; i++) 
-        hidden_weight->matrix[i] =(rand() / (double) RAND_MAX * (2) - 1);
+        hidden_weight->matrix[i] =(rand() / (float) RAND_MAX * (2) - 1);
     for (size_t j = 0 ; j < (output_weight->sizevector) ;j++)
-	    output_weight->matrix[j] = (rand()/ (double)RAND_MAX*(2)-1);
+	    output_weight->matrix[j] = (rand()/ (float)RAND_MAX*(2)-1);
     for (size_t k = 0 ; k < (hidden_bias->sizevector); k++)
-	    hidden_bias->matrix[k] = (rand()/ (double)RAND_MAX*(2)-1);
+	    hidden_bias->matrix[k] = (rand()/ (float)RAND_MAX*(2)-1);
 	for (size_t g = 0; g < (output_bias->sizevector); g++)
-	    output_bias->matrix[g] = (rand()/ (double)RAND_MAX*(2)-1);
+	    output_bias->matrix[g] = (rand()/ (float)RAND_MAX*(2)-1);
 }
 
 //Feed forward
@@ -144,7 +144,7 @@ void train_neural(bool istherearg, unsigned long int epochuser)
         printf("Init Alphabet\n");
 
 	 //path to folder with writing
-        char str[32] = "./BDI/Training/arialalphabet/";
+        char str[32] = "../BDI/Training/arialalphabet/";
         char str2[3];
 
 	 //number of matrice to write (in the ordrer of ALPHABET) put in str2
