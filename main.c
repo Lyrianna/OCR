@@ -25,7 +25,7 @@ int main(int argc, char** argv)
             train_neural(istherearg,(int) atoi(argv[2]));
         }
 
-        /*else
+        else
         {
             int *size = NULL;
             Letter* letters = seg_segmentation(argv[2],size);
@@ -33,7 +33,7 @@ int main(int argc, char** argv)
                 Matrix* input = initwithvaluesM(28, 28, (double *) letters[i].matrix);
                 ocr(input);
             }
-        }*/
+        }
 
     }
 
