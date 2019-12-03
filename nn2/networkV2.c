@@ -5,7 +5,7 @@ char* ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789,
 
 //NEURAL NETWORK - Sarah and Nephelie//
 
-float lr = 0.1; //learning rate
+double lr = 0.1; //learning rate
 
 //inputs
 size_t inputNb = 784;//number of neurons in the input
@@ -51,13 +51,13 @@ void generate_wgt()
 {
     srand(time(NULL));
     for (size_t i = 0; i < (hidden_weight->sizevector) ; i++) 
-        hidden_weight->matrix[i] =(rand() / (float) RAND_MAX * (2) - 1);
+        hidden_weight->matrix[i] =(rand() / (double) RAND_MAX * (2) - 1);
     for (size_t j = 0 ; j < (output_weight->sizevector) ;j++)
-	    output_weight->matrix[j] = (rand()/ (float)RAND_MAX*(2)-1);
+	    output_weight->matrix[j] = (rand()/ (double)RAND_MAX*(2)-1);
     for (size_t k = 0 ; k < (hidden_bias->sizevector); k++)
-	    hidden_bias->matrix[k] = (rand()/ (float)RAND_MAX*(2)-1);
+	    hidden_bias->matrix[k] = (rand()/ (double)RAND_MAX*(2)-1);
 	for (size_t g = 0; g < (output_bias->sizevector); g++)
-	    output_bias->matrix[g] = (rand()/ (float)RAND_MAX*(2)-1);
+	    output_bias->matrix[g] = (rand()/ (double)RAND_MAX*(2)-1);
 }
 
 //Feed forward
