@@ -24,7 +24,8 @@ Matrix *derivative_output, *derivative_hidden;
 Matrix *error_values;
 
 Matrix matarray[7] = {0};
-Matrix* alphabettrain[64];
+Matrix* alphabettrain[64] = {0};
+
 //initialization of matrices
 void initAll(){
 
@@ -83,7 +84,7 @@ void derivatives()//repercution of the error for each layer
 	Matrix *temp1,*temp2;
 	derivative_output = dotM(error_values,sigM(output,true));
 	temp1 = transpM(output_weight);
-	temp2 = mulM(derivative_output, temp1);	
+	temp2 = mulM(derivative_output, temp1);
     derivative_hidden = dotM(sigM(hidden, true), temp2);
     freeM(temp1);
     freeM(temp2);
@@ -99,7 +100,7 @@ void update_weights()//update of the different matrices
 	hidden_weight = addM(hidden_weight, scalM(temp2, lr));
 	freeM(temp1);
 	freeM(temp2);
-	
+
 	//update of the bias of the hidden layer
 	//hidden_bias += dot(sigmoid(hidden_bias), derivative_hidden)*lr
 	hidden_bias = addM(hidden_bias, scalM(dotM(sigM(hidden_bias,false), derivative_hidden), lr));
@@ -241,7 +242,6 @@ void ocr(Matrix* in)
 void freeAll(){
 
 	freeM(input);
-	
     //Hidden layers
     freeM(hidden);
     freeM(hidden_weight);
@@ -264,7 +264,7 @@ void freeAll(){
     for (int j = 0; j < 64; ++j) {
         freeM(alphabettrain[j]);
     }
-    
+
 }
 
 void save_datas()
