@@ -13,7 +13,7 @@ void printM(Matrix* mat, char s[])
     {
         for (size_t j = 0; j < cols; j++)
         {
-            printf("%4g", mat->matrix[i * cols + j]);
+            printf("%f", mat->matrix[i * cols + j]);
         }
 
         printf("\n");

@@ -3,7 +3,7 @@
 //
 
 
-//#include "./ImageAnalysis/TestOCR/letter.h"
+#include "./ImageAnalysis/TestOCR/letter.h"
 
 #include <stdio.h>
 #include "nn2/networkV2.h"
@@ -24,19 +24,19 @@ int main(int argc, char** argv)
         {
             train_neural(istherearg,(int) atoi(argv[2]));
         }
-        /*else
+        else
         {
 		    printf("1main");
 		        int size = 0;
                 Letter* letters = seg_segmentation(arg,&size);
             
 	        for (int i = 0; i < size; ++i) {
-                float *tableau = letters[i].matrix;
+                float *tableau = (float*) letters[i].matrix;
                     Matrix* input = initwithvaluesM(1, 784, tableau);
                     printM(input,"input");
 		    //ocr(input);
 	        }
-        }*/
+        }
 
     }
 
