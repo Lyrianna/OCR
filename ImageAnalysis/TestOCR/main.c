@@ -36,16 +36,21 @@ void trainingmode(char *filename){
         sprintf(name, "training/matrix%d",i);
         FILE *f = fopen(name,"w");
         char *content = str_matrix(l[i]);
-        fputs(content,f);
-        fclose(f);
-        free(name);
-        free(content);
+        if(content != NULL){
+			fputs(content,f);	
+	}
+      fclose(f);
+      free(name);
+      free(content);
     }
 }
 
 char* str_matrix(Letter l){
     char *s = malloc(28*29*sizeof(char));
     int strindex = 0;
+    if(l.newline == 1){
+	return NULL;
+    }
 	for(int i = 0; i < 28; i++){
 		for(int j = 0; j < 28; j++){
 			s[strindex] = l.matrix[i][j] + '0';

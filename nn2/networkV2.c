@@ -1,4 +1,5 @@
 #include "networkV2.h"
+#include "../ImageAnalysis/TestOCR/letter.h"
 
 char* ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789,.";
 
@@ -121,7 +122,7 @@ void update_weights()//update of the different matrices
 void train_neural(bool istherearg, unsigned long int epochuser)
 {
     FILE* fichier = fopen("../datasaved.txt","r");
-    //TODO: initialiser inputNb et outputNb avant d'entrer dans la boucle!
+    
     if (fichier != NULL)
     {
         load_datas(matarray,fichier);
@@ -143,7 +144,7 @@ void train_neural(bool istherearg, unsigned long int epochuser)
         printf("Init Alphabet\n");
 
 	 //path to folder with writing
-        char str[32] = "../BDI/Training/arialalphabet/";
+        char str[32] = "./BDI/Training/arialalphabet/";
         char str2[3];
 
 	 //number of matrice to write (in the ordrer of ALPHABET) put in str2
@@ -191,21 +192,37 @@ Matrix* createouttrain(int i)
     return result;
 }
 
+Matrix* mattovector(Letter *in)
+{
+	Matrix* result = initM(1,784);
+	int count = 0;
+
+	for(size_t i = 0; i<28;i++)
+	{
+		for(size_t j=0;j<28;i++)
+		{
+			result->matrix[count]=in->matrix[i][j];
+		}
+	}	
+
+	return result;
+}
 void ocr(Matrix* in)
 {
     FILE* fichier2 = fopen("datasaved.txt","r");
     load_datas(matarray,fichier2);
-
-    input = in;
+    printf("1");
+    input = mattovector(in);
     input->n = 1;//the matrix formation is change to fit the NN
-    input->p = (in->n)*(in->p);
+    input->p = 784;
     bool isspace = false;
-
-	initAll();
-	hidden_layers();
-	output_neurons();
-
-	int max = 0;
+    
+    printf("2");
+    initAll();
+    hidden_layers();
+    output_neurons();
+    printf("3");
+    int max = 0;
 
     for (size_t i = 0; i < output->sizevector; ++i) {
         if (output->matrix[i]>output->matrix[max])
