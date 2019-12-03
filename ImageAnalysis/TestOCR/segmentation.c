@@ -10,7 +10,7 @@ void debug_matrix(Letter l){
 	}
 	for(int i = 0; i < 28; i++){
 		for(int j = 0; j < 28; j++){
-			printf("%4g",l.matrix[i*28 + j]);
+			printf("%lf",l.matrix[i*28 + j]);
 		}
 		printf("\n");
 	}
