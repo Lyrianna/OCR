@@ -23,6 +23,7 @@ Letter* seg_segmentation(char *filename,int *size){
 		return NULL;
 	}
 	int *nbletters = malloc(sizeof(int));
+	*nbletters = 0;
 	int value = loadimage(filename,seg_letters,nbletters);
 	seg_letters = realloc(seg_letters,*nbletters*sizeof(SDL_Surface));
 	if(value != 0){
@@ -30,21 +31,21 @@ Letter* seg_segmentation(char *filename,int *size){
 		return NULL;
 	}
 	Letter *letters = getLetters(seg_letters,*nbletters);
-	for(int i = 0; i < *nbletters; i++){
-		debug_matrix(letters[i]);
-		printf("\n\n");
-	}
 	IMG_Quit();
 	SDL_Quit();	
 	free(seg_letters);
-	*size = *nbletters;
+	*size = *nbletters - 1;
+		for(int i = 0; i < *nbletters; i++){
+		debug_matrix(letters[i]);
+		printf("\n\n");
+	}
 	free(nbletters);
-	return letters;
+	return letters + 1;
 }
 
 
 Letter* getLetters(SDL_Surface *seg_letters, int size){
-	Letter* letters = calloc(size + 1,sizeof(Letter));
+	Letter* letters = calloc(size,sizeof(Letter));
 	for(int i = 0; i < size; i++){
 		if((seg_letters + i)->h == 2){
 			Letter l;
@@ -59,6 +60,7 @@ Letter* getLetters(SDL_Surface *seg_letters, int size){
 			l.newline = 0;
 			letters[i] = l;	
 		}
+		
 	}
 	return letters;
 }
