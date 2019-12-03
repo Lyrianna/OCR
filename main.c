@@ -3,13 +3,13 @@
 //
 
 
-//#include "./ImageAnalysis/TestOCR/letter.h"
+#include "./ImageAnalysis/TestOCR/letter.h"
 
 #include <stdio.h>
 #include "nn2/networkV2.h"
 #include "nn2/matrix/matrix.h"
 #include <string.h>
-//#include <SDL2/SDL.h>
+#include <SDL2/SDL.h>
 
 int main(int argc, char** argv)
 {
@@ -25,15 +25,15 @@ int main(int argc, char** argv)
             train_neural(istherearg,(int) atoi(argv[2]));
         }
 
-        /*else
+        else
         {
-            int *size = NULL;
-            Letter* letters = seg_segmentation(argv[2],size);
-            for (int i = 0; i < *size; ++i) {
-                Matrix* input = initwithvaluesM(28, 28, (double *) letters[i].matrix);
+            int size = 0;
+            Letter* letters = seg_segmentation(arg,&size);
+            for (int i = 0; i < size; ++i) {
+                Matrix* input = initwithvaluesM(1, 784, letters[i].matrix);
                 ocr(input);
             }
-        }*/
+        }
 
     }
 

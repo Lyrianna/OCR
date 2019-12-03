@@ -143,7 +143,7 @@ void train_neural(bool istherearg, unsigned long int epochuser)
         printf("Init Alphabet\n");
 
         //path to folder with writing
-        char str[32] = "../BDI/Training/arialalphabet/";
+        char str[32] = "./BDI/Training/arialalphabet/";
         char str2[3];
 
         //number of matrice to write (in the ordrer of ALPHABET) put in str2
@@ -212,7 +212,7 @@ void ocr(Matrix* in)
         {
             max = i;
         }
-
+	printf("file\n");
         FILE* fichier = fopen("text.txt", "a");
         if (fichier!=NULL)
         {
@@ -241,7 +241,7 @@ void ocr(Matrix* in)
 
 void freeAll(){
 
-    freeM(input);
+    //freeM(input);
     //Hidden layers
     freeM(hidden);
     freeM(hidden_weight);
