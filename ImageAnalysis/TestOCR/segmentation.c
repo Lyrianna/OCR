@@ -10,7 +10,7 @@ void debug_matrix(Letter l){
 	}
 	for(int i = 0; i < 28; i++){
 		for(int j = 0; j < 28; j++){
-			printf("%lf",l.matrix[i*28 + j]);
+			printf("%d",(int)l.matrix[i*28 + j]);
 		}
 		printf("\n");
 	}
@@ -52,7 +52,7 @@ Letter* getLetters(SDL_Surface *seg_letters, int size){
 			letters[i] = l;
 		}
 		else if(seg_letters + i != NULL){
-			double* matrix = malloc(28*28*sizeof(int));
+			double* matrix = malloc(28*28*sizeof(double));
 			matrix = makesquare(*(seg_letters + i));
 			Letter l;
 			l.matrix = matrix;
