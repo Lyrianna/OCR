@@ -32,9 +32,9 @@ SDL_Surface makesquarehelper(SDL_Surface surface){
     return *square;
 }
 
-int* makesquare(SDL_Surface letter){
+double* makesquare(SDL_Surface letter){
     letter = makesquarehelper(letter);
-    int *matrix = malloc(28*28*sizeof(int));
+    double *matrix = malloc(28*28*sizeof(int));
     float xratio = letter.w/(float)28;
     float yratio = letter.h/(float)28;
     for(int i = 0; i < 28; i++){
@@ -43,7 +43,7 @@ int* makesquare(SDL_Surface letter){
             Uint8 black;
             SDL_GetRGB(pixel,letter.format,&black,&black,&black);
             if(black == 0)
-                matrix[j*28 + i] = 1;
+                matrix[j*28 + i] = 1.0;
         }
     }
     return matrix;
