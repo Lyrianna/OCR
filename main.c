@@ -31,8 +31,10 @@ int main(int argc, char** argv)
             Letter* letters = seg_segmentation(arg,&size);
             
 	    for (int i = 0; i < size; ++i) {
-                Matrix* input = initwithvaluesM(28, 28, mattovector(letters[i]));
-                ocr(input);
+		double *tableau = letters[i].matrix;
+                Matrix* input = initwithvaluesM(1, 784, tableau);
+                printM(input,"input");
+		//ocr(input);
             }
         }
 

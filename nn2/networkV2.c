@@ -192,27 +192,11 @@ Matrix* createouttrain(int i)
     return result;
 }
 
-Matrix* mattovector(Letter *in)
-{
-	Matrix* result = initM(1,784);
-	int count = 0;
-
-	for(size_t i = 0; i<28;i++)
-	{
-		for(size_t j=0;j<28;i++)
-		{
-			result->matrix[count]=in->matrix[i][j];
-		}
-	}	
-
-	return result;
-}
 void ocr(Matrix* in)
 {
     FILE* fichier2 = fopen("datasaved.txt","r");
     load_datas(matarray,fichier2);
     printf("1");
-    input = mattovector(in);
     input->n = 1;//the matrix formation is change to fit the NN
     input->p = 784;
     bool isspace = false;
@@ -258,7 +242,7 @@ void ocr(Matrix* in)
 
 void freeAll(){
 
-	freeM(input);
+    freeM(input);
     //Hidden layers
     freeM(hidden);
     freeM(hidden_weight);
