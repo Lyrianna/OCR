@@ -34,7 +34,7 @@ SDL_Surface makesquarehelper(SDL_Surface surface){
 
 double* makesquare(SDL_Surface letter){
     letter = makesquarehelper(letter);
-    double *matrix = malloc(28*28*sizeof(int));
+    double *matrix = malloc(28*28*sizeof(double));
     float xratio = letter.w/(float)28;
     float yratio = letter.h/(float)28;
     for(int i = 0; i < 28; i++){
