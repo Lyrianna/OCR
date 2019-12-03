@@ -31,7 +31,6 @@ void initAll(){
     //Hidden layers
     hidden = initM(1,hiddenNb);
     hidden_weight = initM(inputNb,hiddenNb);
-    hidden_weight = initM(inputNb,hiddenNb);
     hidden_bias = initM(1,hiddenNb);
 
     //Output Layer
@@ -160,13 +159,14 @@ void train_neural(bool istherearg, unsigned long int epochuser)
             error();
             derivatives();
             update_weights();
+
+            freeM(wanted_output);
         }
 
         k+=1;
     }
 
-    printM(wanted_output, "wanted");
-    printf("\n");
+
     printM(output, "outputttt");
     save_datas();//saves the important datas of the NN
     printf("saved datas\n");
@@ -252,6 +252,9 @@ void freeAll(){
     for (int j = 0; j < 64; ++j) {
         freeM(alphabettrain[j]);
     }
+
+    freeM(wanted_output);
+    freeM(input);
 }
 
 void save_datas()
