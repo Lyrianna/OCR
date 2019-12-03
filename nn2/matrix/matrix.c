@@ -13,7 +13,7 @@ void printM(Matrix* mat, char s[])
     {
         for (size_t j = 0; j < cols; j++)
         {
-            printf("%f", mat->matrix[i * cols + j]);
+            printf("%4g ", mat->matrix[i * cols + j]);
         }
 
         printf("\n");
@@ -103,7 +103,7 @@ Matrix* addM(Matrix* mat1, Matrix* mat2)
     if(mat1->n!= mat2->n || mat1->p != mat2->p)
     {
         errx(1, "ADD : matrices do not have the same dimension. M1(%zi*%zi) and M2(%zi*%zi).\n",
-                mat1->n,mat1->p,mat2->n,mat2->p);
+             mat1->n,mat1->p,mat2->n,mat2->p);
     }
 
     size_t rows = mat1->n;
@@ -125,12 +125,12 @@ Matrix* subM(Matrix* mat1, Matrix* mat2)
     if(mat1->n!= mat2->n || mat1->p != mat2->p)
     {
         errx(1, "SUB : matrices do not have the same dimension. M1(%zi*%zi) and M2(%zi*%zi).\n",
-                mat1->n,mat1->p,mat2->n,mat2->p);
+             mat1->n,mat1->p,mat2->n,mat2->p);
     }
 
     size_t rows = mat1->n;
     size_t cols = mat2->p;
-    
+
     for (size_t i = 0; i < rows; i++)
     {
         for (size_t j = 0; j < cols;j++)
@@ -205,9 +205,9 @@ Matrix* transpM(Matrix* m)
 {
     size_t rows = m->n;
     size_t cols = m->p;
-    
+
     Matrix* result = initM(cols,rows);
-    
+
     for (size_t i=0; i<rows; i++)
     {
         for(size_t j=0; j<cols; j++)
@@ -242,19 +242,19 @@ Matrix* softmaxM(Matrix* m){
 
     double max = m->matrix[0];
 
-	for (size_t i = 0 ; i < m->sizevector;i++)
-		if (max < m->matrix[i])
-			max = m->matrix[i];
+    for (size_t i = 0 ; i < m->sizevector;i++)
+        if (max < m->matrix[i])
+            max = m->matrix[i];
 
     double sum_of_exp = 0;
 
-	for (size_t i = 0 ; i < m->sizevector;i++)
-		sum_of_exp +=exp(m->matrix[i]-max);
+    for (size_t i = 0 ; i < m->sizevector;i++)
+        sum_of_exp +=exp(m->matrix[i]-max);
 
-	for (size_t j = 0 ; j < m->sizevector; j++)
-		m->matrix[j]=exp(m->matrix[j]-max)/sum_of_exp;
+    for (size_t j = 0 ; j < m->sizevector; j++)
+        m->matrix[j]=exp(m->matrix[j]-max)/sum_of_exp;
 
-	return m;
+    return m;
 }
 
 //Init a matrix with special values (DEBUGGED)

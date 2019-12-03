@@ -1,5 +1,4 @@
 #include "networkV2.h"
-#include "../ImageAnalysis/TestOCR/letter.h"
 
 char* ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789,.";
 
@@ -50,14 +49,14 @@ void initAll(){
 void generate_wgt()
 {
     srand(time(NULL));
-    for (size_t i = 0; i < (hidden_weight->sizevector) ; i++) 
+    for (size_t i = 0; i < (hidden_weight->sizevector) ; i++)
         hidden_weight->matrix[i] =(rand() / (double) RAND_MAX * (2) - 1);
     for (size_t j = 0 ; j < (output_weight->sizevector) ;j++)
-	    output_weight->matrix[j] = (rand()/ (double)RAND_MAX*(2)-1);
+        output_weight->matrix[j] = (rand()/ (double)RAND_MAX*(2)-1);
     for (size_t k = 0 ; k < (hidden_bias->sizevector); k++)
-	    hidden_bias->matrix[k] = (rand()/ (double)RAND_MAX*(2)-1);
-	for (size_t g = 0; g < (output_bias->sizevector); g++)
-	    output_bias->matrix[g] = (rand()/ (double)RAND_MAX*(2)-1);
+        hidden_bias->matrix[k] = (rand()/ (double)RAND_MAX*(2)-1);
+    for (size_t g = 0; g < (output_bias->sizevector); g++)
+        output_bias->matrix[g] = (rand()/ (double)RAND_MAX*(2)-1);
 }
 
 //Feed forward
@@ -65,27 +64,27 @@ void generate_wgt()
 void hidden_layers(){
 
     hidden = mulM(input, hidden_weight);
-	hidden = sigM(addM(hidden, hidden_bias),false);
+    hidden = sigM(addM(hidden, hidden_bias),false);
 }
 
 void output_neurons()
 {
-	output = mulM(hidden, output_weight);
-	output = sigM(addM(output, softmaxM(output_bias)),false);
+    output = mulM(hidden, output_weight);
+    output = sigM(addM(output, softmaxM(output_bias)),false);
 }
 
 //Backpropagation
 void error() //error for each case
 {
-	error_values = subM(wanted_output,output);
+    error_values = subM(wanted_output,output);
 }
 
 void derivatives()//repercution of the error for each layer
 {
-	Matrix *temp1,*temp2;
-	derivative_output = dotM(error_values,sigM(output,true));
-	temp1 = transpM(output_weight);
-	temp2 = mulM(derivative_output, temp1);
+    Matrix *temp1,*temp2;
+    derivative_output = dotM(error_values,sigM(output,true));
+    temp1 = transpM(output_weight);
+    temp2 = mulM(derivative_output, temp1);
     derivative_hidden = dotM(sigM(hidden, true), temp2);
     freeM(temp1);
     freeM(temp2);
@@ -93,36 +92,36 @@ void derivatives()//repercution of the error for each layer
 
 void update_weights()//update of the different matrices
 {
-	Matrix *temp1,*temp2;
-	//update of the weight btw input and hidden layer
-	//hidden_w += dot(input, derivative_hidden)*lr
-	temp1 = transpM(input);
-	temp2 = mulM(temp1, derivative_hidden);
-	hidden_weight = addM(hidden_weight, scalM(temp2, lr));
-	freeM(temp1);
-	freeM(temp2);
-
-	//update of the bias of the hidden layer
-	//hidden_bias += dot(sigmoid(hidden_bias), derivative_hidden)*lr
-	hidden_bias = addM(hidden_bias, scalM(dotM(sigM(hidden_bias,false), derivative_hidden), lr));
-	
-   	//update of the weight btw hidden and output layer
-   	//output_w += dot(input, derivative_output)*lr
-   	temp1 = transpM(hidden);
-   	temp2 = mulM(temp1, derivative_output);
-	output_weight = addM(output_weight, scalM(temp2, lr));
+    Matrix *temp1,*temp2;
+    //update of the weight btw input and hidden layer
+    //hidden_w += dot(input, derivative_hidden)*lr
+    temp1 = transpM(input);
+    temp2 = mulM(temp1, derivative_hidden);
+    hidden_weight = addM(hidden_weight, scalM(temp2, lr));
     freeM(temp1);
-	freeM(temp2);
-	//update of the bias of the output layer
-	//output_bias += dot(sigmoid(output_bias), derivative_output)*lr))
-	output_bias = addM(output_bias, scalM(dotM(softmaxM(output_bias), derivative_output), lr));
+    freeM(temp2);
+
+    //update of the bias of the hidden layer
+    //hidden_bias += dot(sigmoid(hidden_bias), derivative_hidden)*lr
+    hidden_bias = addM(hidden_bias, scalM(dotM(sigM(hidden_bias,false), derivative_hidden), lr));
+
+    //update of the weight btw hidden and output layer
+    //output_w += dot(input, derivative_output)*lr
+    temp1 = transpM(hidden);
+    temp2 = mulM(temp1, derivative_output);
+    output_weight = addM(output_weight, scalM(temp2, lr));
+    freeM(temp1);
+    freeM(temp2);
+    //update of the bias of the output layer
+    //output_bias += dot(sigmoid(output_bias), derivative_output)*lr))
+    output_bias = addM(output_bias, scalM(dotM(softmaxM(output_bias), derivative_output), lr));
 }
 
 //training
 void train_neural(bool istherearg, unsigned long int epochuser)
 {
     FILE* fichier = fopen("../datasaved.txt","r");
-    
+    //TODO: initialiser inputNb et outputNb avant d'entrer dans la boucle!
     if (fichier != NULL)
     {
         load_datas(matarray,fichier);
@@ -143,11 +142,11 @@ void train_neural(bool istherearg, unsigned long int epochuser)
     for (int j = 0; j < 64; ++j) {
         printf("Init Alphabet\n");
 
-	 //path to folder with writing
-        char str[32] = "./BDI/Training/arialalphabet/";
+        //path to folder with writing
+        char str[32] = "../BDI/Training/arialalphabet/";
         char str2[3];
 
-	 //number of matrice to write (in the ordrer of ALPHABET) put in str2
+        //number of matrice to write (in the ordrer of ALPHABET) put in str2
         //sprintf(str2,"%u",j);
         itoa(j,str2,10);
         strcat(str,str2); //concatenate the 2 str
@@ -196,16 +195,16 @@ void ocr(Matrix* in)
 {
     FILE* fichier2 = fopen("datasaved.txt","r");
     load_datas(matarray,fichier2);
-    printf("1");
+
+    input = in;
     input->n = 1;//the matrix formation is change to fit the NN
-    input->p = 784;
+    input->p = (in->n)*(in->p);
     bool isspace = false;
-    
-    printf("2");
+
     initAll();
     hidden_layers();
     output_neurons();
-    printf("3");
+
     int max = 0;
 
     for (size_t i = 0; i < output->sizevector; ++i) {
@@ -214,7 +213,7 @@ void ocr(Matrix* in)
             max = i;
         }
 
-    FILE* fichier = fopen("text.txt", "a");
+        FILE* fichier = fopen("text.txt", "a");
         if (fichier!=NULL)
         {
             for (size_t k = 0; k < input->sizevector; ++k)
@@ -237,7 +236,7 @@ void ocr(Matrix* in)
             }
         }
     }
-	freeAll();
+    freeAll();
 }
 
 void freeAll(){
@@ -293,14 +292,14 @@ void load_datas(Matrix* matrixarray[], FILE* fichier)
         while (i<7)
         {
             int mn = fscanf(fichier, "%d %d",&taille[0],&taille[1]);
-	    printf("use fscanf: %i", mn);
+            printf("use fscanf: %i", mn);
             int size = taille[0]*taille[1];
             fgetc(fichier);
             double* matrixvalues = malloc(sizeof(double)*size);
 
 
             int pt = fread(matrixvalues, sizeof(double),size,fichier);
-	        printf("use fread = %i", pt);
+            printf("use fread = %i", pt);
 
             matrixarray[i] = initwithvaluesM(taille[0],taille[1], matrixvalues);
 

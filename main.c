@@ -3,7 +3,7 @@
 //
 
 
-#include "./ImageAnalysis/TestOCR/letter.h"
+//#include "./ImageAnalysis/TestOCR/letter.h"
 
 #include <stdio.h>
 #include "nn2/networkV2.h"
@@ -19,29 +19,25 @@ int main(int argc, char** argv)
     {
         char* arg = argv[1];
         bool istherearg = (argc==3) ? true : false ;
-	printf("miaou");
+
         if (strcmp(arg, "train") == 0)
         {
             train_neural(istherearg,(int) atoi(argv[2]));
         }
-        else
+
+        /*else
         {
-		    printf("1main");
-		        int size = 0;
-                Letter* letters = seg_segmentation(arg,&size);
-            
-	        for (int i = 0; i < size; ++i) {
-                float *tableau = (float*) letters[i].matrix;
-                    Matrix* input = initwithvaluesM(1, 784, tableau);
-                    printM(input,"input");
-		    //ocr(input);
-	        }
-        }
+            int *size = NULL;
+            Letter* letters = seg_segmentation(argv[2],size);
+            for (int i = 0; i < *size; ++i) {
+                Matrix* input = initwithvaluesM(28, 28, (double *) letters[i].matrix);
+                ocr(input);
+            }
+        }*/
 
     }
 
     //Matrix* test = loadM("../BDI/Training/arialalphabet/10");
-	freeAll();
+    freeAll();
     return 0;
 }
-
