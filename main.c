@@ -22,26 +22,33 @@ int main(int argc, char** argv)
 
         if (strcmp(arg, "train") == 0)
         {
-            train_neural(istherearg,(int) atoi(argv[2]));
+            printf("miaou1");
+		train_neural(istherearg,(int) atoi(argv[2]));
         }
-
         else
         {
+		printf("miaou\n");
             FILE* fichier = fopen("text.txt", "w");
-            int size = 0;
+            
+	    int size = 0;
             printf("before letter");
-	    Letter* letters = seg_segmentation(arg,&size);
-            for (int i = 0; i < size; ++i) {
-                printf("letter");
-		Matrix* input = initwithvaluesM(1, 784, letters[i].matrix);
-                ocr(input, fichier);
-            }
-            fclose(fichier);
+
+	    if (fichier!=NULL)
+	    {
+	    	Letter* letters = seg_segmentation(arg,&size);
+            	for (int i = 0; i < size; ++i) {
+                	printf("letter");
+			if(letters[i].newline==0)
+			{		Matrix* input = initwithvaluesM(1, 784, letters[i].matrix);
+                		ocr(input, fichier);
+			}
+            	}
+
+            	fclose(fichier);
+	    }
         }
 
     }
-
-    //Matrix* test = loadM("../BDI/Training/arialalphabet/10");
-    freeAll();
+	freeAll();
     return 0;
 }

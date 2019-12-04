@@ -23,8 +23,10 @@ Matrix *derivative_output, *derivative_hidden;
 
 Matrix *error_values;
 
-Matrix matarray[7] = {0};
+Matrix* matarray[7] = {0};
 Matrix* alphabettrain[64] = {0};
+
+bool bl = false;
 
 //initialization of matrices
 void initAll(){
@@ -62,15 +64,16 @@ void generate_wgt()
 //Feed forward
 
 void hidden_layers(){
-
-    hidden = mulM(input, hidden_weight);
-    hidden = sigM(addM(hidden, hidden_bias),false);
+    Matrix* temp = mulM(input, hidden_weight);
+    hidden = sigM(addM(hidden_bias, temp),bl);
+    freeM(temp);
 }
 
 void output_neurons()
 {
-    output = mulM(hidden, output_weight);
-    output = sigM(addM(output, softmaxM(output_bias)),false);
+	Matrix* temp = mulM(hidden, output_weight);
+    output = sigM(addM(softmaxM(output_bias), temp),bl);
+    freeM(temp);
 }
 
 //Backpropagation
@@ -82,10 +85,10 @@ void error() //error for each case
 void derivatives()//repercution of the error for each layer
 {
     Matrix *temp1,*temp2;
-    derivative_output = dotM(error_values,sigM(output,true));
+    derivative_output = dotM(error_values,sigM(output,!bl));
     temp1 = transpM(output_weight);
     temp2 = mulM(derivative_output, temp1);
-    derivative_hidden = dotM(sigM(hidden, true), temp2);
+    derivative_hidden = dotM(sigM(hidden, !bl), temp2);
     freeM(temp1);
     freeM(temp2);
 }
@@ -103,7 +106,7 @@ void update_weights()//update of the different matrices
 
     //update of the bias of the hidden layer
     //hidden_bias += dot(sigmoid(hidden_bias), derivative_hidden)*lr
-    hidden_bias = addM(hidden_bias, scalM(dotM(sigM(hidden_bias,false), derivative_hidden), lr));
+    hidden_bias = addM(hidden_bias, scalM(dotM(sigM(hidden_bias,bl), derivative_hidden), lr));
 
     //update of the weight btw hidden and output layer
     //output_w += dot(input, derivative_output)*lr
@@ -185,7 +188,6 @@ void train_neural(bool istherearg, unsigned long int epochuser)
     printM(output, "outputttt");
     save_datas();//saves the important datas of the NN
     printf("saved datas\n");
-    freeAll();//frees all the matrix used in the NN
 }
 
 //create the wantedouput based on the i of its place in the output layer
@@ -199,32 +201,34 @@ Matrix* createouttrain(int i)
 void ocr(Matrix* in, FILE* fichier)
 {
     FILE* fichier2 = fopen("datasaved.txt","r");
-    load_datas(matarray,fichier2);
-    fclose(fichier2);
+    if(fichier2!=NULL)
+    {
+    	initAll();
+   	load_datas(matarray,fichier2);
+    	fclose(fichier2);
+    }
+    else
+	    errx(1,"LOADDATAS : NO FILE datasaved.txt");
 
     input = in;
     input->n = 1;//the matrix formation is change to fit the NN
     input->p = (in->n)*(in->p);
 
-    initAll();
     hidden_layers();
     output_neurons();
 
     char letter = whichchar(output);
     writeinfile(letter, fichier);
-
-	freeAll();
 }
 
 char whichchar(Matrix* output)
 {
     int max = 0;
-    bool isspace = false;
-
-    for (int i = 0; i < output->sizevector; ++i) {
+    bool isspace = bl;
+    for (size_t i = 0; i < output->sizevector; ++i) {
         if (output->matrix[i] == 1)
         {
-            isspace = true;
+            isspace = !bl;
         }
         if (output->matrix[i]>output->matrix[max])
         {
@@ -244,14 +248,13 @@ void writeinfile(char character, FILE* fichier)
 
     if (fichier!=NULL)
     {
-        fputs(&character,fichier);
+        fputc(character,fichier);
     }
-    fclose(fichier);
 }
 
 void freeAll(){
 
-    //freeM(input);
+    freeM(input);
     //Hidden layers
     freeM(hidden);
     freeM(hidden_weight);
@@ -268,9 +271,6 @@ void freeAll(){
     freeM(derivative_hidden);
     freeM(wanted_output);
 
-    for (int i = 0; i < 7; ++i) {
-        freeM(&matarray[i]);
-    }
     for (int j = 0; j < 64; ++j) {
         freeM(alphabettrain[j]);
     }
@@ -279,13 +279,13 @@ void freeAll(){
 
 void save_datas()
 {
-    saveM(hidden,false);
-    saveM(hidden_weight,true);
-    saveM(hidden_bias,true);
-    saveM(output_weight,true);
-    saveM(output_bias,true);
-    saveM(derivative_output,true);
-    saveM(derivative_hidden,true);
+    saveM(hidden,bl);
+    saveM(hidden_weight,!bl);
+    saveM(hidden_bias,!bl);
+    saveM(output_weight,!bl);
+    saveM(output_bias,!bl);
+    saveM(derivative_output,!bl);
+    saveM(derivative_hidden,!bl);
 }
 
 
@@ -294,22 +294,19 @@ int taille[2] = {0};
 
 void load_datas(Matrix* matrixarray[], FILE* fichier)
 {
-
-    if (fichier != NULL)
-    {
         int i = 0;
 
         while (i<7)
         {
             int mn = fscanf(fichier, "%d %d",&taille[0],&taille[1]);
-            printf("use fscanf: %i", mn);
+            mn-=1;
             int size = taille[0]*taille[1];
             fgetc(fichier);
             double* matrixvalues = malloc(sizeof(double)*size);
 
 
             int pt = fread(matrixvalues, sizeof(double),size,fichier);
-            printf("use fread = %i", pt);
+            pt-=1;
 
             matrixarray[i] = initwithvaluesM(taille[0],taille[1], matrixvalues);
 
@@ -319,8 +316,6 @@ void load_datas(Matrix* matrixarray[], FILE* fichier)
             fgetc(fichier);
         }
 
-        fclose(fichier);
-
         hidden = matrixarray[0];
         hidden_weight = matrixarray[1];
         hidden_bias = matrixarray[2];
@@ -328,7 +323,5 @@ void load_datas(Matrix* matrixarray[], FILE* fichier)
         output_bias = matrixarray[4];
         derivative_output = matrixarray[5];
         derivative_hidden = matrixarray[6];
-    }
-    else
-        errx(1,"LOADMATRIX : No file datasaved.txt.");
+
 }

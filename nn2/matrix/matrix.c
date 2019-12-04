@@ -51,8 +51,8 @@ Matrix* loadM(char* filename)
         size_t size = 28*28;
         double* matrixvalues = malloc(sizeof(double)*size);
 
-        for (int i = 0; i < 28; ++i) {
-            for (int j = 0; j < 28; ++j) {
+        for (int i = 0; i < 28; ) {
+            for (int j = 0; j < 28; j++) {
                 char e = fgetc(fichier);
                 double f = 5;
                 //double f = (e == 48) ? 0: 1;
@@ -194,7 +194,7 @@ Matrix* dotM(Matrix* mat1, Matrix* mat2)
 //Scalar product (DEBUGGED)
 Matrix* scalM(Matrix* m, double s)
 {
-    for (size_t i = 0; i < m->sizevector; ++i) {
+    for (size_t i = 0; i < m->sizevector; i++) {
         m->matrix[i] *= s;
     }
     return m;
@@ -221,16 +221,15 @@ Matrix* transpM(Matrix* m)
 //Calculate the sigmoid of each value in matrice (NOT)
 Matrix* sigM(Matrix* m, bool is_derivate)
 {
-
     if (!is_derivate)
     {
-        for (size_t i = 0; i < m->sizevector; ++i) {
+        for (size_t i = 0; i < m->sizevector; i++) {
             m->matrix[i] = (1/(1+exp(-(m->matrix[i]))));
         }
     }
     else
     {
-        for (size_t i = 0; i < m->sizevector; ++i) {
+        for (size_t i = 0; i < m->sizevector; i++) {
             m->matrix[i] = (m->matrix[i])*(1-(m->matrix[i]));
         }
     }

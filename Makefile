@@ -1,5 +1,5 @@
 # Compilers and options
-CC=gcc -g -fsanitize=address
+CC=gcc #-fsanitize=address -g
 CPPFLAGS= `sdl-2config --cflags` -MMD
 CFLAGS= -Wall -Wextra -std=c99 -pedantic -O2
 #CFLAGS= -g
