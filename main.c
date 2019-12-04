@@ -31,7 +31,7 @@ int main(int argc, char** argv)
             Letter* letters = seg_segmentation(arg,&size);
             for (int i = 0; i < size; ++i) {
                 Matrix* input = initwithvaluesM(1, 784, letters[i].matrix);
-                ocr(input);
+                ocr(input, false);
             }
         }
 

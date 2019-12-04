@@ -7,7 +7,7 @@
 #include <time.h>
 #include "networkV2.h"
 #include <string.h>
-
+#include <stdbool.h>
 
 
 //initialization
@@ -30,7 +30,7 @@ void train_neural(bool istherearg, unsigned long int epochuser);
 Matrix* createouttrain(int i);
 
 //character finder
-void ocr(Matrix* in);
+void ocr(Matrix* in, bool isnewtext);
 
 //Displays the results
 void displayepoch();

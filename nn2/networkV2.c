@@ -174,6 +174,11 @@ void train_neural(bool istherearg, unsigned long int epochuser)
             update_weights();
         }
 
+	if(k%1000==0)
+	{
+		save_datas();
+	}
+
         k+=1;
     }
 
@@ -191,7 +196,7 @@ Matrix* createouttrain(int i)
     return result;
 }
 
-void ocr(Matrix* in)
+void ocr(Matrix* in, bool isnewtext)
 {
     FILE* fichier2 = fopen("datasaved.txt","r");
     load_datas(matarray,fichier2);
@@ -212,11 +217,16 @@ void ocr(Matrix* in)
         {
             max = i;
         }
-	printf("file\n");
-        FILE* fichier = fopen("text.txt", "a");
-        if (fichier!=NULL)
+    }
+
+    char* mode = (isnewtext) ? "w" : "a" ;
+    isnewtext = false;
+        FILE* fichier = fopen("text.txt", mode);
+        
+	if (fichier!=NULL)
         {
-            for (size_t k = 0; k < input->sizevector; ++k)
+	
+            /*for (size_t k = 0; k < input->sizevector; ++k)
             {
                 if (input->matrix[k] == 0)
                     isspace = true;
@@ -225,18 +235,19 @@ void ocr(Matrix* in)
             {
                 fputs(" ",fichier);
             }
-            else
+            else*/
             {
                 for (int j = 0; j < 64; ++j) {
                     if (j==max)
                     {
-                        fputs(&ALPHABET[i],fichier);
+                        printf("ouptut",output->matrix[j]);
+			    fputs(&ALPHABET[max],fichier);
                     }
                 }
             }
-        }
-    }
-    freeAll();
+        } 
+	fclose(fichier);
+	freeAll();
 }
 
 void freeAll(){
