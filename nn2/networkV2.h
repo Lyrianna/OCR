@@ -30,7 +30,9 @@ void train_neural(bool istherearg, unsigned long int epochuser);
 Matrix* createouttrain(int i);
 
 //character finder
-void ocr(Matrix* in, bool isnewtext);
+void ocr(Matrix* in, FILE* fichier);
+char whichchar(Matrix* output);
+void writeinfile(char character, FILE* fichier);
 
 //Displays the results
 void displayepoch();
@@ -39,7 +41,7 @@ void displayepoch();
 void save_datas();
 
 //loadmatric
-void load_datas(Matrix* matrixarray[], FILE* fichier);
+void load_datas(Matrix matrixarray[], FILE* fichier);
 
 //free the memory
 void freeAll();

@@ -196,58 +196,57 @@ Matrix* createouttrain(int i)
     return result;
 }
 
-void ocr(Matrix* in, bool isnewtext)
+void ocr(Matrix* in, FILE* fichier)
 {
     FILE* fichier2 = fopen("datasaved.txt","r");
     load_datas(matarray,fichier2);
+    fclose(fichier2);
 
     input = in;
     input->n = 1;//the matrix formation is change to fit the NN
     input->p = (in->n)*(in->p);
-    bool isspace = false;
 
     initAll();
     hidden_layers();
     output_neurons();
 
-    int max = 0;
+    char letter = whichchar(output);
+    writeinfile(letter, fichier);
 
-    for (size_t i = 0; i < output->sizevector; ++i) {
+	freeAll();
+}
+
+char whichchar(Matrix* output)
+{
+    int max = 0;
+    bool isspace = false;
+
+    for (int i = 0; i < output->sizevector; ++i) {
+        if (output->matrix[i] == 1)
+        {
+            isspace = true;
+        }
         if (output->matrix[i]>output->matrix[max])
         {
             max = i;
         }
     }
 
-    char* mode = (isnewtext) ? "w" : "a" ;
-    isnewtext = false;
-        FILE* fichier = fopen("text.txt", mode);
-        
-	if (fichier!=NULL)
-        {
-	
-            /*for (size_t k = 0; k < input->sizevector; ++k)
-            {
-                if (input->matrix[k] == 0)
-                    isspace = true;
-            }
-            if (isspace)
-            {
-                fputs(" ",fichier);
-            }
-            else*/
-            {
-                for (int j = 0; j < 64; ++j) {
-                    if (j==max)
-                    {
-                        printf("ouptut",output->matrix[j]);
-			    fputs(&ALPHABET[max],fichier);
-                    }
-                }
-            }
-        } 
-	fclose(fichier);
-	freeAll();
+    if (isspace)
+    {
+        return ' ';
+    } else
+        return ALPHABET[max];
+}
+
+void writeinfile(char character, FILE* fichier)
+{
+
+    if (fichier!=NULL)
+    {
+        fputs(&character,fichier);
+    }
+    fclose(fichier);
 }
 
 void freeAll(){
