@@ -4,7 +4,7 @@ char* ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789,
 
 //NEURAL NETWORK - Sarah and Nephelie//
 
-double lr = 0.1; //learning rate
+double lr = 0.8; //learning rate
 
 //inputs
 size_t inputNb = 784;//number of neurons in the input
@@ -72,20 +72,20 @@ void hidden_layers(){
 void output_neurons()
 {
 	Matrix* temp = mulM(hidden, output_weight);
-    output = sigM(addM(softmaxM(output_bias), temp),bl);
+    output = softmaxM(addM(output_bias, temp));
     freeM(temp);
 }
 
 //Backpropagation
 void error() //error for each case
 {
-    error_values = subM(wanted_output,output);
+    error_values = subM(wanted_output, output);
 }
 
 void derivatives()//repercution of the error for each layer
 {
     Matrix *temp1,*temp2;
-    derivative_output = dotM(error_values,sigM(output,!bl));
+    derivative_output = dotM(error_values,softmaxM(output_bias));
     temp1 = transpM(output_weight);
     temp2 = mulM(derivative_output, temp1);
     derivative_hidden = dotM(sigM(hidden, !bl), temp2);
@@ -117,7 +117,7 @@ void update_weights()//update of the different matrices
     freeM(temp2);
     //update of the bias of the output layer
     //output_bias += dot(sigmoid(output_bias), derivative_output)*lr))
-    output_bias = addM(output_bias, scalM(dotM(softmaxM(output_bias), derivative_output), lr));
+    output_bias = addM(output_bias, scalM(derivative_output, lr));
 }
 
 //training
@@ -186,6 +186,10 @@ void train_neural(bool istherearg, unsigned long int epochuser)
     }
 
     printM(output, "outputttt");
+    double total =0;
+    for(size_t i = 0; i < output->sizevector; i++)
+	    total+=output->matrix[i];
+    printf("%lf sortie\n", total);
     save_datas();//saves the important datas of the NN
     printf("saved datas\n");
 }
