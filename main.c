@@ -29,9 +29,11 @@ int main(int argc, char** argv)
         {
             FILE* fichier = fopen("text.txt", "w");
             int size = 0;
-            Letter* letters = seg_segmentation(arg,&size);
+            printf("before letter");
+	    Letter* letters = seg_segmentation(arg,&size);
             for (int i = 0; i < size; ++i) {
-                Matrix* input = initwithvaluesM(1, 784, letters[i].matrix);
+                printf("letter");
+		Matrix* input = initwithvaluesM(1, 784, letters[i].matrix);
                 ocr(input, fichier);
             }
             fclose(fichier);
