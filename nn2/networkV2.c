@@ -153,7 +153,7 @@ void train_neural(bool istherearg, unsigned long int epochuser)
         //sprintf(str2,"%u",j);
         itoa(j,str2,10);
         strcat(str,str2); //concatenate the 2 str
-        printf("str = %s\n",str);
+        //printf("str = %s\n",str);
 
         alphabettrain[j] = loadM(str); //load the matrice with the path
     }

@@ -23,7 +23,7 @@ int main(int argc, char** argv)
         if (strcmp(arg, "train") == 0)
         {
             printf("miaou1");
-		train_neural(istherearg,(int) atoi(argv[2]));
+	    train_neural(istherearg,(int) atoi(argv[2]));
         }
         else
         {

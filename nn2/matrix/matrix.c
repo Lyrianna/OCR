@@ -51,7 +51,7 @@ Matrix* loadM(char* filename)
         size_t size = 28*28;
         double* matrixvalues = malloc(sizeof(double)*size);
 
-        for (int i = 0; i < 28; ) {
+        for (int i = 0; i < 28;++i ) {
             for (int j = 0; j < 28; j++) {
                 char e = fgetc(fichier);
                 double f = 5;
