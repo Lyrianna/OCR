@@ -27,5 +27,5 @@ clean:
 	rm -f *.o
 	$(shell rm -f ./ImageAnalysis/TestOCR/*.o ./build/*.o ./nn2/*.o ./nn2/matrix/*.o)
 	rm -rf build
-
+	rm -r *.png
  # END
