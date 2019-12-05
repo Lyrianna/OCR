@@ -71,7 +71,7 @@ void hidden_layers(){
 
 void output_neurons()
 {
-	Matrix* temp = mulM(hidden, output_weight);
+    Matrix* temp = mulM(hidden, output_weight);
     output = softmaxM(addM(output_bias, temp));
     freeM(temp);
 }

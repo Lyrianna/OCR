@@ -36,7 +36,7 @@ Letter* seg_segmentation(char *filename,int *size){
 	free(seg_letters);
 	*size = *nbletters - 1;
 		for(int i = 0; i < *nbletters; i++){
-		//debug_matrix(letters[i]);
+		debug_matrix(letters[i]);
 		printf("\n\n");
 	}
 	free(nbletters);

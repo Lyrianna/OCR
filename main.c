@@ -22,16 +22,13 @@ int main(int argc, char** argv)
 
         if (strcmp(arg, "train") == 0)
         {
-            printf("miaou1");
 	    train_neural(istherearg,(int) atoi(argv[2]));
         }
         else
         {
-		printf("miaou\n");
             FILE* fichier = fopen("text.txt", "w");
             
 	    int size = 0;
-            printf("before letter");
 
 	    if (fichier!=NULL)
 	    {
